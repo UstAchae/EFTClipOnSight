@@ -241,7 +241,7 @@ float3 pvs22_tube(float3 scene, float2 pixel) {
  public static Shader WriteLiveShader(string gen){
   WriteTubeInclude(gen);
   File.WriteAllText(gen+"/PVS22Live.shader",@"Shader ""UstAchae/PVS22/Live"" {
- Properties { _PVS22LiveOn (""on"", Range(0,1)) = 0 _PVS22LiveMode (""mode"", Range(0,1)) = 0 }
+ Properties { _PVS22LiveOn (""on"", Range(0,1)) = 0 _PVS22LiveMode (""mode"", Range(0,1)) = 0 _PVS22LiveFov (""fov"", Float) = 10 }
  SubShader {
   Tags { ""Queue""=""Geometry"" ""RenderType""=""Opaque"" }
   Cull Off
@@ -256,25 +256,22 @@ float3 pvs22_tube(float3 scene, float2 pixel) {
    float4 _PVS22ThermalParams; // x cold level, y gain
    float _PVS22LiveOn;
    float _PVS22LiveMode;
+   float _PVS22LiveFov;
    struct v2f { float4 pos : SV_POSITION; float4 screen : TEXCOORD0; float2 uv : TEXCOORD1; float3 normal : TEXCOORD2; float3 view : TEXCOORD3; float3 world : TEXCOORD4; };
    v2f vert (appdata_base v) {
     v2f o; o.pos = UnityObjectToClipPos(v.vertex); o.screen = ComputeScreenPos(o.pos); o.uv = v.texcoord.xy;
     o.normal = UnityObjectToWorldNormal(v.normal); o.view = WorldSpaceViewDir(v.vertex);
     o.world = mul(unity_ObjectToWorld, v.vertex).xyz; return o;
    }
-   // The picture is seen through the eyepiece's field stop, a circle inside the tube: looking into it from a
-   // distance, as through any real eyepiece, a dark ring frames the picture and slides across it as the eye
-   // moves off the axis. The disc is the lens (object radius 0.016539544, facing +Y toward the shooter).
+   // The eyepiece is focused at infinity, so its field stop is too: seen from a distance the picture shows only
+   // along view directions within the device's field of view of its axis, and an edge sweeps across the whole lens
+   // as the eye moves off the axis, black beyond. The disc faces +Y toward the shooter.
    float fieldStop(float3 world) {
-    float3 c = mul(unity_ObjectToWorld, float4(0, 0, 0, 1)).xyz;
     float3 n = normalize(mul((float3x3)unity_ObjectToWorld, float3(0, 1, 0)));
-    float R = length(mul((float3x3)unity_ObjectToWorld, float3(0.016539544, 0, 0)));
-    float3 d = world - _WorldSpaceCameraPos;
-    float dn = dot(d, n);
-    if (dn > -1e-5) return 0;                       // seen from inside or edge-on
-    float3 stop = c - n * (1.2 * R);                // the stop sits 1.2 lens radii into the tube
-    float3 q = world + d * (dot(stop - world, n) / dn);
-    return 1 - smoothstep(0.80 * R, 0.90 * R, length(q - stop));
+    float c = -dot(normalize(world - _WorldSpaceCameraPos), n);
+    if (c <= 0) return 0;
+    float halfFov = _PVS22LiveFov * 0.5;
+    return 1 - smoothstep(halfFov - 0.5, halfFov + 0.2, degrees(acos(saturate(c))));
    }
    fixed4 frag (v2f i) : SV_Target {
     float2 uv = i.screen.xy / i.screen.w;

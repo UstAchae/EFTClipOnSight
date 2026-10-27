@@ -1,6 +1,8 @@
 using BepInEx;
 using BepInEx.Configuration;
 using BSG.CameraEffects;
+using Comfort.Common;
+using EFT;
 using EFT.CameraControl;
 using HarmonyLib;
 using UnityEngine;
@@ -34,8 +36,9 @@ namespace UstAchae.PVS22
         internal static float LiveResolution => liveResolution.Value;
         internal static float ThermalLevel => thermalLevel.Value;
         internal static float ThermalGain => thermalGain.Value;
-        // Last frame an optic camera drew on a clip-on's own sight lens (aiming through the clip-on itself), and
-        // which clip-on. A magnified optic behind a clip-on draws on its own lens, not the clip-on's.
+        // Last frame the shooter aimed through a clip-on itself (its optic camera drawing on its own sight lens),
+        // and which clip-on. The game keeps the active sight's optic camera running when not aiming too, and a
+        // magnified optic behind a clip-on draws on its own lens, not the clip-on's.
         internal static int OwnSightFrame = -10;
         internal static Transform OwnSight;
 
@@ -82,8 +85,11 @@ namespace UstAchae.PVS22
             // Looking straight through the PVS-22 itself: it is a 1x night sight, so only the switch matters.
             if (sight.transform.Find(FrontMarker) != null)
             {
-                OwnSightFrame = Time.frameCount;
-                OwnSight = sight.transform;
+                if (Aiming())
+                {
+                    OwnSightFrame = Time.frameCount;
+                    OwnSight = sight.transform;
+                }
                 if (sight.transform.Find(ThermalMarker) != null)
                 {
                     thermalVisionRef(__instance).On = true;
@@ -136,6 +142,8 @@ namespace UstAchae.PVS22
                 __instance.CopyComponentFromOptic(sight);
             }
         }
+
+        static bool Aiming() => Singleton<GameWorld>.Instance?.MainPlayer?.ProceduralWeaponAnimation?.IsAiming ?? false;
 
         // Thermal clip-on in front of a magnified optic: the optic camera's own ThermalVision, set up from the
         // clip-on's thermal data the same way OpticComponentUpdater.CopyComponentFromOptic does for thermal scopes.

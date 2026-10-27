@@ -30,6 +30,7 @@ namespace UstAchae.PVS22
         static readonly int texId = Shader.PropertyToID("_PVS22LiveTex");
         static readonly int onId = Shader.PropertyToID("_PVS22LiveOn");
         static readonly int modeId = Shader.PropertyToID("_PVS22LiveMode");
+        static readonly int fovId = Shader.PropertyToID("_PVS22LiveFov");
         static readonly int thermalParamsId = Shader.PropertyToID("_PVS22ThermalParams");
         // Set by EFT's ThermalVision around its camera's render: materials then write their heat into GBuffer0.
         static readonly int thermalOnId = Shader.PropertyToID("_ThermalVisionOn");
@@ -39,6 +40,7 @@ namespace UstAchae.PVS22
         Transform clipOn, front, rear;
         MaterialPropertyBlock block;
         bool thermal;
+        float fov;
         bool scopeBehind;
         float checkedAt = -10f;
 
@@ -53,6 +55,7 @@ namespace UstAchae.PVS22
             lens.rear = clipOn.Find(RearMarker);
             lens.block = new MaterialPropertyBlock();
             lens.thermal = clipOn.Find(ThermalMarker) != null;
+            lens.fov = ImageProfile.For(clipOn).Fov;
             // The sight lens and the dark glass behind it sit 2 and 5 mm deeper than this disc, so seen at an
             // angle their rims showed as a crescent around the picture. This disc covers the eyepiece on a
             // weapon (picture or coated glass), so the back glass is never needed here and the sight lens only
@@ -92,6 +95,7 @@ namespace UstAchae.PVS22
             disc.GetPropertyBlock(block);
             block.SetFloat(onId, pupil);
             block.SetFloat(modeId, thermal ? 1f : 0f);
+            block.SetFloat(fovId, fov);
             disc.SetPropertyBlock(block);
             // Every other frame (about 30 Hz at 60 fps, close to a tube's own refresh): halves the extra render's cost.
             if (pupil <= 0f || Time.frameCount - renderedFrame < 2) return;
