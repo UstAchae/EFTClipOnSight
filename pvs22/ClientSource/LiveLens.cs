@@ -1,3 +1,4 @@
+using Comfort.Common;
 using EFT;
 using EFT.CameraControl;
 using UnityEngine;
@@ -16,7 +17,9 @@ namespace UstAchae.PVS22
     // centre is beyond half the device's field of view (no partial crescents at the rim, the user's choice), and
     // the eyepiece is not drawn while a player's body sits between it and the camera (a free or third-person
     // camera behind the shooter's head, which does not hide it by depth). Used aiming or not; the clip-on's sight
-    // lens, fed by the game's optic camera, stays hidden.
+    // lens, fed by the game's optic camera, stays hidden. Not aiming, the picture is made as if the eye were on the
+    // axis, as when aiming (the user's choice): seen from the hip, the window looked down past the front of the
+    // clip-on at the weapon's own parts.
     class LiveLens : MonoBehaviour
     {
         const string LiveNode = "pvs22_live";
@@ -126,13 +129,15 @@ namespace UstAchae.PVS22
             on &= picture != null;
             // The whole picture fades as the eye's line to the lens centre leaves the field of view.
             Vector3 axis = -transform.up, toLens = transform.position - eye.transform.position;
-            float offAxis = Vector3.Angle(toLens, axis);
+            float offAxis = Aiming() ? Vector3.Angle(toLens, axis) : 0f;
             float shown = on ? 1f - Mathf.SmoothStep(0f, 1f, Mathf.InverseLerp(halfField - 1f, halfField, offAxis)) : 0f;
             disc.GetPropertyBlock(block);
             block.SetFloat(onId, shown);
             if (on) block.SetTexture(pictureId, picture);
             disc.SetPropertyBlock(block);
         }
+
+        static bool Aiming() => Singleton<GameWorld>.Instance?.MainPlayer?.ProceduralWeaponAnimation?.IsAiming ?? false;
 
         // A magnified optic (an OpticSight, which red dots and holographic sights lack) on the same weapon,
         // behind the clip-on's rear end and near its axis. Judged in the clip-on's own frame, where +Z points to
@@ -195,6 +200,7 @@ namespace UstAchae.PVS22
             Quaternion rotation = Quaternion.LookRotation(axis, clipOn.up);
             Vector3 toEye = p - transform.position;
             float ex = Vector3.Dot(toEye, rotation * Vector3.right), ey = Vector3.Dot(toEye, rotation * Vector3.up);
+            if (!Aiming()) ex = ey = 0f;
             const float near = 0.005f;
             float k = near / distance;
             liveCamera.CopyFrom(eye);
