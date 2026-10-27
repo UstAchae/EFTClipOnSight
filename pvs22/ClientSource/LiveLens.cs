@@ -9,12 +9,14 @@ namespace UstAchae.PVS22
     // The prefab's "pvs22_live" disc carries the game's own lens material (CW FX/OpticSight, the one every
     // native scope uses) for the native lens and dark idle look. That shader shows the global _CamTex, the optic
     // camera's picture; this disc gets its own instead, per renderer. As in the real device, the picture is what
-    // the objective sees: a private camera at the front of the objective looking down the clip-on's axis (so
-    // nothing behind it, such as the sight behind or the clip-on itself, can show; parts of the weapon ahead of
-    // it can), with the field the lens covers from the eye (so it lines up 1x with the world around it), black
-    // beyond the device's own field of view (its field stop), then turned into the tube picture. The native
-    // mask's slide with the eye is turned off: it models a scope's exit pupil at its eye relief, and from the
-    // distance this eyepiece is seen at it only drew a large round shadow.
+    // the objective sees, shown 1x at infinity: a private camera at the front of the objective (so nothing behind
+    // it, such as the sight behind or the clip-on itself, can show; parts of the weapon ahead of it can), aimed
+    // like a window, along the directions from the eye through each point of the lens (an off-centre frustum),
+    // so the view through the lens shifts as the eye moves, black where that direction is beyond half the
+    // device's field of view (its field stop), then turned into the tube picture. The native mask's slide with
+    // the eye is turned off: it models a scope's exit pupil at its eye relief, and from the distance this
+    // eyepiece is seen at it only drew a large round shadow. The same disc is used when aiming through the
+    // clip-on itself; its sight lens, fed by the game's optic camera with that mask, stays hidden.
     class LiveLens : MonoBehaviour
     {
         const string LiveNode = "pvs22_live";
@@ -46,13 +48,14 @@ namespace UstAchae.PVS22
         static readonly int scalesId = Shader.PropertyToID("_Scales");
         static readonly int shiftsId = Shader.PropertyToID("_Shifts");
         static readonly int fieldId = Shader.PropertyToID("_PVS22Field");
+        static readonly int fieldTanId = Shader.PropertyToID("_PVS22FieldTan");
         static readonly int thermalId = Shader.PropertyToID("_PVS22Thermal");
         static readonly int thermalParamsId = Shader.PropertyToID("_PVS22ThermalParams");
         // Set by EFT's ThermalVision around its camera's render: materials then write their heat into GBuffer0.
         static readonly int thermalOnId = Shader.PropertyToID("_ThermalVisionOn");
         static CommandBuffer copyHeat;
 
-        Renderer disc, sightLens;
+        Renderer disc;
         Transform clipOn, front, rear, body;
         Bounds bodyBounds;
         MaterialPropertyBlock block;
@@ -71,13 +74,13 @@ namespace UstAchae.PVS22
             lens.rear = clipOn.Find(RearMarker);
             lens.block = new MaterialPropertyBlock();
             lens.thermal = clipOn.Find(ThermalMarker) != null;
-            // The sight lens and the dark glass behind it sit 2 and 5 mm deeper than this disc, so seen at an
-            // angle their rims showed as a crescent around the picture. This disc covers the eyepiece on a
-            // weapon (picture or dark lens), so the back glass is never needed here and the sight lens only
-            // while an optic camera draws on it.
-            lens.sightLens = clipOn.Find(SightLensNode)?.GetComponent<Renderer>();
-            Renderer back = clipOn.Find(BackGlassNode)?.GetComponent<Renderer>();
-            if (back != null) back.forceRenderingOff = true;
+            // This disc is the eyepiece on a weapon (picture or dark lens), aiming or not: the sight lens and the dark
+            // glass behind it are never needed there.
+            foreach (string hidden in new[] { SightLensNode, BackGlassNode })
+            {
+                Renderer r = clipOn.Find(hidden)?.GetComponent<Renderer>();
+                if (r != null) r.forceRenderingOff = true;
+            }
             lens.body = clipOn.Find(BodyNode);
             Mesh mesh = lens.body != null ? lens.body.GetComponent<MeshFilter>()?.sharedMesh : null;
             if (mesh != null)
@@ -113,17 +116,6 @@ namespace UstAchae.PVS22
             transform.localPosition = new Vector3(local.x, local.y, body.localPosition.z + rearZ + 0.0005f);
             float scale = opening * 0.98f / DiscRadius;
             transform.localScale = new Vector3(scale, transform.localScale.y, scale);
-        }
-
-        // Covers the sight lens unless an optic camera is drawing on it, which happens only while aiming through
-        // this clip-on itself (a magnified optic behind it draws on its own lens, and the sight lens here would show
-        // a stale or see-through picture). LateUpdate order against the optic is not fixed, so allow a frame.
-        void LateUpdate()
-        {
-            if (disc == null) return;
-            bool covering = PVS22Plugin.OwnSight != clipOn || Time.frameCount - PVS22Plugin.OwnSightFrame > 1;
-            disc.enabled = covering;
-            if (sightLens != null) sightLens.forceRenderingOff = covering;
         }
 
         void OnWillRenderObject()
@@ -194,13 +186,13 @@ namespace UstAchae.PVS22
                 picture = new RenderTexture(size, size, 0, RenderTextureFormat.ARGB32) { name = "PVS22 live picture" };
             }
 
-            // At the front of the objective, down the clip-on's axis (the disc faces +Y toward the shooter). The field
-            // is set so that its visible part is what the lens spans from the eye: the picture lines up 1x with the
-            // world around the eyepiece when seen on the axis.
+            // At the front of the objective, looking down the clip-on's axis (the disc faces +Y toward the shooter),
+            // with a frustum through the picture's extent on the lens plane as seen from the eye: the native lens maps
+            // the picture onto the lens, so each lens point shows the scene along the eye's line through it.
             Vector3 p = eye.transform.position, axis = -transform.up;
             float distance = Vector3.Dot(transform.position - p, axis);
             if (distance < 0.02f) return false;
-            float radius = DiscRadius * transform.lossyScale.x;
+            float radius = DiscRadius * transform.lossyScale.x, span = radius * 0.5f / Visible;
             float ahead = Mathf.Max(Vector3.Dot(front.position - transform.position, axis), Vector3.Dot(rear.position - transform.position, axis));
             if (body != null)
             {
@@ -211,14 +203,17 @@ namespace UstAchae.PVS22
                     ahead = Mathf.Max(ahead, Vector3.Dot(corner - transform.position, axis));
                 }
             }
-            float halfField = Mathf.Atan(0.5f / Visible * radius / distance);
+            Quaternion rotation = Quaternion.LookRotation(axis, clipOn.up);
+            Vector3 toEye = p - transform.position;
+            float ex = Vector3.Dot(toEye, rotation * Vector3.right), ey = Vector3.Dot(toEye, rotation * Vector3.up);
+            const float near = 0.005f;
+            float k = near / distance;
             liveCamera.CopyFrom(eye);
             liveCamera.targetTexture = raw;
             liveCamera.rect = new Rect(0f, 0f, 1f, 1f);
-            liveCamera.transform.SetPositionAndRotation(transform.position + axis * (ahead + 0.005f), Quaternion.LookRotation(axis, clipOn.up));
-            liveCamera.aspect = 1f;
-            liveCamera.fieldOfView = 2f * halfField * Mathf.Rad2Deg;
-            liveCamera.nearClipPlane = 0.005f;
+            liveCamera.transform.SetPositionAndRotation(transform.position + axis * (ahead + near), rotation);
+            liveCamera.nearClipPlane = near;
+            liveCamera.projectionMatrix = Matrix4x4.Frustum((-span - ex) * k, (span - ex) * k, (-span - ey) * k, (span - ey) * k, near, liveCamera.farClipPlane);
 
             // Thermal: render the scene the way EFT's ThermalVision does (heat flag on, GBuffer0 copied over the
             // lit image before transparents); the processing below maps that heat white-hot.
@@ -241,6 +236,7 @@ namespace UstAchae.PVS22
             {
                 rendering = false;
                 QualitySettings.shadowDistance = shadowDistance;
+                liveCamera.ResetProjectionMatrix();
                 if (thermal)
                 {
                     Shader.SetGlobalFloat(thermalOnId, 0f);
@@ -253,8 +249,9 @@ namespace UstAchae.PVS22
             ImageProfile profile = ImageProfile.For(clipOn);
             TubeEffect.Settings(profile, 1f, out float gain, out float noise, out float grain);
             float lensPixels = radius / distance / Mathf.Tan(eye.fieldOfView * 0.5f * Mathf.Deg2Rad) * eye.pixelHeight;
-            // The field stop: the device's field of view as a radius in this picture's uv.
-            process.SetFloat(fieldId, 0.5f * Mathf.Tan(profile.Fov * 0.5f * Mathf.Deg2Rad) / Mathf.Tan(halfField));
+            // The field stop: black where the eye's line through the lens is beyond half the field of view.
+            process.SetVector(fieldId, new Vector4(ex, ey, distance, span));
+            process.SetFloat(fieldTanId, Mathf.Tan(profile.Fov * 0.5f * Mathf.Deg2Rad));
             TubeEffect.SetGlobals(gain, noise, grain * size * 2f * Visible / Mathf.Max(lensPixels, 1f), profile.Phosphor);
             Shader.SetGlobalVector(thermalParamsId, new Vector4(PVS22Plugin.ThermalLevel, PVS22Plugin.ThermalGain, 0f, 0f));
             process.SetFloat(thermalId, thermal ? 1f : 0f);
