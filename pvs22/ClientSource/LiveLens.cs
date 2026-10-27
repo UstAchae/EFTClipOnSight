@@ -1,3 +1,4 @@
+using EFT;
 using EFT.CameraControl;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -11,9 +12,11 @@ namespace UstAchae.PVS22
     // private camera at the front of the objective (so nothing behind it, such as the sight behind or the clip-on
     // itself, can show; parts of the weapon ahead of it can), aimed like a window, along the directions from the
     // eye through each point of the lens (an off-centre frustum), so the view through the lens shifts as the eye
-    // moves, black where that direction is beyond half the device's field of view (its field stop), then turned
-    // into the tube picture. Used aiming or not; the clip-on's sight lens, fed by the game's optic camera, stays
-    // hidden.
+    // moves, then turned into the tube picture. The whole picture fades out evenly once the eye's line to the lens
+    // centre is beyond half the device's field of view (no partial crescents at the rim, the user's choice), and
+    // the eyepiece is not drawn while a player's body sits between it and the camera (a free or third-person
+    // camera behind the shooter's head, which does not hide it by depth). Used aiming or not; the clip-on's sight
+    // lens, fed by the game's optic camera, stays hidden.
     class LiveLens : MonoBehaviour
     {
         const string LiveNode = "pvs22_live";
@@ -38,8 +41,6 @@ namespace UstAchae.PVS22
         static int renderedFrame = -1;
         static readonly int pictureId = Shader.PropertyToID("_PVS22Picture");
         static readonly int onId = Shader.PropertyToID("_PVS22On");
-        static readonly int fieldId = Shader.PropertyToID("_PVS22Field");
-        static readonly int fieldTanId = Shader.PropertyToID("_PVS22FieldTan");
         static readonly int lensId = Shader.PropertyToID("_PVS22Lens");
         static readonly int thermalId = Shader.PropertyToID("_PVS22Thermal");
         static readonly int thermalParamsId = Shader.PropertyToID("_PVS22ThermalParams");
@@ -52,6 +53,7 @@ namespace UstAchae.PVS22
         Bounds bodyBounds;
         MaterialPropertyBlock block;
         bool thermal;
+        float halfField;  // degrees
         bool scopeBehind;
         float checkedAt = -10f;
 
@@ -66,6 +68,7 @@ namespace UstAchae.PVS22
             lens.rear = clipOn.Find(RearMarker);
             lens.block = new MaterialPropertyBlock();
             lens.thermal = clipOn.Find(ThermalMarker) != null;
+            lens.halfField = ImageProfile.For(clipOn).Fov * 0.5f;
             // This disc is the eyepiece on a weapon (picture or dark lens), aiming or not: the sight lens and the dark
             // glass behind it are never needed there.
             foreach (string hidden in new[] { SightLensNode, BackGlassNode })
@@ -76,6 +79,20 @@ namespace UstAchae.PVS22
             lens.body = clipOn.Find(BodyNode);
             Mesh mesh = lens.body != null ? lens.body.GetComponent<MeshFilter>()?.sharedMesh : null;
             if (mesh != null) lens.bodyBounds = mesh.bounds;
+        }
+
+        // Not drawn while a player's body is between the main camera and the eyepiece: seen from a free or
+        // third-person camera behind the shooter, the head does not hide it by depth. In first person the camera is
+        // inside the head's collider, which a ray from there does not hit.
+        void LateUpdate()
+        {
+            Camera main = Camera.main;
+            if (disc == null || main == null) return;
+            Vector3 from = main.transform.position, to = transform.position - from;
+            bool blocked = false;
+            foreach (RaycastHit hit in Physics.RaycastAll(from, to.normalized, to.magnitude - 0.01f, ~0, QueryTriggerInteraction.Ignore))
+                if (hit.collider.GetComponentInParent<Player>() != null) { blocked = true; break; }
+            disc.forceRenderingOff = blocked;
         }
 
         void OnWillRenderObject()
@@ -97,8 +114,12 @@ namespace UstAchae.PVS22
             // Every other frame (about 30 Hz at 60 fps, close to a tube's own refresh): halves the extra render's cost.
             if (on && Time.frameCount - renderedFrame >= 2 && Render(eye)) renderedFrame = Time.frameCount;
             on &= picture != null;
+            // The whole picture fades as the eye's line to the lens centre leaves the field of view.
+            Vector3 axis = -transform.up, toLens = transform.position - eye.transform.position;
+            float offAxis = Vector3.Angle(toLens, axis);
+            float shown = on ? 1f - Mathf.SmoothStep(0f, 1f, Mathf.InverseLerp(halfField - 1f, halfField, offAxis)) : 0f;
             disc.GetPropertyBlock(block);
-            block.SetFloat(onId, on ? 1f : 0f);
+            block.SetFloat(onId, shown);
             if (on) block.SetTexture(pictureId, picture);
             disc.SetPropertyBlock(block);
         }
@@ -207,9 +228,6 @@ namespace UstAchae.PVS22
             ImageProfile profile = ImageProfile.For(clipOn);
             TubeEffect.Settings(profile, 1f, out float gain, out float noise, out float grain);
             float lensPixels = radius / distance / Mathf.Tan(eye.fieldOfView * 0.5f * Mathf.Deg2Rad) * eye.pixelHeight;
-            // The field stop: black where the eye's line through the lens is beyond half the field of view.
-            process.SetVector(fieldId, new Vector4(ex, ey, distance, span));
-            process.SetFloat(fieldTanId, Mathf.Tan(profile.Fov * 0.5f * Mathf.Deg2Rad));
             // The picture's corners, beyond the lens's edge, are black too.
             process.SetFloat(lensId, Visible);
             TubeEffect.SetGlobals(gain, noise, grain * size * 2f * Visible / Mathf.Max(lensPixels, 1f), profile.Phosphor);
