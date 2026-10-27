@@ -70,12 +70,11 @@ namespace UstAchae.PVS22
             lens.thermal = clipOn.Find(ThermalMarker) != null;
             lens.halfField = ImageProfile.For(clipOn).Fov * 0.5f;
             // This disc is the eyepiece on a weapon (picture or dark lens), aiming or not: the sight lens and the dark
-            // glass behind it are never needed there.
+            // glass behind it are never needed there. They are switched off as objects: the game sets every weapon
+            // renderer's forceRenderingOff itself when it shows or hides the weapon, and the sight lens's own shader
+            // then drew over this disc (its idle black circle, its mask's crescent at the rim, through the head).
             foreach (string hidden in new[] { SightLensNode, BackGlassNode })
-            {
-                Renderer r = clipOn.Find(hidden)?.GetComponent<Renderer>();
-                if (r != null) r.forceRenderingOff = true;
-            }
+                clipOn.Find(hidden)?.gameObject.SetActive(false);
             lens.body = clipOn.Find(BodyNode);
             Mesh mesh = lens.body != null ? lens.body.GetComponent<MeshFilter>()?.sharedMesh : null;
             if (mesh != null) lens.bodyBounds = mesh.bounds;
@@ -92,7 +91,7 @@ namespace UstAchae.PVS22
             bool blocked = false;
             foreach (RaycastHit hit in Physics.RaycastAll(from, to.normalized, to.magnitude - 0.01f, ~0, QueryTriggerInteraction.Ignore))
                 if (hit.collider.GetComponentInParent<Player>() != null) { blocked = true; break; }
-            disc.forceRenderingOff = blocked;
+            if (disc.enabled == blocked) disc.enabled = !blocked;  // not forceRenderingOff: the game sets that
         }
 
         void OnWillRenderObject()
