@@ -4,58 +4,64 @@ SPT 4.1.6 的夹式瞄具模组。它加入四种夹式夜视仪和热像仪，�
 
 Clip-on night vision and thermal sights for SPT 4.1.6. They mount on the rail in front of a magnified day scope, and the view through that scope becomes night vision or thermal while the scope keeps its own magnification.
 
-## 物品
+## 四个模组
 
-| 物品 | 类型 | 适配白光瞄具 | 实物参数 | 怎么获得模型 |
-|---|---|---|---|---|
-| AN/PVS-30 夹式狙击夜视瞄具 | 夜视（P45 白色荧光屏） | 最高 20 倍 | 长 244 mm，1.32 kg，视场 9° | **随模组附带** |
-| AN/PVS-22 通用夜视瞄具 | 夜视（P43 绿色荧光屏） | 最高 12 倍 | 长 180 mm，0.86 kg | 自行购买，用脚本生成 |
-| AN/PVS-27 MUNS 马格南通用夜视瞄具（黑色、沙色） | 夜视（P43 绿色荧光屏） | 3 到 20 倍 | 长 221 mm，1.42 kg，视场 10° | 自行购买，用脚本生成 |
-| Trijicon UTC XII 通用夹式热成像瞄具（黑色、沙色） | 白热热成像 | 最高 10 倍 | 长 158 mm，0.57 kg，视场 7.8° | 自行购买，用脚本生成 |
+每种夹式瞄具是一个独立的模组，想要哪个装哪个，可以同时装多个。
 
-物品都在 Peacekeeper 一级出售，也可以在跳蚤市场买到。没有生成模型的物品不会出现在游戏里。
+| 模组 | 物品 | 类型 | 适配白光瞄具 | 实物参数 | 模型 |
+|---|---|---|---|---|---|
+| `JustachaesClipOnSight-PVS22` | AN/PVS-22 通用夜视瞄具 | 夜视（P43 绿色荧光屏） | 最高 12 倍 | 长 180 mm，0.86 kg，视场 12° | **随模组附带** |
+| `JustachaesClipOnSight-PVS30` | AN/PVS-30 夹式狙击夜视瞄具 | 夜视（P45 白色荧光屏） | 最高 20 倍 | 长 244 mm，1.32 kg，视场 9° | **随模组附带** |
+| `JustachaesClipOnSight-PVS27` | AN/PVS-27 MUNS 马格南通用夜视瞄具（黑色、沙色） | 夜视（P43 绿色荧光屏） | 3 到 20 倍 | 长 221 mm，1.42 kg，视场 10° | 自行购买，用脚本生成 |
+| `JustachaesClipOnSight-UTC` | Trijicon UTC XII 通用夹式热成像瞄具（黑色、沙色） | 白热热成像 | 最高 10 倍 | 长 158 mm，0.57 kg，视场 7.8° | 自行购买，用脚本生成 |
+
+物品都在 Peacekeeper 一级出售，也可以在跳蚤市场买到。
 
 ## 安装
 
-1. 从 [Releases](../../releases) 下载 `JustachaesClipOnSight-<版本>.zip`，解压到游戏根目录（有 `EscapeFromTarkov.exe` 的那个文件夹）。它会放到：
-   - `SPT_Runtime/user/mods/UstAchae-PVS22/`（服务端模组、AN/PVS-30、物品数据、模板和 `build_models.py`）
-   - `BepInEx/plugins/UstAchae-PVS22/`（游戏插件）
-2. 启动服务端和游戏。AN/PVS-30 直接可用。
+1. 从 [Releases](../../releases) 下载想要的模组，比如 `JustachaesClipOnSight-PVS30-<版本>.zip`。
+2. 解压到游戏根目录（有 `EscapeFromTarkov.exe` 的那个文件夹）。每个模组会放到两个地方：
+   - `SPT_Runtime/user/mods/UstAchae-ClipOnSight-<型号>/`：服务端模组和物品数据，以及模型 bundle 或生成脚本和模板。
+   - `BepInEx/plugins/UstAchae-ClipOnSight/`：游戏插件。四个模组用的是同一个插件，装多个时覆盖即可，选"替换"。
+3. 启动服务端和游戏。AN/PVS-22 和 AN/PVS-30 装好就能用；AN/PVS-27 和 UTC XII 需要先按下面的步骤生成模型。
 
-## 用自己购买的模型生成其他物品
+卸载时删除对应的 `UstAchae-ClipOnSight-<型号>` 文件夹即可；四个都卸载时再删除 `BepInEx/plugins/UstAchae-ClipOnSight`。删除前请先把这些物品从仓库和角色身上拿掉。
 
-AN/PVS-22、AN/PVS-27、UTC XII 的模型授权不允许再分发，所以模组里只带不含模型的模板（`templates/`）。买了哪个模型，就能用 `build_models.py` 生成哪个物品；买一个开一个，不需要全买。
+## AN/PVS-27 和 UTC XII：用自己购买的模型生成
 
-| 物品 | 购买链接 | 需要的下载文件 |
-|---|---|---|
-| AN/PVS-22 | [TurboSquid：AN/PVS-22](https://www.turbosquid.com/3d-models/an-pvs-22-519395) | `PVS-22_obj.zip` 和 `PVS-22_3ds.zip`（同一次购买里的两个格式） |
-| AN/PVS-27（含沙色） | [CGTrader：PVS27 Magnum Universal Night Sight](https://www.cgtrader.com/3d-models/military/other/pvs27-magnum-universal-night-sight) | `pvs27-magnum-universal-night-sight.zip` |
-| UTC XII（含沙色） | [CGTrader：UTCx Thermal Weapon Sight](https://www.cgtrader.com/3d-models/military/other/utcx-thermal-weapon-sight) | `utcx-thermal-weapon-sight.zip` |
+这两个模型来自 CGTrader，按其授权条款，模组不附带模型，只附带不含模型的模板（`templates/`）和生成脚本。买了哪个，就能生成哪个；没有生成模型的物品不会出现在游戏里。
 
-需要：
+| 模组 | 购买链接 | 需要的输入文件 | 脚本 |
+|---|---|---|---|
+| AN/PVS-27（含沙色） | [CGTrader：PVS27 Magnum Universal Night Sight](https://www.cgtrader.com/3d-models/military/other/pvs27-magnum-universal-night-sight) | `pvs27-magnum-universal-night-sight.zip` | `build_pvs27.py` |
+| UTC XII（含沙色） | [CGTrader：UTCx Thermal Weapon Sight](https://www.cgtrader.com/3d-models/military/other/utcx-thermal-weapon-sight) | `utcx-thermal-weapon-sight.zip` | `build_utc.py` |
 
-- Python 3.10 或更新版本，并安装依赖：`pip install UnityPy numpy Pillow`
-- 生成 AN/PVS-22 还需要 [Blender](https://www.blender.org/) 4.1 或更新版本（用来重新展 UV 和烘焙贴图，需要几分钟）
+需要：Python 3.10 或更新版本，并安装依赖：
+
+```
+pip install UnityPy numpy Pillow
+```
 
 步骤：
 
-1. 把下载的 zip 原样放进同一个文件夹，不用解压，文件名保持不变。
+1. 把从 CGTrader 下载的 zip 原样放进一个文件夹，**不要解压，文件名保持不变**。
 2. 关闭服务端和游戏。
-3. 在模组文件夹 `SPT_Runtime/user/mods/UstAchae-PVS22` 里运行：
+3. 在模组文件夹里运行脚本，参数是放 zip 的文件夹。例如 AN/PVS-27：
 
    ```
-   python build_models.py <放 zip 的文件夹>
+   cd SPT_Runtime/user/mods/UstAchae-ClipOnSight-PVS27
+   python build_pvs27.py <放 zip 的文件夹>
    ```
 
-   Blender 没有装在默认位置时，加上 `--blender <blender.exe 的路径>`。
-4. 脚本会把生成的 bundle 放进 `bundles/`，并加入 `bundles.json`。启动服务端，对应的物品就出现了。
+   UTC XII 则是在 `UstAchae-ClipOnSight-UTC` 里运行 `python build_utc.py <放 zip 的文件夹>`。
+4. 脚本会把黑色和沙色两个 bundle 生成到 `bundles/`，并写好 `bundles.json`。启动服务端，物品就出现了。
 
 说明：
 
-- **只认指定版本的模型：** 脚本会核对每个文件的 SHA-256。模组是按这一版模型测量和调整的，商店里的模型如果更新过，脚本会提示文件不对，这时请提交 issue。
-- **模板不含模型：** 模板只有预制体、材质、着色器和位置标记，网格和贴图都是空的；生成的 bundle 只在你自己的电脑上。
+- **只认指定版本的模型：** 脚本会核对用到的每个文件的 SHA-256。模组是按这一版模型测量和调整的，商店里的模型如果更新过，脚本会提示文件不对，这时请提交 issue。
+- **和作者版本一致：** 脚本按作者自己的构建流程处理网格和贴图。在同样的视角下，生成的 bundle 和作者构建的 bundle 渲染出来的平均差异约为 0.5/255，肉眼看不出区别。
+- **模板不含模型：** 模板只有预制体、材质、着色器和位置标记，网格和贴图都是空的；生成的 bundle 只在你自己的电脑上，请勿转发。
 - **模组更新后要重新生成：** 新版本的模板可能有改动，更新模组后请重新运行一次脚本。
-- **删除生成的 bundle 前，先把这些物品从仓库和角色身上拿掉**，否则对应物品会从游戏里消失。
 
 ## 功能
 
@@ -71,7 +77,7 @@ AN/PVS-22、AN/PVS-27、UTC XII 的模型授权不允许再分发，所以模组
 
 ## 配置
 
-插件设置在 `BepInEx/config/com.ustachae.pvs22.cfg`：
+插件设置在 `BepInEx/config/com.ustachae.cliponsight.cfg`：
 
 | 分组 | 项目 | 默认 | 说明 |
 |---|---|---|---|
@@ -80,27 +86,28 @@ AN/PVS-22、AN/PVS-27、UTC XII 的模型授权不允许再分发，所以模组
 
 ## 模型来源
 
-| 物品 | 来源 | 说明 |
-|---|---|---|
-| AN/PVS-22 | [TurboSquid：AN/PVS-22](https://www.turbosquid.com/3d-models/an-pvs-22-519395) | 本模组重新展了 UV、烘焙并重新生成了贴图，加了导轨夹具 |
-| AN/PVS-27 | [CGTrader：PVS27 Magnum Universal Night Sight](https://www.cgtrader.com/3d-models/military/other/pvs27-magnum-universal-night-sight) | 含黑色和沙色贴图 |
-| AN/PVS-30 | [3D Military Assets（3DMA）：KAC AN/PVS-30 Night Vision Device](https://www.3dmilitaryassets.com/products/kac-an-pvs-30-night-vision-device) | 模型由 3DMA（www.3dmilitaryassets.com）制作，按其授权随免费模组附带 |
-| Trijicon UTC XII | [CGTrader：UTCx Thermal Weapon Sight](https://www.cgtrader.com/3d-models/military/other/utcx-thermal-weapon-sight) | 原模型是 UTCx，本模组按 UTC XII 的参数使用；含黑色和沙色贴图 |
+| 物品 | 来源 | 授权 | 说明 |
+|---|---|---|---|
+| AN/PVS-22 | [TurboSquid：AN/PVS-22](https://www.turbosquid.com/3d-models/an-pvs-22-519395) | TurboSquid 3D Model License，允许以游戏引擎的专有格式用于游戏模组 | 本模组重新展了 UV、烘焙并重新生成了贴图，加了导轨夹具；随模组附带 |
+| AN/PVS-27 | [CGTrader：PVS27 Magnum Universal Night Sight](https://www.cgtrader.com/3d-models/military/other/pvs27-magnum-universal-night-sight) | CGTrader Royalty Free | 含黑色和沙色贴图；不附带，玩家自行购买后用脚本生成 |
+| AN/PVS-30 | [3D Military Assets（3DMA）：KAC AN/PVS-30 Night Vision Device](https://www.3dmilitaryassets.com/products/kac-an-pvs-30-night-vision-device) | 3DMA Personal，允许用于免费的塔科夫模组 | 模型由 3DMA（www.3dmilitaryassets.com）制作；随模组附带 |
+| Trijicon UTC XII | [CGTrader：UTCx Thermal Weapon Sight](https://www.cgtrader.com/3d-models/military/other/utcx-thermal-weapon-sight) | CGTrader Royalty Free | 原模型是 UTCx，本模组按 UTC XII 的参数使用；含黑色和沙色贴图；不附带，玩家自行购买后用脚本生成 |
 
-模型的版权归各自作者所有。请勿从本模组提取或转发 AN/PVS-30 的模型。
+模型的版权归各自作者所有。请勿从本模组提取或转发 AN/PVS-22 和 AN/PVS-30 的模型。
 
 ## 开发
 
 | 路径 | 内容 |
 |---|---|
-| `pvs22/ClientSource` | BepInEx 插件：瞄具画面效果、目镜画面、镜片光照、自动定位、图标 |
-| `pvs22/ServerSource` | SPT 服务端模组：加入物品、导轨槽位、互斥规则、商人；没有 bundle 的物品不加载 |
+| `pvs22/ClientSource` | BepInEx 插件（四个模组共用）：瞄具画面效果、目镜画面、镜片光照、自动定位、图标 |
+| `pvs22/ServerSource` | SPT 服务端模组：加入物品、导轨槽位、互斥规则、商人；没有 bundle 的物品不加载。`build.sh` 把同一份代码编译成四个模组各自的程序集 |
 | `pvs22/UnityProject` | Unity 工程：生成预制体和着色器、打包 bundle（`Assets/Editor`），以及游戏组件的占位脚本（`Assets/PVS22Stubs`） |
 | `pvs22/*.py`、`clipons/*.py` | 作者用的完整处理流程：烘焙、网格、贴图、材质、物品数据、导轨测量、安装 |
-| `converter/build_models.py` | 玩家用的生成脚本（单个文件，随模组发布） |
+| `mods.py` | 四个模组各包含哪些物品和 bundle |
+| `converter/build_pvs27.py`、`converter/build_utc.py` | 玩家用的生成脚本（各为单个文件，随对应模组发布），由 `converter/make_scripts.py` 从 `converter/parts/` 生成 |
 | `converter/make_templates.py` | 从作者构建的 bundle 生成不含模型的模板 |
 | `converter/templates/` | 模板 |
-| `make_release.py` | 打包发布文件 |
+| `make_release.py` | 打包四个模组的发布文件 |
 | `common/game_refs.py` | 游戏共享着色器和环境贴图的引用 |
 
 作者的完整构建需要 Unity 2022.3.43f1、Python（`UnityPy`、`numpy`、`Pillow`）、Blender、.NET SDK 和 Roslyn 编译器；脚本里的路径按作者自己的目录写死（游戏在 `D:/games/SPT-4.1.6`，本仓库在 `D:/games/SPT-4.1.6/.codex-work/EFTClipOnSight`，Unity 在 `D:/Unity 2022.3.43f1`）。
@@ -109,9 +116,9 @@ AN/PVS-22、AN/PVS-27、UTC XII 的模型授权不允许再分发，所以模组
 2. PVS-22：`blender -b --factory-startup --python pvs22/blender_bake.py`，再运行 `pvs22/make_textures.py`、`pvs22/prepare_mesh.py`；其他三款运行 `clipons/prepare.py`。
 3. 在 Unity 里执行 `PVS22Builder.Build` 和 `ClipOnBuilder.Build`，再运行 `pvs22/finalize_bundle.py` 和 `clipons/finalize_clipons.py`。
 4. 物品数据：`pvs22/make_catalog.py`、`clipons/make_catalogs.py`。
-5. 编译：`pvs22/build_client.sh`；在 `pvs22/ServerSource` 里 `dotnet build -c Release`。
-6. 模板：`python converter/make_templates.py`；发布包：`python make_release.py`。
-7. 自己测试时，关闭服务端和游戏后运行 `clipons/install.py`。
+5. 编译：`pvs22/build_client.sh`；`pvs22/ServerSource/build.sh`。
+6. 生成脚本和模板：`python converter/make_scripts.py`、`python converter/make_templates.py`；发布包：`python make_release.py`。
+7. 自己测试时，关闭服务端和游戏后运行 `clipons/install.py`（会安装四个模组）。
 
 `pvs22/top_rails.py` 会从游戏的物品预制体里重新测量导轨槽位，生成 `pvs22/package/db/top_rails.json`；仓库里已经附带测好的结果。
 

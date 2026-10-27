@@ -1,6 +1,7 @@
 # Whitelist: source, build scripts, measured game data, the built DLLs and item data, the model-free templates, and
-# the AN/PVS-30 bundle (its 3DMA licence allows free mods). The other models' files and bundles must never be
-# committed: their licences forbid redistribution (players build them with converter/build_models.py).
+# the AN/PVS-22 and AN/PVS-30 bundles (TurboSquid's licence allows game mods in an engine's format, 3DMA's free
+# mods). The AN/PVS-27 and UTC XII files and bundles must never be committed: CGTrader's terms are read strictly
+# (players build them with converter/build_pvs27.py and build_utc.py). No source model files at all.
 /*
 !/.gitignore
 !/README.md
@@ -9,24 +10,26 @@
 !/clipons/
 !/converter/
 /converter/*
-!/converter/build_models.py
+!/converter/build_pvs27.py
+!/converter/build_utc.py
+!/converter/make_scripts.py
 !/converter/make_templates.py
+!/converter/parts/
 !/converter/templates/
 !/make_release.py
+!/mods.py
 
 /pvs22/*
 !/pvs22/ClientSource/
 !/pvs22/ServerSource/
 /pvs22/ServerSource/*
 !/pvs22/ServerSource/PVS22Mod.cs
-!/pvs22/ServerSource/UstAchae.PVS22.csproj
+!/pvs22/ServerSource/UstAchae.ClipOnSight.csproj
+!/pvs22/ServerSource/build.sh
 !/pvs22/ServerSource/bin/
 /pvs22/ServerSource/bin/*
 !/pvs22/ServerSource/bin/Release/
-/pvs22/ServerSource/bin/Release/*
-!/pvs22/ServerSource/bin/Release/UstAchae.PVS22.dll
-!/pvs22/ServerSource/bin/Release/UstAchae.PVS22.deps.json
-!/pvs22/ServerSource/bin/Release/UstAchae.PVS22.runtimeconfig.json
+/pvs22/ServerSource/bin/Release/*/*.pdb
 !/pvs22/build_client.sh
 !/pvs22/blender_bake.py
 !/pvs22/prepare_mesh.py
@@ -38,6 +41,8 @@
 /pvs22/package/*
 !/pvs22/package/db/
 !/pvs22/package/client/
+!/pvs22/package/bundles/
+!/pvs22/package/bundles.json
 
 !/pvs22/UnityProject/
 /pvs22/UnityProject/*

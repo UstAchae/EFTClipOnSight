@@ -1,21 +1,19 @@
-# Author-side: turns the finished bundles into the model-free templates that ship with the mod. The model's
+# Author-side: turns the finished bundles into the model-free templates that ship with the mods. The model's
 # mesh and textures are emptied (and the resource file that held the texture pixels is cleared); everything
 # else (prefab, materials, shaders, markers, thermal data) is our own work and stays.
 # Usage: python converter/make_templates.py  ->  converter/templates/<key>.bundle.template
-import sys
+import importlib, sys
 from pathlib import Path
 import UnityPy
 from PIL import Image
 
 W = Path(__file__).resolve().parent
-sys.path.insert(0, str(W.parent / 'common'))
+sys.path[:0] = [str(W), str(W.parent), str(W.parent / 'common')]
 import game_refs as refs
-from build_models import MODELS, write_texture
-
-ROOT = W.parent
+from mods import MODS
 
 
-def strip(src, model):
+def strip(src, model, write_texture):
     env = UnityPy.Environment()
     bundle = env.load_file(src.read_bytes(), name=model['bundle'])
     meshes = textures = 0
@@ -44,8 +42,10 @@ def strip(src, model):
 if __name__ == '__main__':
     out = W / 'templates'
     out.mkdir(exist_ok=True)
-    for key, model in MODELS.items():
-        src = ROOT / model['built']
-        data = strip(src, model)
-        (out / f'{key}.bundle.template').write_bytes(data)
-        print('TEMPLATE', key, len(data))
+    for key, mod in MODS.items():
+        if mod['shipped']: continue
+        script = importlib.import_module(Path(mod['script']).stem)  # the mod's build script: its bundle list
+        for name, model in script.MODELS.items():
+            data = strip(mod['bundles'][model['bundle']][0], model, script.write_texture)
+            (out / f'{name}.bundle.template').write_bytes(data)
+            print('TEMPLATE', name, len(data))

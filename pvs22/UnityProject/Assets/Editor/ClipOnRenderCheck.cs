@@ -7,8 +7,9 @@ using UnityEngine.Rendering;
 // Run: -executeMethod ClipOnRenderCheck.Run
 public static class ClipOnRenderCheck {
  const string Root="D:/games/SPT-4.1.6";
- const string Bundles=Root+"/.codex-work/EFTClipOnSight/clipons/package/bundles/ustachae_clipons";
- const string Output=Root+"/.codex-work/EFTClipOnSight/clipons/previews";
+ // CLIPON_RENDER_BUNDLES / CLIPON_RENDER_OUTPUT render other bundles (a converter test) into another folder.
+ static readonly string Bundles=System.Environment.GetEnvironmentVariable("CLIPON_RENDER_BUNDLES")??Root+"/.codex-work/EFTClipOnSight/clipons/package/bundles/ustachae_clipons";
+ static readonly string Output=System.Environment.GetEnvironmentVariable("CLIPON_RENDER_OUTPUT")??Root+"/.codex-work/EFTClipOnSight/clipons/previews";
  public static void Run(){
   Directory.CreateDirectory(Output);
   AssetBundle.LoadFromFile(Root+"/EscapeFromTarkov_Data/StreamingAssets/Windows/shaders");

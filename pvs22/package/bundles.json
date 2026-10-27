@@ -1,0 +1,12 @@
+{
+  "manifest": [
+    {
+      "key": "ustachae_pvs22/an_pvs22.bundle",
+      "dependencyKeys": [
+        "shaders",
+        "cubemaps",
+        "assets/systems/effects/opticsight/opticsightsmasks.bundle"
+      ]
+    }
+  ]
+}

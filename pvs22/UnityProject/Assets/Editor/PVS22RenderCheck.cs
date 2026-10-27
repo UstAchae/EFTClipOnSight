@@ -5,8 +5,9 @@ using UnityEngine;
 using UnityEngine.Rendering;
 public static class PVS22RenderCheck {
  const string Root="D:/games/SPT-4.1.6";
- const string Bundle=Root+"/.codex-work/EFTClipOnSight/pvs22/package/bundles/"+PVS22Builder.BundleKey;
- const string Output=Root+"/.codex-work/EFTClipOnSight/pvs22/previews";
+ // PVS22_RENDER_BUNDLE / PVS22_RENDER_OUTPUT render another bundle (a converter test) into another folder.
+ static readonly string Bundle=System.Environment.GetEnvironmentVariable("PVS22_RENDER_BUNDLE")??Root+"/.codex-work/EFTClipOnSight/pvs22/package/bundles/"+PVS22Builder.BundleKey;
+ static readonly string Output=System.Environment.GetEnvironmentVariable("PVS22_RENDER_OUTPUT")??Root+"/.codex-work/EFTClipOnSight/pvs22/previews";
  public static void Run(){
   Directory.CreateDirectory(Output);
   AssetBundle.LoadFromFile(Root+"/EscapeFromTarkov_Data/StreamingAssets/Windows/shaders");

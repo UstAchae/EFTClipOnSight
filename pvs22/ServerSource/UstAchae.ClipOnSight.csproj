@@ -5,8 +5,8 @@
     <Nullable>enable</Nullable>
     <OutputType>Library</OutputType>
     <Version>0.1.0</Version>
-    <AssemblyName>UstAchae.PVS22</AssemblyName>
-    <RootNamespace>UstAchaePVS22</RootNamespace>
+    <AssemblyName>UstAchae.ClipOnSight</AssemblyName>
+    <RootNamespace>UstAchae.ClipOnSight</RootNamespace>
     <EnableDynamicLoading>true</EnableDynamicLoading>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
   </PropertyGroup>

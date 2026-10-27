@@ -11,7 +11,7 @@ namespace UstAchae.PVS22
     // being looked through, the optic camera renders night vision (or thermal, for clip-ons with a
     // "clipon_thermal" marker), and its near plane moves past the clip-on so the housing itself does not fill
     // the scope picture.
-    [BepInPlugin("com.ustachae.pvs22", "Justachae's Clip-on Sight", "0.1.0")]
+    [BepInPlugin("com.ustachae.cliponsight", "Justachae's Clip-on Sight", "0.1.0")]
     public class PVS22Plugin : BaseUnityPlugin
     {
         const string FrontMarker = "pvs22_front";

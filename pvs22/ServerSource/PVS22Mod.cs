@@ -13,12 +13,33 @@ using SPTarkov.Server.Core.Services.Modding.Custom;
 using SPTarkov.Server.Core.Utils;
 using SPTarkov.Server.Core.Utils.Json;
 
-namespace UstAchaePVS22;
+// One clip-on per mod (the user's choice): build.sh compiles this file once per clip-on, with its own
+// namespace, GUID and assembly, so the four mods load side by side. Each loads the items in its own folder.
+#if CLIPON_PVS22
+namespace UstAchae.ClipOnSight.PVS22;
+#elif CLIPON_PVS27
+namespace UstAchae.ClipOnSight.PVS27;
+#elif CLIPON_PVS30
+namespace UstAchae.ClipOnSight.PVS30;
+#elif CLIPON_UTC
+namespace UstAchae.ClipOnSight.UTC;
+#endif
 
 public record ModMetadata : IModMetadata
 {
-    public string ModGuid { get; init; } = "com.ustachae.pvs22";
-    public string Name { get; init; } = "Justachae's Clip-on Sight";
+#if CLIPON_PVS22
+    public string ModGuid { get; init; } = "com.ustachae.cliponsight.pvs22";
+    public string Name { get; init; } = "Justachae's Clip-on Sight: AN/PVS-22";
+#elif CLIPON_PVS27
+    public string ModGuid { get; init; } = "com.ustachae.cliponsight.pvs27";
+    public string Name { get; init; } = "Justachae's Clip-on Sight: AN/PVS-27";
+#elif CLIPON_PVS30
+    public string ModGuid { get; init; } = "com.ustachae.cliponsight.pvs30";
+    public string Name { get; init; } = "Justachae's Clip-on Sight: AN/PVS-30";
+#elif CLIPON_UTC
+    public string ModGuid { get; init; } = "com.ustachae.cliponsight.utc";
+    public string Name { get; init; } = "Justachae's Clip-on Sight: UTC XII";
+#endif
     public string Author { get; init; } = "UstAchae";
     public List<string>? Contributors { get; init; }
     public SemanticVersioning.Version Version { get; init; } = new("0.1.0");
@@ -55,10 +76,8 @@ public class PVS22Mod(
         var options = JsonUtil.JsonSerializerOptionsNoIndent ?? new JsonSerializerOptions();
         var topRails = JsonSerializer.Deserialize<Dictionary<string, Dictionary<string, bool>>>(
             File.ReadAllText(System.IO.Path.Combine(modPath, "db", "top_rails.json")), options) ?? [];
-        // The PVS-22, then every clip-on the clipons pipeline added (db/items/*.json), all built the same way.
-        string itemsDir = System.IO.Path.Combine(modPath, "db", "items");
-        var catalogs = new List<string> { System.IO.Path.Combine(modPath, "db", "pvs22.json") };
-        if (Directory.Exists(itemsDir)) catalogs.AddRange(Directory.GetFiles(itemsDir, "*.json").OrderBy(f => f));
+        // This mod's clip-on and its colour variants (db/items/*.json), all built the same way.
+        var catalogs = Directory.GetFiles(System.IO.Path.Combine(modPath, "db", "items"), "*.json").OrderBy(f => f);
         var clipOns = new List<MongoId>();
         foreach (string file in catalogs) if (LoadItem(file, options, topRails) is MongoId id) clipOns.Add(id);
         AddConflicts(clipOns);
@@ -83,12 +102,12 @@ public class PVS22Mod(
         }
         string name = locales.TryGetValue("en", out var en) ? en.ShortName! : template.Id.ToString();
 
-        // Only the AN/PVS-30's bundle ships with the mod; the others are built by build_models.py from the
-        // player's own purchased models. An item without its bundle stays out of the game.
+        // Only the AN/PVS-30 mod ships its bundle; the others are built by the build_*.py script in their mod
+        // folder from the player's own purchased model. An item without its bundle stays out of the game.
         string bundle = template.Properties?.Prefab?.Path ?? "";
         if (!File.Exists(System.IO.Path.Combine(modHelper.GetAbsolutePathToModFolder(Assembly.GetExecutingAssembly()), "bundles", bundle)))
         {
-            logger.Info($"{name} not enabled: its model is not built (see build_models.py in the mod folder)");
+            logger.Info($"{name} not enabled: its model is not built (run the build_*.py script in its mod folder)");
             return null;
         }
 
