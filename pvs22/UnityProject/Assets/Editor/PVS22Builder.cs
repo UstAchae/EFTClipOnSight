@@ -171,7 +171,7 @@ float3 pvs22_tube(float3 scene, float2 pixel) {
  public static Shader WriteTubeShader(string gen){
   WriteTubeInclude(gen);
   File.WriteAllText(gen+"/PVS22Tube.shader",@"Shader ""UstAchae/PVS22/Tube"" {
- Properties { _MainTex (""source"", 2D) = ""white"" {} _PVS22Thermal (""thermal"", Float) = 0 _PVS22Field (""field stop geometry"", Vector) = (0,0,1,1) _PVS22FieldTan (""field stop"", Float) = 10 }
+ Properties { _MainTex (""source"", 2D) = ""white"" {} _PVS22Thermal (""thermal"", Float) = 0 _PVS22Field (""field stop geometry"", Vector) = (0,0,1,1) _PVS22FieldTan (""field stop"", Float) = 10 _PVS22Lens (""lens edge"", Float) = 10 }
  SubShader {
   Cull Off ZWrite Off ZTest Always
   Pass {
@@ -188,10 +188,12 @@ float3 pvs22_tube(float3 scene, float2 pixel) {
    // z in front of it: black where the eye's line through that lens point is beyond the field (tangent; 10: none).
    float4 _PVS22Field;
    float _PVS22FieldTan;
+   float _PVS22Lens;           // the lens's edge as a radius in uv: the picture beyond it is black (10: none)
    fixed4 frag (v2f_img i) : SV_Target {
     float3 scene = tex2D(_MainTex, i.uv).rgb;
     float slope = length((i.uv - 0.5) * 2 * _PVS22Field.w - _PVS22Field.xy) / _PVS22Field.z;
-    float stop = 1 - smoothstep(_PVS22FieldTan * 0.97, _PVS22FieldTan * 1.01, slope);
+    float stop = (1 - smoothstep(_PVS22FieldTan * 0.97, _PVS22FieldTan * 1.01, slope))
+               * (1 - smoothstep(_PVS22Lens - 0.006, _PVS22Lens, length(i.uv - 0.5)));
     if (_PVS22Thermal > 0.5)  // white hot
      return fixed4(saturate((dot(scene, float3(0.299, 0.587, 0.114)) - _PVS22ThermalParams.x) * _PVS22ThermalParams.y).xxx * stop, 1);
     return fixed4(pvs22_tube(scene, i.uv * _MainTex_TexelSize.zw) * stop, 1);
