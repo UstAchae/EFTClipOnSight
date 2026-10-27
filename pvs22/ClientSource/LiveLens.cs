@@ -4,19 +4,16 @@ using UnityEngine.Rendering;
 
 namespace UstAchae.PVS22
 {
-    // Live 1x picture (night vision, or thermal for clip-ons with a "clipon_thermal" marker) on the eyepiece for
-    // when no optic camera feeds the sight lens: behind a red dot or a holographic sight, or not aiming at all.
-    // The prefab's "pvs22_live" disc carries the game's own lens material (CW FX/OpticSight, the one every
-    // native scope uses) for the native lens and dark idle look. That shader shows the global _CamTex, the optic
-    // camera's picture; this disc gets its own instead, per renderer. As in the real device, the picture is what
-    // the objective sees, shown 1x at infinity: a private camera at the front of the objective (so nothing behind
-    // it, such as the sight behind or the clip-on itself, can show; parts of the weapon ahead of it can), aimed
-    // like a window, along the directions from the eye through each point of the lens (an off-centre frustum),
-    // so the view through the lens shifts as the eye moves, black where that direction is beyond half the
-    // device's field of view (its field stop), then turned into the tube picture. The native mask's slide with
-    // the eye is turned off: it models a scope's exit pupil at its eye relief, and from the distance this
-    // eyepiece is seen at it only drew a large round shadow. The same disc is used when aiming through the
-    // clip-on itself; its sight lens, fed by the game's optic camera with that mask, stays hidden.
+    // Live 1x picture (night vision, or thermal for clip-ons with a "clipon_thermal" marker) on the eyepiece: the
+    // prefab's "pvs22_live" disc with our own lens shader (UstAchae/PVS22/Eyepiece, depth-tested: the game's own
+    // lens shader draws over everything in front of it, the shooter's head included, and its eye-relief masks drew
+    // shadows and rings). As in the real device, the picture is what the objective sees, shown 1x at infinity: a
+    // private camera at the front of the objective (so nothing behind it, such as the sight behind or the clip-on
+    // itself, can show; parts of the weapon ahead of it can), aimed like a window, along the directions from the
+    // eye through each point of the lens (an off-centre frustum), so the view through the lens shifts as the eye
+    // moves, black where that direction is beyond half the device's field of view (its field stop), then turned
+    // into the tube picture. Used aiming or not; the clip-on's sight lens, fed by the game's optic camera, stays
+    // hidden.
     class LiveLens : MonoBehaviour
     {
         const string LiveNode = "pvs22_live";
@@ -32,21 +29,15 @@ namespace UstAchae.PVS22
         const float AxisTolerance = 0.10f;
         const float MaxBehind = 0.6f;
         const float DiscRadius = 0.016539544f;  // the lens disc mesh's radius; its node is scaled to the lens
-        const float Off = 0.97f;                // _SwitchToSight of a native sight that is not in use
-        // Native lens settings for this eyepiece: _Scales.x 10 shows _CamTex out to 0.47 of its width from the centre
-        // with a soft native rim (measured); _Shifts zero stops the mask sliding with the eye.
-        static readonly Vector4 Scales = new Vector4(10f, 100f, 100f, 100f);
-        const float Visible = 0.47f;
+        const float Visible = 0.5f;             // the picture spans the lens exactly (its uv 0..1)
 
         static Camera liveCamera;
         static RenderTexture raw, picture;
         static Material process;
         static bool rendering;
         static int renderedFrame = -1;
-        static readonly int camTexId = Shader.PropertyToID("_CamTex");
-        static readonly int switchId = Shader.PropertyToID("_SwitchToSight");
-        static readonly int scalesId = Shader.PropertyToID("_Scales");
-        static readonly int shiftsId = Shader.PropertyToID("_Shifts");
+        static readonly int pictureId = Shader.PropertyToID("_PVS22Picture");
+        static readonly int onId = Shader.PropertyToID("_PVS22On");
         static readonly int fieldId = Shader.PropertyToID("_PVS22Field");
         static readonly int fieldTanId = Shader.PropertyToID("_PVS22FieldTan");
         static readonly int lensId = Shader.PropertyToID("_PVS22Lens");
@@ -84,39 +75,7 @@ namespace UstAchae.PVS22
             }
             lens.body = clipOn.Find(BodyNode);
             Mesh mesh = lens.body != null ? lens.body.GetComponent<MeshFilter>()?.sharedMesh : null;
-            if (mesh != null)
-            {
-                lens.bodyBounds = mesh.bounds;
-                lens.ToOpening(mesh);
-            }
-        }
-
-        // The native lens shader draws its picture over everything (ZTest Always), which is fine for a native
-        // scope whose lens sits at the end of the eyepiece but painted the eyepiece's recessed lens over the boot
-        // or eyecup in front of it. So the disc goes where a native scope has its lens: just inside the eyepiece
-        // opening, with nothing of the clip-on in front of it. It keeps its size: the shader's mask edge has the
-        // lens's size, and an enlarged disc showed it as a dark ring inside the lens with picture outside it. Runs
-        // before the placement rig records the children's positions. A lens within 3 mm of the opening, or wider
-        // than it, stays where it is.
-        void ToOpening(Mesh mesh)
-        {
-            Vector3 centre = transform.localPosition - body.localPosition;  // the axis, in the body mesh's frame
-            float lensRadius = DiscRadius * transform.localScale.x, reach = lensRadius * 2.5f;
-            Vector3[] vertices = mesh.vertices;
-            float rearZ = float.MaxValue;
-            foreach (Vector3 v in vertices)
-                if (new Vector2(v.x - centre.x, v.y - centre.y).magnitude < reach) rearZ = Mathf.Min(rearZ, v.z);
-            if (centre.z - rearZ < 0.003f) return;
-            float opening = float.MaxValue;  // the rim's inner edge: the closest point to the axis near the end
-            foreach (Vector3 v in vertices)
-            {
-                if (v.z > rearZ + 0.003f) continue;
-                float r = new Vector2(v.x - centre.x, v.y - centre.y).magnitude;
-                if (r < reach) opening = Mathf.Min(opening, r);
-            }
-            if (opening < lensRadius || opening == float.MaxValue) return;
-            Vector3 local = transform.localPosition;
-            transform.localPosition = new Vector3(local.x, local.y, body.localPosition.z + rearZ + 0.0005f);
+            if (mesh != null) lens.bodyBounds = mesh.bounds;
         }
 
         void OnWillRenderObject()
@@ -139,10 +98,8 @@ namespace UstAchae.PVS22
             if (on && Time.frameCount - renderedFrame >= 2 && Render(eye)) renderedFrame = Time.frameCount;
             on &= picture != null;
             disc.GetPropertyBlock(block);
-            block.SetFloat(switchId, on ? 0f : Off);
-            block.SetVector(scalesId, Scales);
-            block.SetVector(shiftsId, Vector4.zero);
-            if (on) block.SetTexture(camTexId, picture);
+            block.SetFloat(onId, on ? 1f : 0f);
+            if (on) block.SetTexture(pictureId, picture);
             disc.SetPropertyBlock(block);
         }
 
@@ -253,8 +210,7 @@ namespace UstAchae.PVS22
             // The field stop: black where the eye's line through the lens is beyond half the field of view.
             process.SetVector(fieldId, new Vector4(ex, ey, distance, span));
             process.SetFloat(fieldTanId, Mathf.Tan(profile.Fov * 0.5f * Mathf.Deg2Rad));
-            // The picture beyond the lens's edge is black too: the native lens's soft rim samples a little past it,
-            // and from the side that part could still be in the field and showed as a bright crescent at the rim.
+            // The picture's corners, beyond the lens's edge, are black too.
             process.SetFloat(lensId, Visible);
             TubeEffect.SetGlobals(gain, noise, grain * size * 2f * Visible / Mathf.Max(lensPixels, 1f), profile.Phosphor);
             Shader.SetGlobalVector(thermalParamsId, new Vector4(PVS22Plugin.ThermalLevel, PVS22Plugin.ThermalGain, 0f, 0f));

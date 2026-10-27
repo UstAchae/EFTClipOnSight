@@ -63,15 +63,14 @@ public static class PVS22Builder {
   back.AddComponent<MeshFilter>().sharedMesh=dome;
   var backRenderer=back.AddComponent<MeshRenderer>();backRenderer.sharedMaterial=backGlass;backRenderer.shadowCastingMode=ShadowCastingMode.Off;
 
-  // Live 1x picture for when no optic camera feeds the lens (a red dot or holo behind it, or at the hip): a
-  // second lens with the same native lens material, so it has the game's own exit-pupil ring and dark idle
-  // look. The client feeds it its own picture through a per-renderer _CamTex and switches it with
-  // _SwitchToSight; it hides it while aiming through the clip-on, when the sight lens shows the optic camera.
-  // It sits 2 mm nearer the eye than the sight lens so the two never z-fight.
+  // The eyepiece as the shooter sees it: the client's live 1x picture on a coated lens (UstAchae/PVS22/Eyepiece,
+  // shipped in the bundle; depth-tested, unlike the game's own lens shader, which draws over everything in front
+  // of it). It sits 2 mm nearer the eye than the sight lens, which the client keeps hidden.
+  var liveMat=new Material(WriteEyepieceShader(gen)){name="an_pvs22_live"};AssetDatabase.CreateAsset(liveMat,gen+"/mat_live.asset");
   var live=new GameObject("pvs22_live");live.transform.SetParent(root.transform,false);live.transform.localPosition=new Vector3(0,y,lensZ-0.002f);
   live.transform.localRotation=lens.transform.localRotation;live.transform.localScale=lens.transform.localScale;
   live.AddComponent<MeshFilter>().sharedMesh=disc;
-  var liveRenderer=live.AddComponent<MeshRenderer>();liveRenderer.sharedMaterial=lensMat;liveRenderer.shadowCastingMode=ShadowCastingMode.Off;liveRenderer.receiveShadows=false;
+  var liveRenderer=live.AddComponent<MeshRenderer>();liveRenderer.sharedMaterial=liveMat;liveRenderer.shadowCastingMode=ShadowCastingMode.Off;liveRenderer.receiveShadows=false;
 
   // Carries the tube image effect's shader in the bundle (the client reads it from here); never drawn.
   var tubeMat=new Material(WriteTubeShader(gen)){name="an_pvs22_tube"};AssetDatabase.CreateAsset(tubeMat,gen+"/mat_tube.asset");
@@ -168,6 +167,41 @@ float3 pvs22_tube(float3 scene, float2 pixel) {
  }
  // Image effect for the optic camera when a night-vision clip-on sits in front of the scope (or is the
  // sight): it replaces the game's night vision. Shipped in the bundle on the hidden "pvs22_tube" renderer.
+ // The eyepiece lens: the client's picture (_PVS22Picture, set per renderer; it spans the lens exactly, lens uv 0..1)
+ // under one even coated-glass layer, dark with a faint sheen at grazing angles, the same over the whole lens from
+ // every side. With _PVS22On 0 only the glass shows.
+ public static Shader WriteEyepieceShader(string gen){
+  File.WriteAllText(gen+"/PVS22Eyepiece.shader",@"Shader ""UstAchae/PVS22/Eyepiece"" {
+ Properties { _PVS22Picture (""picture"", 2D) = ""black"" {} _PVS22On (""on"", Float) = 0 }
+ SubShader {
+  Tags { ""Queue""=""Geometry"" ""RenderType""=""Opaque"" }
+  Cull Off
+  Pass {
+   CGPROGRAM
+   #pragma vertex vert
+   #pragma fragment frag
+   #include ""UnityCG.cginc""
+   sampler2D _PVS22Picture;
+   float _PVS22On;
+   struct v2f { float4 pos : SV_POSITION; float2 uv : TEXCOORD0; float3 normal : TEXCOORD1; float3 view : TEXCOORD2; };
+   v2f vert (appdata_base v) {
+    v2f o; o.pos = UnityObjectToClipPos(v.vertex); o.uv = v.texcoord.xy;
+    o.normal = UnityObjectToWorldNormal(v.normal); o.view = WorldSpaceViewDir(v.vertex); return o;
+   }
+   fixed4 frag (v2f i) : SV_Target {
+    float r = length(i.uv - 0.5) * 2;  // 0 at the centre, 1 at the rim
+    float3 picture = tex2D(_PVS22Picture, i.uv).rgb * _PVS22On * (1 - 0.5 * smoothstep(0.85, 1.0, r));
+    float grazing = pow(1 - abs(dot(normalize(i.normal), normalize(i.view))), 5);  // drawn from either side
+    float3 glass = float3(0.005, 0.006, 0.009) + float3(0.06, 0.07, 0.09) * grazing;
+    return fixed4(picture + glass, 1);
+   }
+   ENDCG
+  }
+ }
+}");
+  AssetDatabase.ImportAsset(gen+"/PVS22Eyepiece.shader",ImportAssetOptions.ForceSynchronousImport);
+  return AssetDatabase.LoadAssetAtPath<Shader>(gen+"/PVS22Eyepiece.shader");
+ }
  public static Shader WriteTubeShader(string gen){
   WriteTubeInclude(gen);
   File.WriteAllText(gen+"/PVS22Tube.shader",@"Shader ""UstAchae/PVS22/Tube"" {
