@@ -93,8 +93,10 @@ namespace UstAchae.PVS22
         // The native lens shader draws its picture over everything (ZTest Always), which is fine for a native
         // scope whose lens sits at the end of the eyepiece but painted the eyepiece's recessed lens over the boot
         // or eyecup in front of it. So the disc goes where a native scope has its lens: just inside the eyepiece
-        // opening, sized to it, with nothing of the clip-on in front of it. Runs before the placement rig records
-        // the children's positions. A lens within 3 mm of the opening stays where it is.
+        // opening, with nothing of the clip-on in front of it. It keeps its size: the shader's mask edge has the
+        // lens's size, and an enlarged disc showed it as a dark ring inside the lens with picture outside it. Runs
+        // before the placement rig records the children's positions. A lens within 3 mm of the opening, or wider
+        // than it, stays where it is.
         void ToOpening(Mesh mesh)
         {
             Vector3 centre = transform.localPosition - body.localPosition;  // the axis, in the body mesh's frame
@@ -111,11 +113,9 @@ namespace UstAchae.PVS22
                 float r = new Vector2(v.x - centre.x, v.y - centre.y).magnitude;
                 if (r < reach) opening = Mathf.Min(opening, r);
             }
-            if (opening < lensRadius * 0.5f || opening == float.MaxValue) return;
+            if (opening < lensRadius || opening == float.MaxValue) return;
             Vector3 local = transform.localPosition;
             transform.localPosition = new Vector3(local.x, local.y, body.localPosition.z + rearZ + 0.0005f);
-            float scale = opening * 0.98f / DiscRadius;
-            transform.localScale = new Vector3(scale, transform.localScale.y, scale);
         }
 
         void OnWillRenderObject()
