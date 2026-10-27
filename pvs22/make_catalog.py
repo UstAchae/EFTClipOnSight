@@ -1,4 +1,5 @@
-# Writes package/db/pvs22.json: the item template (a 1x night-vision special scope), locales and the trader listing.
+# Writes package/db/pvs22.json: the item template (cloned from a night-vision scope, then made a Mount: the clip-on
+# is not a sight itself, the user's choice), locales and the trader listing.
 import json, copy
 from pathlib import Path
 
@@ -7,22 +8,24 @@ DB = Path(r'D:/games/SPT-4.1.6/SPT_Runtime/SPT_Data/database/templates/items.jso
 ITEM_ID = '67a0c0de5056532200000001'
 BASE = '5b3b6e495acfc4330140bd88'  # Armasight Vulcan: a night-vision special scope
 BUNDLE = 'ustachae_pvs22/an_pvs22.bundle'
+MOUNT = '55818b224bdc2dde698b456f'
+SCOPE_ONLY = ['AdjustableOpticSensitivity', 'AdjustableOpticSensitivityMax', 'AimSensitivity', 'CalibrationDistances', 'CustomAimPlane', 'IsAdjustableOptic', 'MinMaxFov', 'ModesCount', 'ScopesCount', 'ZoomSensitivity', 'Zooms', 'sightModType']  # properties only sights have
 
 items = json.loads(DB.read_text(encoding='utf-8-sig'))
 t = copy.deepcopy(items[BASE])
 t['_id'] = ITEM_ID
 t['_name'] = 'ustachae_mount_an_pvs22'
 t['_proto'] = BASE
+t['_parent'] = MOUNT
 p = t['_props']
+for k in SCOPE_ONLY: p.pop(k, None)
 p.update({
     'Name': 'AN/PVS-22', 'ShortName': 'PVS-22', 'Description': 'AN/PVS-22',
     'Prefab': {'path': BUNDLE, 'rcid': ''},
     'Weight': 0.86, 'Width': 2, 'Height': 1, 'Ergonomics': -9,
     'BackgroundColor': 'blue', 'RarityPvE': 'Superrare', 'CanSellOnRagfair': True,
     'Slots': [], 'ConflictingItems': [], 'ExamineExperience': 10, 'LootExperience': 10,
-    # On its own it is a 1x night sight.
-    'Zooms': [[1]], 'AimSensitivity': [[0.65]], 'CalibrationDistances': [[100]], 'SightingRange': 300,
-    'ModesCount': [1], 'ScopesCount': 1, 'sightModType': 'optic',
+    'CoolFactor': 1, 'HeatFactor': 1,
 })
 
 locales = {

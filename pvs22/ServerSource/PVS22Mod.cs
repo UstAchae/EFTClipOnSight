@@ -161,8 +161,7 @@ public class PVS22Mod(
     int AddToTopRails(MongoId pvs, Dictionary<string, Dictionary<string, bool>> topRails)
     {
         string[] owners = [Handguard, Mount, Receiver, GasBlock, Stock];
-        // Decided once, before any clip-on is added: the clip-ons are special scopes themselves, so afterwards
-        // every rail mount would look like an optic mount.
+        // Decided once, before any clip-on is added, and kept for the other clip-ons.
         opticMounts ??= templateTable.Items.Values.Where(m => IsA(m.Id, Mount)
             && m.Properties?.Slots?.Any(s => Takes(s, t => Optics.Any(o => IsA(t, o)))) == true).Select(m => m.Id).ToHashSet();
         sideMounts ??= SideMounts(topRails);

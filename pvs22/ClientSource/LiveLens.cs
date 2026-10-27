@@ -16,8 +16,8 @@ namespace UstAchae.PVS22
     // moves, then turned into the tube picture. The whole picture fades out evenly once the eye's line to the lens
     // centre is beyond half the device's field of view (no partial crescents at the rim, the user's choice), and
     // the eyepiece is not drawn while a player's body sits between it and the camera (a free or third-person
-    // camera behind the shooter's head, which does not hide it by depth). Used aiming or not; the clip-on's sight
-    // lens, fed by the game's optic camera, stays hidden. Not aiming, the picture is made as if the eye were on the
+    // camera behind the shooter's head, which does not hide it by depth). The clip-on is not a sight itself, so no
+    // game lens or optic camera draws on its eyepiece. Not aiming, the picture is made as if the eye were on the
     // axis, as when aiming (the user's choice): seen from the hip, the window looked down past the front of the
     // clip-on at the weapon's own parts.
     class LiveLens : MonoBehaviour
@@ -26,7 +26,6 @@ namespace UstAchae.PVS22
         const string FrontMarker = "pvs22_front";
         const string RearMarker = "pvs22_rear";
         const string ThermalMarker = "clipon_thermal";
-        const string SightLensNode = "linza";
         const string BackGlassNode = "eyepiece_glass";
         const string BodyNode = "an_pvs22_LOD0";
         const float MaxEyeDistance = 1.0f;      // the shooter's own clip-on, not ones seen on other weapons
@@ -72,11 +71,6 @@ namespace UstAchae.PVS22
             lens.block = new MaterialPropertyBlock();
             lens.thermal = clipOn.Find(ThermalMarker) != null;
             lens.halfField = ImageProfile.For(clipOn).Fov * 0.5f;
-            // This disc is the eyepiece on a weapon (picture or dark lens), aiming or not: the sight lens is never
-            // needed there. It is switched off as an object: the game sets every weapon renderer's forceRenderingOff
-            // itself when it shows or hides the weapon, and the sight lens's own shader then drew over this disc (its
-            // idle black circle, its mask's crescent at the rim, through the head).
-            clipOn.Find(SightLensNode)?.gameObject.SetActive(false);
             // The glass disc behind closes the hollow eyepiece tube: without it the room showed through past this
             // disc's rim at an angle. Made plain black and half as wide again, it reads as the tube's dark inside.
             Transform back = clipOn.Find(BackGlassNode);

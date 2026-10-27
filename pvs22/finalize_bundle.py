@@ -101,7 +101,7 @@ for o in refs.objects(built):
     t['m_SavedProperties'] = props
     o.save_typetree(t)
     done.add(name)
-assert done == set(LOOK) | {'an_pvs22_glass', 'an_pvs22_linza'}, done
+assert done == set(LOOK) | {'an_pvs22_glass'}, done  # no sight lens: the clip-on is not a sight
 
 out = W / 'package/bundles' / KEY
 out.parent.mkdir(parents=True, exist_ok=True)

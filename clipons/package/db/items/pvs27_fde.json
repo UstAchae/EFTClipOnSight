@@ -2,31 +2,18 @@
  "item": {
   "_id": "67a0c0de5056532700000003",
   "_name": "ustachae_mount_pvs27_fde",
-  "_parent": "55818aeb4bdc2ddc698b456a",
+  "_parent": "55818b224bdc2dde698b456f",
   "_props": {
    "Accuracy": 0,
-   "AdjustableOpticSensitivity": 0,
-   "AdjustableOpticSensitivityMax": 0,
-   "AimSensitivity": [
-    [
-     0.65
-    ]
-   ],
    "AnimationVariantsNumber": 0,
    "BackgroundColor": "blue",
    "BlocksCollapsible": false,
    "BlocksFolding": false,
-   "CalibrationDistances": [
-    [
-     100
-    ]
-   ],
    "CanPutIntoDuringTheRaid": true,
    "CanRequireOnRagfair": false,
    "CanSellOnRagfair": true,
    "CantRemoveFromSlotsDuringRaid": [],
    "ConflictingItems": [],
-   "CustomAimPlane": "",
    "Description": "AN/PVS-27 FDE",
    "DiscardLimit": -1,
    "DiscardingBlock": false,
@@ -50,7 +37,6 @@
    "Height": 2,
    "HideEntrails": false,
    "InsuranceDisabled": false,
-   "IsAdjustableOptic": false,
    "IsAlwaysAvailableForInsurance": false,
    "IsAnimated": false,
    "IsLockedafterEquip": false,
@@ -67,14 +53,6 @@
    "Loudness": 0,
    "MergesWithChildren": true,
    "MetascoreGroup": "Firepower",
-   "MinMaxFov": {
-    "x": 0,
-    "y": 0,
-    "z": 0
-   },
-   "ModesCount": [
-    1
-   ],
    "Name": "AN/PVS-27 FDE",
    "NotShownInSlot": false,
    "Prefab": {
@@ -89,9 +67,8 @@
    "Recoil": 0,
    "RepairCost": 0,
    "RepairSpeed": 0,
-   "ScopesCount": 1,
    "ShortName": "AN/PVS-27 FDE",
-   "SightingRange": 300,
+   "SightingRange": 500,
    "Slots": [],
    "StackMaxSize": 1,
    "StackObjectsCount": 1,
@@ -107,13 +84,8 @@
    "Velocity": 0,
    "Weight": 1.42,
    "Width": 2,
-   "ZoomSensitivity": 0,
-   "Zooms": [
-    [
-     1
-    ]
-   ],
-   "sightModType": "optic"
+   "CoolFactor": 1,
+   "HeatFactor": 1
   },
   "_proto": "5b3b6e495acfc4330140bd88",
   "_type": "Item"

@@ -75,25 +75,7 @@ namespace UstAchae.PVS22
             if (sight == null || camera == null) return;
 
             Transform cam = camera.transform;
-            // Looking straight through the PVS-22 itself: it is a 1x night sight, so only the switch matters.
-            if (sight.transform.Find(FrontMarker) != null)
-            {
-                if (sight.transform.Find(ThermalMarker) != null)
-                {
-                    thermalVisionRef(__instance).On = true;
-                    TubeEffect.Hide(camera);
-                    MagnificationBlur.Set(camera, null, 0f);
-                    return;
-                }
-                // A clip-on works whenever it is mounted (no on/off switch, user's choice). Our tube picture
-                // replaces the game's night vision.
-                NightVision own = nightVisionRef(__instance);
-                own.enabled = false;
-                own.On = false;
-                TubeEffect.Show(camera, sight.transform, ImageProfile.For(sight.transform), 1f);
-                MagnificationBlur.Set(camera, null, 0f);
-                return;
-            }
+            // A clip-on is not a sight itself (the user's choice), so the optic here is always another one.
             bool active = FindClipOn(sight) && InLine(cam);
             if (active)
             {

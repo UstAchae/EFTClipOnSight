@@ -1,5 +1,6 @@
-# Writes package/db/items/<key>.json for each clip-on: the item template (a 1x special scope cloned from a
-# native night-vision or thermal scope), locales and the trader listing. The server mod loads every file there.
+# Writes package/db/items/<key>.json for each clip-on: the item template (cloned from a native night-vision or
+# thermal scope, then made a Mount: the clip-on is not a sight itself, the user's choice), locales and the trader
+# listing. The server mod loads every file there.
 import json, copy
 from pathlib import Path
 from items import ITEMS
@@ -9,6 +10,8 @@ DB = Path(r'D:/games/SPT-4.1.6/SPT_Runtime/SPT_Data/database/templates/items.jso
 VULCAN = '5b3b6e495acfc4330140bd88'   # Armasight Vulcan: a night-vision special scope
 REAP = '5a1eaa87fcdbcb001865f75e'     # Trijicon REAP-IR: a thermal special scope
 PEACEKEEPER, USD = '5935c25fb3acc3127c3d8cd9', '5696686a4bdc2da3298b456a'
+MOUNT = '55818b224bdc2dde698b456f'
+SCOPE_ONLY = ['AdjustableOpticSensitivity', 'AdjustableOpticSensitivityMax', 'AimSensitivity', 'CalibrationDistances', 'CustomAimPlane', 'IsAdjustableOptic', 'MinMaxFov', 'ModesCount', 'ScopesCount', 'ZoomSensitivity', 'Zooms', 'sightModType']  # properties only sights have
 
 CATALOG = {
     'pvs27': {
@@ -61,16 +64,15 @@ out.mkdir(parents=True, exist_ok=True)
 for key, c in CATALOG.items():
     cfg = ITEMS[key]
     t = copy.deepcopy(items[c['base']])
-    t['_id'] = c['id']; t['_name'] = f'ustachae_mount_{key}'; t['_proto'] = c['base']
+    t['_id'] = c['id']; t['_name'] = f'ustachae_mount_{key}'; t['_proto'] = c['base']; t['_parent'] = MOUNT
+    for k in SCOPE_ONLY: t['_props'].pop(k, None)
     t['_props'].update({
         'Name': c['en'][1], 'ShortName': c['en'][1], 'Description': c['en'][1],
         'Prefab': {'path': f'ustachae_clipons/{key}.bundle', 'rcid': ''},
         'Weight': cfg['weight'], 'Width': c['size'][0], 'Height': c['size'][1], 'Ergonomics': c['ergonomics'],
         'BackgroundColor': 'blue', 'RarityPvE': 'Superrare', 'CanSellOnRagfair': True,
         'Slots': [], 'ConflictingItems': [], 'ExamineExperience': 10, 'LootExperience': 10,
-        # On its own it is a 1x sight.
-        'Zooms': [[1]], 'AimSensitivity': [[0.65]], 'CalibrationDistances': [[100]], 'SightingRange': 300,
-        'ModesCount': [1], 'ScopesCount': 1, 'sightModType': 'optic',
+        'CoolFactor': 1, 'HeatFactor': 1,
     })
     locales = {lang: {'name': n, 'shortName': s, 'description': d}
                for lang, (n, s, d) in (('en', c['en']), ('ch', c['ch']))}

@@ -78,7 +78,7 @@ public static class ClipOnBuilder {
   Marker(root,"pvs22_rear",new Vector3(0,info.axisHeight,info.rearZ));
   Marker(root,"clipon_axis",new Vector3(0,info.axisHeight,0));
   if(info.thermal)Marker(root,"clipon_thermal",Vector3.zero);
-  PVS22Builder.BuildSight(root,stub,glass,gen,info.axisHeight,info.lensZ,info.lensRadius,info.objectiveZ,info.thermal);
+  PVS22Builder.BuildSight(root,glass,gen,info.axisHeight,info.lensZ,info.lensRadius,info.thermal);
   string prefab=gen+"/"+name+".prefab";PrefabUtility.SaveAsPrefabAsset(root,prefab);UnityEngine.Object.DestroyImmediate(root);
   return new AssetBundleBuild{assetBundleName=BundleKey(key),assetNames=new[]{prefab}};
  }

@@ -137,7 +137,7 @@ for key, cfg in ITEMS.items():
             assert t['ThermalVisionUtilities']['CurrentRampPalette'] == 2  # WhiteHot
             o.save_typetree(t)
             done.add('thermal')
-    expected = {'body', 'glass', 'linza'} | ({'thermal'} if cfg['thermal'] else set())
+    expected = {'body', 'glass'} | ({'thermal'} if cfg['thermal'] else set())  # no sight lens: not a sight
     assert done == expected, (key, done)
 
     out = W / 'package/bundles' / bundle_key

@@ -19,19 +19,17 @@ public static class PVS22Builder {
   im.textureType=type;im.sRGBTexture=srgb;im.mipmapEnabled=true;im.wrapMode=wrap;im.anisoLevel=4;im.SaveAndReimport();
   return AssetDatabase.LoadAssetAtPath<Texture2D>(path);
  }
- // Standalone 1x sight, laid out like the Armasight Vulcan: an image lens on the output end, the optic
- // camera at the objective and the aim camera behind the lens. +Z is toward the muzzle. Thermal sights get
- // a ScopeThermalVisionData that finalize_clipons.py fills from the REAP-IR; the rest get night vision.
- public static void BuildSight(GameObject root,Shader stub,Material backGlass,string gen,float axisHeight,float lensZ0,float lensRadius,float objectiveZ,bool thermal){
-  const float eyeRelief=0.074f;
-  // The lens shader sizes its exit-pupil mask in object space for the native lens radius; a bigger disc
-  // shows the image past the mask edge as a crescent. Keep the Vulcan's radius in the mesh and scale the node.
+ // The clip-on's eyepiece (it is not a sight itself, the user's choice: no OpticSight, sight lens or optic camera,
+ // so the game's sight system never draws on it). +Z is toward the muzzle. Thermal clip-ons carry a
+ // ScopeThermalVisionData, filled from the REAP-IR by finalize_clipons.py, that the client applies to the optic
+ // behind them.
+ public static void BuildSight(GameObject root,Material backGlass,string gen,float axisHeight,float lensZ0,float lensRadius,bool thermal){
+  // The eyepiece disc mesh has the Vulcan lens's radius; its node is scaled to the clip-on's lens.
   const float r=0.016539544f;
   float y=axisHeight,lensZ=lensZ0-0.0005f,lensScale=lensRadius/r;
+  var discRotation=new Quaternion(-0.7071068f,0,0,0.7071068f);  // local +Y (the disc's face) toward the shooter
 
-  // Same convention as the game's lens meshes: a disc in the local XZ plane facing local +Y, on a node
-  // turned -90 degrees about X so +Y looks at the shooter. The lens shader works in that object space;
-  // a disc facing local -Z renders black.
+  // A disc in the local XZ plane facing local +Y, radial uvs (centre 0.5, rim at 0.5 out).
   const int seg=48;var disc=new Mesh{name="an_pvs22_linza"};
   var v=new Vector3[seg+1];var uv=new Vector2[seg+1];var n=new Vector3[seg+1];var t=new int[seg*3];
   v[0]=Vector3.zero;uv[0]=new Vector2(.5f,.5f);
@@ -42,33 +40,22 @@ public static class PVS22Builder {
   disc.vertices=v;disc.uv=uv;disc.normals=n;disc.triangles=t;disc.RecalculateTangents();disc.RecalculateBounds();
   AssetDatabase.CreateAsset(disc,gen+"/mesh_an_pvs22_linza.asset");
 
-  var mark=new Texture2D(16,16,TextureFormat.RGBA32,false){name="tex_no_reticle"};mark.SetPixels(Enumerable.Repeat(new Color(0,0,0,0),256).ToArray());mark.Apply();
-  AssetDatabase.CreateAsset(mark,gen+"/tex_no_reticle.asset");
-  var lensMat=new Material(stub){name="an_pvs22_linza"};lensMat.SetTexture("_MarkTex",mark);AssetDatabase.CreateAsset(lensMat,gen+"/mat_linza.asset");
-
-  var lens=new GameObject("linza");lens.transform.SetParent(root.transform,false);lens.transform.localPosition=new Vector3(0,y,lensZ);
-  lens.transform.localRotation=new Quaternion(-0.7071068f,0,0,0.7071068f);lens.transform.localScale=new Vector3(lensScale,1,lensScale);
-  lens.AddComponent<MeshFilter>().sharedMesh=disc;
-  var lensRenderer=lens.AddComponent<MeshRenderer>();lensRenderer.sharedMaterial=lensMat;lensRenderer.shadowCastingMode=ShadowCastingMode.Off;
-
-  // Eyepiece glass 3 mm behind the sight lens (far enough not to z-fight): wherever the sight lens shows
-  // nothing, as in the item inspect view, the eyepiece reads as dark coated glass instead of an open tube.
-  // Its normals form a convex dome so the reflection sweeps across it like on a real lens.
+  // Glass 3 mm behind the eyepiece disc that closes the hollow eyepiece tube (the client makes it plain black on a
+  // weapon; in the inspect view it reads as dark coated glass). Its normals form a convex dome.
   var dome=new Mesh{name="an_pvs22_eyepiece_glass"};var dn=new Vector3[seg+1];
   for(int i=0;i<=seg;i++)dn[i]=(Vector3.up*2.5f*r+new Vector3(v[i].x,0,v[i].z)).normalized;
   dome.vertices=v;dome.uv=uv;dome.normals=dn;dome.triangles=t;dome.RecalculateTangents();dome.RecalculateBounds();
   AssetDatabase.CreateAsset(dome,gen+"/mesh_an_pvs22_eyepiece_glass.asset");
   var back=new GameObject("eyepiece_glass");back.transform.SetParent(root.transform,false);back.transform.localPosition=new Vector3(0,y,lensZ+0.003f);
-  back.transform.localRotation=lens.transform.localRotation;back.transform.localScale=lens.transform.localScale;
+  back.transform.localRotation=discRotation;back.transform.localScale=new Vector3(lensScale,1,lensScale);
   back.AddComponent<MeshFilter>().sharedMesh=dome;
   var backRenderer=back.AddComponent<MeshRenderer>();backRenderer.sharedMaterial=backGlass;backRenderer.shadowCastingMode=ShadowCastingMode.Off;
 
   // The eyepiece as the shooter sees it: the client's live 1x picture on a coated lens (UstAchae/PVS22/Eyepiece,
-  // shipped in the bundle; depth-tested, unlike the game's own lens shader, which draws over everything in front
-  // of it). It sits 2 mm nearer the eye than the sight lens, which the client keeps hidden.
+  // shipped in the bundle, depth-tested).
   var liveMat=new Material(WriteEyepieceShader(gen)){name="an_pvs22_live"};AssetDatabase.CreateAsset(liveMat,gen+"/mat_live.asset");
   var live=new GameObject("pvs22_live");live.transform.SetParent(root.transform,false);live.transform.localPosition=new Vector3(0,y,lensZ-0.002f);
-  live.transform.localRotation=lens.transform.localRotation;live.transform.localScale=lens.transform.localScale;
+  live.transform.localRotation=discRotation;live.transform.localScale=new Vector3(lensScale,1,lensScale);
   live.AddComponent<MeshFilter>().sharedMesh=disc;
   var liveRenderer=live.AddComponent<MeshRenderer>();liveRenderer.sharedMaterial=liveMat;liveRenderer.shadowCastingMode=ShadowCastingMode.Off;liveRenderer.receiveShadows=false;
 
@@ -80,33 +67,12 @@ public static class PVS22Builder {
   var blurNode=new GameObject("pvs22_blur");blurNode.transform.SetParent(root.transform,false);
   var blurRenderer=blurNode.AddComponent<MeshRenderer>();blurRenderer.sharedMaterial=blurMat;blurRenderer.enabled=false;
 
-  var aim=new GameObject("mod_aim_camera");aim.transform.SetParent(root.transform,false);
-  aim.transform.localPosition=new Vector3(0,y,lensZ-eyeRelief);aim.transform.localRotation=new Quaternion(0,1,0,0);
-
-  var cam=new GameObject("optic_camera");cam.layer=8;cam.transform.SetParent(root.transform,false);cam.transform.localPosition=new Vector3(0,y,objectiveZ+0.002f);
-  var scope=cam.AddComponent<EFT.CameraControl.ScopeData>();
-  var camData=cam.AddComponent<EFT.CameraControl.ScopeCameraData>();
-  camData.FieldOfView=23f;camData.NearClipPlane=0.05f;camData.FarClipPlane=1000f;camData.OpticCullingMask=true;camData.OpticCullingMaskScale=1f;
-  var fx=cam.AddComponent<EFT.CameraControl.ScopeEffectsData>();
   if(thermal){
-   // REAP-IR's effects; its thermal data is copied in by finalize_clipons.py.
-   fx.ChromaticAberration=true;fx.ChromaticAberrationAniso=2;fx.ChromaticAberrationShift=0.02051f;fx.BloomOptimized=true;fx.BloomOptimizedIntensity=0.4f;fx.BloomOptimizedThreshold=0.272f;fx.BloomOptimizedBlurSize=5.5f;
-   var tv=cam.AddComponent<EFT.CameraControl.ScopeThermalVisionData>();tv.ThermalVision=true;
-   scope.ThermalVisionData=tv;
-  }else{
-   fx.ChromaticAberration=true;fx.ChromaticAberrationAniso=3;fx.ChromaticAberrationShift=0.00583f;fx.FastVignette=true;fx.UltimateBloom=true;
-   fx.White=1.76f;fx.AdaptionSpeed=3f;fx.ExposureAdjustment=0.03f;fx.MiddleGrey=0.15f;fx.AdaptiveTextureSize=256;fx.Type=5;
-   var nv=cam.AddComponent<EFT.CameraControl.ScopeNightVisionData>();
-   nv.NightVision=true;nv.Intensity=2f;nv.MaskSize=1.5f;nv.NoiseIntensity=0.05f;nv.NoiseScale=5f;nv.Color=new Color(0.13f,0.36f,0.13f,0);
-   scope.NightVisionData=nv;
+   // The thermal picture the client puts on the optic behind; its data is copied in by finalize_clipons.py.
+   var data=new GameObject("thermal_data");data.transform.SetParent(root.transform,false);
+   var tv=data.AddComponent<EFT.CameraControl.ScopeThermalVisionData>();tv.ThermalVision=true;
+   data.SetActive(false);
   }
-  scope.PostEffectsData=fx;
-  cam.SetActive(false);
-
-  var sight=root.AddComponent<EFT.CameraControl.OpticSight>();sight.enabled=false;
-  sight.LensRenderer=lensRenderer;sight.ScopeTransform=aim.transform;sight.DistanceToCamera=eyeRelief;sight.ScopeData=scope;
-  var cache=root.AddComponent<ScopePrefabCache>();cache.AngleByRange=new ScopePrefabCache.DistaneAngle[0];
-  cache._scopeModeInfos=new[]{new ScopePrefabCache.ScopeModeInfo{ModeGameObject=root,OpticSight=sight}};
  }
  // Stub shader; the finalize scripts point every material at the game's p0 reflective shader.
  public static Shader WriteStubShader(string gen){
@@ -426,7 +392,7 @@ float3 pvs22_tube(float3 scene, float2 pixel) {
   // Markers the client plugin uses to find the clip-on on a weapon and measure it against the optic.
   var front=new GameObject("pvs22_front");front.transform.SetParent(root.transform,false);front.transform.localPosition=new Vector3(0,info.axisHeight,info.frontZ);
   var rear=new GameObject("pvs22_rear");rear.transform.SetParent(root.transform,false);rear.transform.localPosition=new Vector3(0,info.axisHeight,info.rearZ);
-  BuildSight(root,stub,mats[Array.IndexOf(names,"glass")],Gen,info.axisHeight,info.lensZ,info.lensRadius,info.objectiveZ,false);
+  BuildSight(root,mats[Array.IndexOf(names,"glass")],Gen,info.axisHeight,info.lensZ,info.lensRadius,false);
   string prefab=Gen+"/an_pvs22.prefab";PrefabUtility.SaveAsPrefabAsset(root,prefab);UnityEngine.Object.DestroyImmediate(root);
   AssetDatabase.SaveAssets();
 
