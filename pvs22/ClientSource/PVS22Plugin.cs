@@ -34,8 +34,10 @@ namespace UstAchae.PVS22
         internal static float LiveResolution => liveResolution.Value;
         internal static float ThermalLevel => thermalLevel.Value;
         internal static float ThermalGain => thermalGain.Value;
-        // Last frame an optic camera drew through a clip-on (its own sight mode or a magnified optic behind it).
-        internal static int OpticDrivenFrame = -10;
+        // Last frame an optic camera drew on a clip-on's own sight lens (aiming through the clip-on itself), and
+        // which clip-on. A magnified optic behind a clip-on draws on its own lens, not the clip-on's.
+        internal static int OwnSightFrame = -10;
+        internal static Transform OwnSight;
 
         static readonly AccessTools.FieldRef<OpticComponentUpdater, OpticSight> sightRef = AccessTools.FieldRefAccess<OpticComponentUpdater, OpticSight>("_opticSight");
         static readonly AccessTools.FieldRef<OpticComponentUpdater, Camera> cameraRef = AccessTools.FieldRefAccess<OpticComponentUpdater, Camera>("opticCamera");
@@ -80,7 +82,8 @@ namespace UstAchae.PVS22
             // Looking straight through the PVS-22 itself: it is a 1x night sight, so only the switch matters.
             if (sight.transform.Find(FrontMarker) != null)
             {
-                OpticDrivenFrame = Time.frameCount;
+                OwnSightFrame = Time.frameCount;
+                OwnSight = sight.transform;
                 if (sight.transform.Find(ThermalMarker) != null)
                 {
                     thermalVisionRef(__instance).On = true;
@@ -100,7 +103,6 @@ namespace UstAchae.PVS22
             bool active = FindClipOn(sight) && InLine(cam);
             if (active)
             {
-                OpticDrivenFrame = Time.frameCount;
                 if (sight != appliedSight) { applied = null; appliedSight = sight; }
                 NightVision nightVision = nightVisionRef(__instance);
                 ImageProfile profile = ImageProfile.For(front.parent);

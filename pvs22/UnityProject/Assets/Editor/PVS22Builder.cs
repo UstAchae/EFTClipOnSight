@@ -256,10 +256,25 @@ float3 pvs22_tube(float3 scene, float2 pixel) {
    float4 _PVS22ThermalParams; // x cold level, y gain
    float _PVS22LiveOn;
    float _PVS22LiveMode;
-   struct v2f { float4 pos : SV_POSITION; float4 screen : TEXCOORD0; float2 uv : TEXCOORD1; float3 normal : TEXCOORD2; float3 view : TEXCOORD3; };
+   struct v2f { float4 pos : SV_POSITION; float4 screen : TEXCOORD0; float2 uv : TEXCOORD1; float3 normal : TEXCOORD2; float3 view : TEXCOORD3; float3 world : TEXCOORD4; };
    v2f vert (appdata_base v) {
     v2f o; o.pos = UnityObjectToClipPos(v.vertex); o.screen = ComputeScreenPos(o.pos); o.uv = v.texcoord.xy;
-    o.normal = UnityObjectToWorldNormal(v.normal); o.view = WorldSpaceViewDir(v.vertex); return o;
+    o.normal = UnityObjectToWorldNormal(v.normal); o.view = WorldSpaceViewDir(v.vertex);
+    o.world = mul(unity_ObjectToWorld, v.vertex).xyz; return o;
+   }
+   // The picture is seen through the eyepiece's field stop, a circle inside the tube: looking into it from a
+   // distance, as through any real eyepiece, a dark ring frames the picture and slides across it as the eye
+   // moves off the axis. The disc is the lens (object radius 0.016539544, facing +Y toward the shooter).
+   float fieldStop(float3 world) {
+    float3 c = mul(unity_ObjectToWorld, float4(0, 0, 0, 1)).xyz;
+    float3 n = normalize(mul((float3x3)unity_ObjectToWorld, float3(0, 1, 0)));
+    float R = length(mul((float3x3)unity_ObjectToWorld, float3(0.016539544, 0, 0)));
+    float3 d = world - _WorldSpaceCameraPos;
+    float dn = dot(d, n);
+    if (dn > -1e-5) return 0;                       // seen from inside or edge-on
+    float3 stop = c - n * (1.2 * R);                // the stop sits 1.2 lens radii into the tube
+    float3 q = world + d * (dot(stop - world, n) / dn);
+    return 1 - smoothstep(0.80 * R, 0.90 * R, length(q - stop));
    }
    fixed4 frag (v2f i) : SV_Target {
     float2 uv = i.screen.xy / i.screen.w;
@@ -269,14 +284,11 @@ float3 pvs22_tube(float3 scene, float2 pixel) {
     float3 picture = _PVS22LiveMode > 0.5
         ? saturate((lum - _PVS22ThermalParams.x) * _PVS22ThermalParams.y).xxx
         : pvs22_tube(scene, pixel);
-    picture *= 1 - 0.8 * smoothstep(0.8, 1.0, length(i.uv - 0.5) * 2);
-    // Idle look: dark blue-coated glass with a soft highlight and a brighter rim at grazing angles.
-    float2 d = i.uv - 0.5;
-    float2 h = d - float2(-0.17, 0.19);
-    float grazing = pow(1 - abs(dot(normalize(i.normal), normalize(i.view))), 4);  // the disc is drawn from either side
-    float3 glass = float3(0.006, 0.008, 0.014) + float3(0.30, 0.36, 0.55) * (0.5 * grazing + 0.35 * exp(-dot(h, h) * 90))
-                 + float3(0.015, 0.02, 0.04) * smoothstep(0.7, 1.0, length(d) * 2);
-    return fixed4(lerp(glass, picture, _PVS22LiveOn), 1);
+    // Off (no live picture: a magnified optic behind it, other weapons, the inspect view): near-black coated
+    // glass with only a faint sheen at grazing angles, like an unlit eyepiece.
+    float grazing = pow(1 - abs(dot(normalize(i.normal), normalize(i.view))), 5);  // the disc is drawn from either side
+    float3 glass = float3(0.004, 0.005, 0.008) + float3(0.10, 0.12, 0.16) * grazing;
+    return fixed4(lerp(glass, picture, _PVS22LiveOn * fieldStop(i.world)), 1);
    }
    ENDCG
   }

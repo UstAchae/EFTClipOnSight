@@ -62,12 +62,13 @@ namespace UstAchae.PVS22
             if (back != null) back.forceRenderingOff = true;
         }
 
-        // Covers the sight lens unless an optic camera is already drawing through the clip-on (its own sight
-        // mode, or a magnified optic behind it). LateUpdate order against the optic is not fixed, so allow a frame.
+        // Covers the sight lens unless an optic camera is drawing on it, which happens only while aiming through
+        // this clip-on itself (a magnified optic behind it draws on its own lens, and the sight lens here would show
+        // a stale or see-through picture). LateUpdate order against the optic is not fixed, so allow a frame.
         void LateUpdate()
         {
             if (disc == null) return;
-            bool covering = Time.frameCount - PVS22Plugin.OpticDrivenFrame > 1;
+            bool covering = PVS22Plugin.OwnSight != clipOn || Time.frameCount - PVS22Plugin.OwnSightFrame > 1;
             disc.enabled = covering;
             if (sightLens != null) sightLens.forceRenderingOff = covering;
         }
@@ -100,17 +101,19 @@ namespace UstAchae.PVS22
         }
 
         // A magnified optic (an OpticSight, which red dots and holographic sights lack) on the same weapon,
-        // behind the clip-on's rear end and near its axis.
+        // behind the clip-on's rear end and near its axis. Judged in the clip-on's own frame, where +Z points to
+        // the muzzle (the placement uses the same frame); the front/rear markers are not reliably front and back.
         bool ScopeBehind()
         {
             Transform root = clipOn.GetComponentInParent<WeaponPrefab>()?.transform ?? clipOn.root;
-            Vector3 axis = (front.position - rear.position).normalized;
+            Vector3 a = clipOn.InverseTransformPoint(front.position), b = clipOn.InverseTransformPoint(rear.position);
+            float rearZ = Mathf.Min(a.z, b.z), axisY = (a.y + b.y) / 2f;
             foreach (OpticSight sight in root.GetComponentsInChildren<OpticSight>())
             {
                 if (sight.transform.IsChildOf(clipOn)) continue;
-                Vector3 toSight = sight.transform.position - rear.position;
-                float along = Vector3.Dot(toSight, axis);
-                if (along < 0f && along > -MaxBehind && Vector3.ProjectOnPlane(toSight, axis).magnitude < AxisTolerance) return true;
+                Vector3 p = clipOn.InverseTransformPoint(sight.transform.position);
+                float behind = rearZ - p.z;
+                if (behind > 0f && behind < MaxBehind && new Vector2(p.x, p.y - axisY).magnitude < AxisTolerance) return true;
             }
             return false;
         }
