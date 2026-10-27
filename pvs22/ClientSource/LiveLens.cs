@@ -69,12 +69,23 @@ namespace UstAchae.PVS22
             lens.block = new MaterialPropertyBlock();
             lens.thermal = clipOn.Find(ThermalMarker) != null;
             lens.halfField = ImageProfile.For(clipOn).Fov * 0.5f;
-            // This disc is the eyepiece on a weapon (picture or dark lens), aiming or not: the sight lens and the dark
-            // glass behind it are never needed there. They are switched off as objects: the game sets every weapon
-            // renderer's forceRenderingOff itself when it shows or hides the weapon, and the sight lens's own shader
-            // then drew over this disc (its idle black circle, its mask's crescent at the rim, through the head).
-            foreach (string hidden in new[] { SightLensNode, BackGlassNode })
-                clipOn.Find(hidden)?.gameObject.SetActive(false);
+            // This disc is the eyepiece on a weapon (picture or dark lens), aiming or not: the sight lens is never
+            // needed there. It is switched off as an object: the game sets every weapon renderer's forceRenderingOff
+            // itself when it shows or hides the weapon, and the sight lens's own shader then drew over this disc (its
+            // idle black circle, its mask's crescent at the rim, through the head).
+            clipOn.Find(SightLensNode)?.gameObject.SetActive(false);
+            // The glass disc behind closes the hollow eyepiece tube: without it the room showed through past this
+            // disc's rim at an angle. Made plain black and half as wide again, it reads as the tube's dark inside.
+            Transform back = clipOn.Find(BackGlassNode);
+            Renderer backRenderer = back != null ? back.GetComponent<Renderer>() : null;
+            if (backRenderer != null)
+            {
+                var black = new MaterialPropertyBlock();
+                foreach (string colour in new[] { "_Color", "_ReflectColor", "_SpecColor" }) black.SetColor(colour, Color.black);
+                backRenderer.SetPropertyBlock(black);
+                Vector3 scale = back.localScale;
+                back.localScale = new Vector3(scale.x * 1.5f, scale.y, scale.z * 1.5f);
+            }
             lens.body = clipOn.Find(BodyNode);
             Mesh mesh = lens.body != null ? lens.body.GetComponent<MeshFilter>()?.sharedMesh : null;
             if (mesh != null) lens.bodyBounds = mesh.bounds;
