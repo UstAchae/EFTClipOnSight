@@ -65,7 +65,6 @@ public static class PVS22Builder {
   // A short opening (the UTC's 4 mm rim) leaks through its own rim walls too: line it from the very end. Longer
   // ones (the PVS-22's eyecup with its threads) keep their own walls in front of the narrowest point.
   if(zRim-zEnd<0.006f)zRim=zEnd+0.0002f;
-  Debug.Log($"EYEPIECE_LINING {root.name} end {zEnd*1000:F1} lens {lensZ0*1000:F1} r {lensRadius*1000:F1} opening r {rim*1000:F1} at {zRim*1000:F1} mm");
   var stopMat=new Material(backGlass){name=backGlass.name.Replace("glass","backstop")};
   stopMat.SetFloat("_Elements",0);stopMat.SetFloat("_Reflect",0);stopMat.SetFloat("_Highlight",0);
   stopMat.SetColor("_CoatColor",Color.black);stopMat.SetColor("_CoatGrazing",Color.black);
@@ -112,7 +111,7 @@ public static class PVS22Builder {
  }
  // The tube model both night-vision pictures use (see the comment at the top of PVS22Tube.cginc).
  public static void WriteTubeInclude(string gen){
-  File.WriteAllText(gen+"/PVS22Tube.cginc",@"// Image-intensifier model for the clip-ons' optic-camera effect. Our own
+  File.WriteAllText(gen+"/PVS22Tube.cginc",@"// Image-intensifier model for the clip-ons' optic-camera effect and eyepiece picture. Our own
 // implementation of the usual tube model (as in BRNVG): the scene is weighted by the photocathode's
 // spectral response and amplified, then the output carries read noise plus shot noise that grows with the
 // square root of the signal, a coarser grain, a stationary fixed-pattern gain variation and brief 1-pixel
@@ -230,21 +229,28 @@ float3 pvs22_tube(float3 scene, float2 pixel) {
  }
  // Coated objective glass, shipped in the bundle like the tube shader. The lens UVs are radial (centre 0.5,
  // rim at distance 0.5). Layers, from the photos of these sights: a near-black body, a thin-film anti-reflection
- // coating whose reflected colour shifts from _CoatColor head-on to _CoatGrazing at grazing angles, the game's
- // crisp cubemap (finalize points _Cube at it) seen through that coating, a few lens elements inside the barrel
- // drawn with parallax (their rims and highlight arcs slide against each other as the view turns), and a
- // Fresnel rim. Opaque, so the hollow tube never shows through.
+ // coating whose reflected colour shifts from _CoatColor head-on to _CoatGrazing at grazing angles, the place's
+ // own surroundings (its reflection probe, which the client passes as _PVS22Env; the game's crisp cubemap _Cube
+ // where it has none) seen through that coating, sharp highlights of the actual lights reaching the lens (sun,
+ // lamps, flashlights: the client passes the four strongest, as the game feeds a shader like this one no lights
+ // in a raid) that slide over the domed glass as light and view move, a few lens elements inside the barrel drawn with parallax (their rims and highlight arcs slide against
+ // each other as the view turns), and a Fresnel rim. Opaque, so the hollow tube never shows through.
  public static Shader WriteLensShader(string gen){
   File.WriteAllText(gen+"/PVS22Lens.shader",@"Shader ""UstAchae/PVS22/Lens"" {
  Properties {
   _Cube (""reflection"", Cube) = """" {}
+  _PVS22Env (""place's reflection"", Cube) = """" {}
   _CoatColor (""coating head-on"", Color) = (0.30, 0.22, 0.95, 1)
   _CoatGrazing (""coating grazing"", Color) = (0.95, 0.35, 0.60, 1)
   _ElementColor (""inner elements"", Color) = (0.35, 0.45, 1.0, 1)
   _Base (""body"", Color) = (0.004, 0.005, 0.012, 1)
   _Reflect (""reflection strength"", Range(0, 2)) = 0.9
   _Elements (""inner element strength"", Range(0, 2)) = 1
-  _Highlight (""window highlight"", Range(0, 2)) = 1
+  _Highlight (""light highlights"", Range(0, 2)) = 1
+  _PVS22On (""live picture"", Float) = 0
+  _PVS22Picture (""live picture"", 2D) = ""black"" {}
+  _PVS22Axis (""clip-on axis, half field (deg)"", Vector) = (0, 0, 1, 5)
+  _PVS22Glow (""phosphor glow"", Color) = (0, 0, 0, 0)
  }
  SubShader {
   // Opaque, but drawn after the opaque queue: the game's screen-space effects (reflections, ambient occlusion) read
@@ -257,9 +263,16 @@ float3 pvs22_tube(float3 scene, float2 pixel) {
    #pragma vertex vert
    #pragma fragment frag
    #include ""UnityCG.cginc""
-   samplerCUBE _Cube;
+   samplerCUBE _Cube, _PVS22Env;
+   float4 _PVS22Env_HDR;
+   float _PVS22EnvOn;
+   float4 _PVS22LightDir[4], _PVS22LightColor[4];  // world direction to each light; its colour at the lens
    float4 _CoatColor, _CoatGrazing, _ElementColor, _Base;
    float _Reflect, _Elements, _Highlight;
+   float _PVS22On;
+   sampler2D _PVS22Picture;
+   float4x4 _PVS22VP;          // the picture camera's view-projection
+   float4 _PVS22Axis, _PVS22Glow;
    struct v2f { float4 pos : SV_POSITION; float2 uv : TEXCOORD0; float3 viewT : TEXCOORD1; float3 normalW : TEXCOORD2; float3 viewW : TEXCOORD3; };
    v2f vert (appdata_tan v) {
     v2f o; o.pos = UnityObjectToClipPos(v.vertex); o.uv = v.texcoord.xy;
@@ -279,9 +292,17 @@ float3 pvs22_tube(float3 scene, float2 pixel) {
     float cosv = saturate(dot(n, v));
     float fres = pow(1 - cosv, 3);
     float3 coat = lerp(_CoatColor.rgb, _CoatGrazing.rgb, saturate(fres * 1.2));
-    // The scene in the front surface, tinted by the coating's residual reflection (a few percent head-on).
-    float3 env = texCUBE(_Cube, reflect(-v, n)).rgb;
+    // The surroundings in the front surface, tinted by the coating's residual reflection (a few percent head-on).
+    float3 r = reflect(-v, n);
+    float3 env = _PVS22EnvOn > 0 ? DecodeHDR(texCUBE(_PVS22Env, r), _PVS22Env_HDR) : texCUBE(_Cube, r).rgb;
     float3 col = _Base.rgb + env * coat * (0.03 + 0.55 * fres) * _Reflect;
+    // Each light reaching the lens mirrored by its polished, domed front surface: a small sharp spot where the
+    // half vector meets the normal, and a soft halo from the coating.
+    [unroll] for (int j = 0; j < 4; j++) {
+     float3 l = _PVS22LightDir[j].xyz;
+     float h = saturate(dot(n, normalize(l + v))) * step(0, dot(n, l));
+     col += _PVS22LightColor[j].rgb * (pow(h, 900) * 4 + pow(h, 60) * 0.05) * _Highlight;
+    }
     // Inner elements: each sits deeper, so its picture shifts further against the front glass with the view.
     float2 shift = vt.xy / max(vt.z, 0.25);
     float3 inner = 0;
@@ -308,9 +329,22 @@ float3 pvs22_tube(float3 scene, float2 pixel) {
     }
     // Elements only show inside the barrel, and fade toward the front rim.
     col += inner * 0.4 * _Elements * (1 - smoothstep(0.85, 1.0, length(p)));
-    // Crisp window highlight on the front surface, moving with the view like a real reflection.
-    col += float3(0.85, 0.88, 1.0) * 0.6 * _Highlight * blob(p - shift * 0.05, float2(-0.42, 0.45), 160);
     col += coat * 0.25 * fres;                       // coloured Fresnel rim
+    // The live picture on the eyepiece of the shooter's own clip-on. The device is 1x and afocal, so the eye's
+    // line through each point of the glass sees the scene in that same direction: the picture is rendered from the
+    // eye, and this point shows the picture in its line's direction (a point at infinity, w 0: looked up by
+    // position, a picture from a frame before showed the eye's old line through the glass, which only 10 cm away
+    // swings with every millimetre the weapon moves, and the picture jumped on the frames between renders). Lines
+    // more than half the field of view off the clip-on's axis meet the field stop and stay dark, apart from the
+    // faint glow of the screen inside.
+    if (_PVS22On > 0) {
+     float3 ray = -normalize(i.viewW);
+     float4 c = mul(_PVS22VP, float4(ray, 0));
+     float3 picture = tex2D(_PVS22Picture, c.xy / c.w * 0.5 + 0.5).rgb;
+     float off = degrees(acos(saturate(dot(ray, _PVS22Axis.xyz))));
+     float field = 1 - smoothstep(_PVS22Axis.w - 0.2, _PVS22Axis.w, off);
+     col += (picture * field + _PVS22Glow.rgb) * _PVS22On;  // seen through the glass, under its reflection
+    }
     return fixed4(col, 1);
    }
    ENDCG
