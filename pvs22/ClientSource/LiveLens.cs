@@ -19,6 +19,7 @@ namespace UstAchae.PVS22
         const string ThermalMarker = "clipon_thermal";
         const string SightLensNode = "linza";
         const string BackGlassNode = "eyepiece_glass";
+        const string BodyNode = "an_pvs22_LOD0";
         const float MaxEyeDistance = 1.0f;      // the shooter's own clip-on, not ones seen on other weapons
         // How far a scope's OpticSight node may sit off the clip-on's axis and still count as behind it: the node
         // is the scope's "mode" object, often at the mount origin a few cm below the optic axis.
@@ -44,7 +45,8 @@ namespace UstAchae.PVS22
         static CommandBuffer copyHeat;
 
         Renderer disc, sightLens;
-        Transform clipOn, front, rear;
+        Transform clipOn, front, rear, body;
+        Bounds bodyBounds;
         MaterialPropertyBlock block;
         bool thermal;
         bool scopeBehind;
@@ -68,6 +70,41 @@ namespace UstAchae.PVS22
             lens.sightLens = clipOn.Find(SightLensNode)?.GetComponent<Renderer>();
             Renderer back = clipOn.Find(BackGlassNode)?.GetComponent<Renderer>();
             if (back != null) back.forceRenderingOff = true;
+            lens.body = clipOn.Find(BodyNode);
+            Mesh mesh = lens.body != null ? lens.body.GetComponent<MeshFilter>()?.sharedMesh : null;
+            if (mesh != null)
+            {
+                lens.bodyBounds = mesh.bounds;
+                lens.ToOpening(mesh);
+            }
+        }
+
+        // The native lens shader draws its picture over everything (ZTest Always), which is fine for a native
+        // scope whose lens sits at the end of the eyepiece but painted the eyepiece's recessed lens over the boot
+        // or eyecup in front of it. So the disc goes where a native scope has its lens: just inside the eyepiece
+        // opening, sized to it, with nothing of the clip-on in front of it. Runs before the placement rig records
+        // the children's positions. A lens within 3 mm of the opening stays where it is.
+        void ToOpening(Mesh mesh)
+        {
+            Vector3 centre = transform.localPosition - body.localPosition;  // the axis, in the body mesh's frame
+            float lensRadius = DiscRadius * transform.localScale.x, reach = lensRadius * 2.5f;
+            Vector3[] vertices = mesh.vertices;
+            float rearZ = float.MaxValue;
+            foreach (Vector3 v in vertices)
+                if (new Vector2(v.x - centre.x, v.y - centre.y).magnitude < reach) rearZ = Mathf.Min(rearZ, v.z);
+            if (centre.z - rearZ < 0.003f) return;
+            float opening = float.MaxValue;  // the rim's inner edge: the closest point to the axis near the end
+            foreach (Vector3 v in vertices)
+            {
+                if (v.z > rearZ + 0.003f) continue;
+                float r = new Vector2(v.x - centre.x, v.y - centre.y).magnitude;
+                if (r < reach) opening = Mathf.Min(opening, r);
+            }
+            if (opening < lensRadius * 0.5f || opening == float.MaxValue) return;
+            Vector3 local = transform.localPosition;
+            transform.localPosition = new Vector3(local.x, local.y, body.localPosition.z + rearZ + 0.0005f);
+            float scale = opening * 0.98f / DiscRadius;
+            transform.localScale = new Vector3(scale, transform.localScale.y, scale);
         }
 
         // Covers the sight lens unless an optic camera is drawing on it, which happens only while aiming through
@@ -160,8 +197,19 @@ namespace UstAchae.PVS22
             liveCamera.transform.SetPositionAndRotation(p, Quaternion.LookRotation(axis, clipOn.up));
             liveCamera.aspect = 1f;
             liveCamera.fieldOfView = 2f * Mathf.Atan(0.5f / Visible * radius / distance) * Mathf.Rad2Deg;
-            // Clip past whichever end of the clip-on is farther ahead, like the optic camera path does.
-            float clear = Mathf.Max(Vector3.Dot(front.position - p, axis), Vector3.Dot(rear.position - p, axis)) + 0.01f;
+            // Clip past the clip-on's farthest point down the axis (its whole body, not just the marker points:
+            // the objective hood reaches past them and showed in the picture).
+            float clear = Mathf.Max(Vector3.Dot(front.position - p, axis), Vector3.Dot(rear.position - p, axis));
+            if (body != null)
+            {
+                Vector3 c = bodyBounds.center, e = bodyBounds.extents;
+                for (int i = 0; i < 8; i++)
+                {
+                    Vector3 corner = body.TransformPoint(c + new Vector3((i & 1) == 0 ? -e.x : e.x, (i & 2) == 0 ? -e.y : e.y, (i & 4) == 0 ? -e.z : e.z));
+                    clear = Mathf.Max(clear, Vector3.Dot(corner - p, axis));
+                }
+            }
+            clear += 0.01f;
             liveCamera.nearClipPlane = Mathf.Max(eye.nearClipPlane, clear);
 
             // Thermal: render the scene the way EFT's ThermalVision does (heat flag on, GBuffer0 copied over the
