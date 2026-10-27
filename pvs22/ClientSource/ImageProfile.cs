@@ -20,22 +20,19 @@ namespace UstAchae.PVS22
         // the PVS-27). The day scope enlarges this fixed blur with its power. 0 for the thermal, whose limit
         // is its pixel grid (shown by pixelation instead).
         public readonly float Resolution;
-        // Field of view in degrees (PVS-22 12, PVS-27 10, PVS-30 9, UTC XII 7.8 diagonal). The eyepiece is focused
-        // at infinity, so seen from a distance the picture shows only along view directions within this field.
-        public readonly float Fov;
 
-        ImageProfile(string name, float gain, float noise, float grain, Color phosphor, float ratedPower, float resolution, float fov)
+        ImageProfile(string name, float gain, float noise, float grain, Color phosphor, float ratedPower, float resolution)
         {
             Name = name; Gain = gain; Noise = noise; Grain = grain; Phosphor = phosphor; RatedPower = ratedPower;
-            Resolution = resolution; Fov = fov;
+            Resolution = resolution;
         }
 
         // P43 green-yellow phosphor and the bluish-white P45 of white-phosphor tubes.
         static readonly Color P43 = new Color(0.39f, 1.00f, 0.27f), P45 = new Color(0.60f, 0.84f, 0.99f);
-        static readonly ImageProfile PVS22 = new ImageProfile("pvs22", 1f, 1f, 1f, P43, 12f, 3.35f, 12f);
-        static readonly ImageProfile PVS27 = new ImageProfile("pvs27", 1.4f, 0.6f, 0.75f, P43, 20f, 4.6f, 10f);
-        static readonly ImageProfile PVS30 = new ImageProfile("pvs30", 1.15f, 0.75f, 0.6f, P45, 20f, 4.6f, 9f);
-        static readonly ImageProfile UTC = new ImageProfile("utc", 1f, 1f, 1f, P45, 10f, 0f, 7.8f);
+        static readonly ImageProfile PVS22 = new ImageProfile("pvs22", 1f, 1f, 1f, P43, 12f, 3.35f);
+        static readonly ImageProfile PVS27 = new ImageProfile("pvs27", 1.4f, 0.6f, 0.75f, P43, 20f, 4.6f);
+        static readonly ImageProfile PVS30 = new ImageProfile("pvs30", 1.15f, 0.75f, 0.6f, P45, 20f, 4.6f);
+        static readonly ImageProfile UTC = new ImageProfile("utc", 1f, 1f, 1f, P45, 10f, 0f);
 
         // Magnification of the optic camera: native scopes give power x field of view of 23-26.6 degrees (fixed
         // ELCAN 4x at 5.75, PS-320 6x at 4.08; variable March 3-24 at 25, ATACR 7-35 at 26.6, whose FOV follows

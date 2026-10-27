@@ -68,7 +68,7 @@ namespace UstAchae.PVS22
             noise = Config.Bind("Night vision", "Noise", 1f, new ConfigDescription("Scale of the tube noise: grain, scintillation and fixed pattern. 0 turns it off.", new AcceptableValueRange<float>(0f, 3f)));
             thermalLevel = Config.Bind("Thermal", "Live cold level", 0.2f, new ConfigDescription("Heat level shown as black in the thermal eyepiece picture behind a red dot or holographic sight.", new AcceptableValueRange<float>(0f, 1f)));
             thermalGain = Config.Bind("Thermal", "Live gain", 2.5f, new ConfigDescription("Contrast of that thermal picture.", new AcceptableValueRange<float>(0.5f, 10f)));
-            liveResolution = Config.Bind("PVS-22", "Live resolution", 0.5f, new ConfigDescription("Resolution of the live eyepiece picture (behind a red dot or holographic sight, or with no sight behind the clip-on) as a fraction of the screen; it costs one extra scene render every other frame.", new AcceptableValueRange<float>(0.25f, 1f)));
+            liveResolution = Config.Bind("PVS-22", "Live resolution", 0.5f, new ConfigDescription("Resolution of the live eyepiece picture (behind a red dot or holographic sight, or with no sight behind the clip-on): 0.5 renders 1024 x 1024 pixels (the lens shows the middle third), 1 renders 2048 x 2048. It costs one extra scene render every other frame.", new AcceptableValueRange<float>(0.25f, 1f)));
             var harmony = new Harmony("com.ustachae.pvs22");
             harmony.Patch(AccessTools.Method(typeof(OpticComponentUpdater), "LateUpdate"),
                 postfix: new HarmonyMethod(typeof(PVS22Plugin), nameof(AfterOpticLateUpdate)));

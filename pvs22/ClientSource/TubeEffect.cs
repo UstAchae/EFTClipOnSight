@@ -57,7 +57,7 @@ namespace UstAchae.PVS22
             Shader.SetGlobalVector(spectralId, Spectral);
         }
 
-        static Shader ShaderOf(Transform clipOn)
+        internal static Shader ShaderOf(Transform clipOn)
         {
             Transform node = clipOn != null ? clipOn.Find(CarrierNode) : null;
             Renderer carrier = node != null ? node.GetComponent<Renderer>() : null;

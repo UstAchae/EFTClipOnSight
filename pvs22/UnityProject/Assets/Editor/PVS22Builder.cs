@@ -22,7 +22,7 @@ public static class PVS22Builder {
  // Standalone 1x sight, laid out like the Armasight Vulcan: an image lens on the output end, the optic
  // camera at the objective and the aim camera behind the lens. +Z is toward the muzzle. Thermal sights get
  // a ScopeThermalVisionData that finalize_clipons.py fills from the REAP-IR; the rest get night vision.
- public static void BuildSight(GameObject root,Shader stub,Shader liveShader,Material backGlass,string gen,float axisHeight,float lensZ0,float lensRadius,float objectiveZ,bool thermal){
+ public static void BuildSight(GameObject root,Shader stub,Material backGlass,string gen,float axisHeight,float lensZ0,float lensRadius,float objectiveZ,bool thermal){
   const float eyeRelief=0.074f;
   // The lens shader sizes its exit-pupil mask in object space for the native lens radius; a bigger disc
   // shows the image past the mask edge as a crescent. Keep the Vulcan's radius in the mesh and scale the node.
@@ -63,16 +63,15 @@ public static class PVS22Builder {
   back.AddComponent<MeshFilter>().sharedMesh=dome;
   var backRenderer=back.AddComponent<MeshRenderer>();backRenderer.sharedMaterial=backGlass;backRenderer.shadowCastingMode=ShadowCastingMode.Off;
 
-  // Live 1x picture for when no optic camera feeds the lens (a red dot or holo behind it, or at the hip):
-  // the client renders the scene into _PVS22LiveTex. Whenever that picture is off (inspect view, other
-  // players' weapons, eye off the axis) the disc draws dark coated glass, which also hides the sight lens's
-  // own idle look. The client switches it off while an optic camera drives the sight lens. It sits 2 mm
-  // nearer the eye than the sight lens so the two never z-fight.
-  var liveMat=new Material(liveShader){name="an_pvs22_live"};AssetDatabase.CreateAsset(liveMat,gen+"/mat_live.asset");
+  // Live 1x picture for when no optic camera feeds the lens (a red dot or holo behind it, or at the hip): a
+  // second lens with the same native lens material, so it has the game's own exit-pupil ring and dark idle
+  // look. The client feeds it its own picture through a per-renderer _CamTex and switches it with
+  // _SwitchToSight; it hides it while aiming through the clip-on, when the sight lens shows the optic camera.
+  // It sits 2 mm nearer the eye than the sight lens so the two never z-fight.
   var live=new GameObject("pvs22_live");live.transform.SetParent(root.transform,false);live.transform.localPosition=new Vector3(0,y,lensZ-0.002f);
   live.transform.localRotation=lens.transform.localRotation;live.transform.localScale=lens.transform.localScale;
   live.AddComponent<MeshFilter>().sharedMesh=disc;
-  var liveRenderer=live.AddComponent<MeshRenderer>();liveRenderer.sharedMaterial=liveMat;liveRenderer.shadowCastingMode=ShadowCastingMode.Off;liveRenderer.receiveShadows=false;
+  var liveRenderer=live.AddComponent<MeshRenderer>();liveRenderer.sharedMaterial=lensMat;liveRenderer.shadowCastingMode=ShadowCastingMode.Off;liveRenderer.receiveShadows=false;
 
   // Carries the tube image effect's shader in the bundle (the client reads it from here); never drawn.
   var tubeMat=new Material(WriteTubeShader(gen)){name="an_pvs22_tube"};AssetDatabase.CreateAsset(tubeMat,gen+"/mat_tube.asset");
@@ -116,11 +115,6 @@ public static class PVS22Builder {
   AssetDatabase.ImportAsset(gen+"/PVS22Stub.shader",ImportAssetOptions.ForceSynchronousImport);
   return AssetDatabase.LoadAssetAtPath<Shader>(gen+"/PVS22Stub.shader");
  }
- // The live eyepiece shader ships in the bundle as is (same Unity version as the game). It samples the
- // client's render texture in screen space, so the picture lines up 1x with the world around the eyepiece.
- // Night vision (_PVS22LiveMode 0): the tube's gain, phosphor tint and noise. Thermal (1): the texture holds
- // the scene's heat buffer, mapped white-hot. _PVS22LiveOn (per renderer) fades it to black.
-
  // The tube model both night-vision pictures use (see the comment at the top of PVS22Tube.cginc).
  public static void WriteTubeInclude(string gen){
   File.WriteAllText(gen+"/PVS22Tube.cginc",@"// Image-intensifier model shared by the clip-ons' eyepiece picture and their optic-camera effect. Our own
@@ -177,7 +171,7 @@ float3 pvs22_tube(float3 scene, float2 pixel) {
  public static Shader WriteTubeShader(string gen){
   WriteTubeInclude(gen);
   File.WriteAllText(gen+"/PVS22Tube.shader",@"Shader ""UstAchae/PVS22/Tube"" {
- Properties { _MainTex (""source"", 2D) = ""white"" {} }
+ Properties { _MainTex (""source"", 2D) = ""white"" {} _PVS22Thermal (""thermal"", Float) = 0 }
  SubShader {
   Cull Off ZWrite Off ZTest Always
   Pass {
@@ -188,8 +182,13 @@ float3 pvs22_tube(float3 scene, float2 pixel) {
    #include ""PVS22Tube.cginc""
    sampler2D _MainTex;
    float4 _MainTex_TexelSize;
+   float _PVS22Thermal;        // 1 for a thermal clip-on's live picture: the source holds the scene's heat
+   float4 _PVS22ThermalParams; // x cold level, y gain
    fixed4 frag (v2f_img i) : SV_Target {
-    return fixed4(pvs22_tube(tex2D(_MainTex, i.uv).rgb, i.uv * _MainTex_TexelSize.zw), 1);
+    float3 scene = tex2D(_MainTex, i.uv).rgb;
+    if (_PVS22Thermal > 0.5)  // white hot
+     return fixed4(saturate((dot(scene, float3(0.299, 0.587, 0.114)) - _PVS22ThermalParams.x) * _PVS22ThermalParams.y).xxx, 1);
+    return fixed4(pvs22_tube(scene, i.uv * _MainTex_TexelSize.zw), 1);
    }
    ENDCG
   }
@@ -237,62 +236,6 @@ float3 pvs22_tube(float3 scene, float2 pixel) {
 }");
   AssetDatabase.ImportAsset(gen+"/PVS22Blur.shader",ImportAssetOptions.ForceSynchronousImport);
   return AssetDatabase.LoadAssetAtPath<Shader>(gen+"/PVS22Blur.shader");
- }
- public static Shader WriteLiveShader(string gen){
-  WriteTubeInclude(gen);
-  File.WriteAllText(gen+"/PVS22Live.shader",@"Shader ""UstAchae/PVS22/Live"" {
- Properties { _PVS22LiveOn (""on"", Range(0,1)) = 0 _PVS22LiveMode (""mode"", Range(0,1)) = 0 _PVS22LiveFov (""fov"", Float) = 10 }
- SubShader {
-  Tags { ""Queue""=""Geometry"" ""RenderType""=""Opaque"" }
-  Cull Off
-  Pass {
-   CGPROGRAM
-   #pragma vertex vert
-   #pragma fragment frag
-   #include ""UnityCG.cginc""
-   #include ""PVS22Tube.cginc""
-   sampler2D _PVS22LiveTex;
-   float4 _PVS22LiveTex_TexelSize;
-   float4 _PVS22ThermalParams; // x cold level, y gain
-   float _PVS22LiveOn;
-   float _PVS22LiveMode;
-   float _PVS22LiveFov;
-   struct v2f { float4 pos : SV_POSITION; float4 screen : TEXCOORD0; float2 uv : TEXCOORD1; float3 normal : TEXCOORD2; float3 view : TEXCOORD3; float3 world : TEXCOORD4; };
-   v2f vert (appdata_base v) {
-    v2f o; o.pos = UnityObjectToClipPos(v.vertex); o.screen = ComputeScreenPos(o.pos); o.uv = v.texcoord.xy;
-    o.normal = UnityObjectToWorldNormal(v.normal); o.view = WorldSpaceViewDir(v.vertex);
-    o.world = mul(unity_ObjectToWorld, v.vertex).xyz; return o;
-   }
-   // The eyepiece is focused at infinity, so its field stop is too: seen from a distance the picture shows only
-   // along view directions within the device's field of view of its axis, and an edge sweeps across the whole lens
-   // as the eye moves off the axis, black beyond. The disc faces +Y toward the shooter.
-   float fieldStop(float3 world) {
-    float3 n = normalize(mul((float3x3)unity_ObjectToWorld, float3(0, 1, 0)));
-    float c = -dot(normalize(world - _WorldSpaceCameraPos), n);
-    if (c <= 0) return 0;
-    float halfFov = _PVS22LiveFov * 0.5;
-    return 1 - smoothstep(halfFov - 0.5, halfFov + 0.2, degrees(acos(saturate(c))));
-   }
-   fixed4 frag (v2f i) : SV_Target {
-    float2 uv = i.screen.xy / i.screen.w;
-    float3 scene = tex2D(_PVS22LiveTex, uv).rgb;
-    float2 pixel = uv * _PVS22LiveTex_TexelSize.zw;
-    float lum = dot(scene, float3(0.299, 0.587, 0.114));
-    float3 picture = _PVS22LiveMode > 0.5
-        ? saturate((lum - _PVS22ThermalParams.x) * _PVS22ThermalParams.y).xxx
-        : pvs22_tube(scene, pixel);
-    // Off (no live picture: a magnified optic behind it, other weapons, the inspect view): near-black coated
-    // glass with only a faint sheen at grazing angles, like an unlit eyepiece.
-    float grazing = pow(1 - abs(dot(normalize(i.normal), normalize(i.view))), 5);  // the disc is drawn from either side
-    float3 glass = float3(0.004, 0.005, 0.008) + float3(0.10, 0.12, 0.16) * grazing;
-    return fixed4(lerp(glass, picture, _PVS22LiveOn * fieldStop(i.world)), 1);
-   }
-   ENDCG
-  }
- }
-}");
-  AssetDatabase.ImportAsset(gen+"/PVS22Live.shader",ImportAssetOptions.ForceSynchronousImport);
-  return AssetDatabase.LoadAssetAtPath<Shader>(gen+"/PVS22Live.shader");
  }
  // Coated objective glass, shipped in the bundle like the live shader. The lens UVs are radial (centre 0.5,
  // rim at distance 0.5). Layers, from the photos of these sights: a near-black body, a thin-film anti-reflection
@@ -415,7 +358,6 @@ float3 pvs22_tube(float3 scene, float2 pixel) {
   Texture2D rubberA=Import("rubber_albedo",TextureImporterType.Default,true),rubberS=Import("rubber_spec",TextureImporterType.Default,false),rubberN=Import("rubber_normal",TextureImporterType.NormalMap,false);
 
   var stub=WriteStubShader(Gen);
-  var liveShader=WriteLiveShader(Gen);
   var lensShader=WriteLensShader(Gen);
   string[] names={"body","label","text","glass","rubber","black"};
   var mats=names.Select(n=>{
@@ -442,7 +384,7 @@ float3 pvs22_tube(float3 scene, float2 pixel) {
   // Markers the client plugin uses to find the clip-on on a weapon and measure it against the optic.
   var front=new GameObject("pvs22_front");front.transform.SetParent(root.transform,false);front.transform.localPosition=new Vector3(0,info.axisHeight,info.frontZ);
   var rear=new GameObject("pvs22_rear");rear.transform.SetParent(root.transform,false);rear.transform.localPosition=new Vector3(0,info.axisHeight,info.rearZ);
-  BuildSight(root,stub,liveShader,mats[Array.IndexOf(names,"glass")],Gen,info.axisHeight,info.lensZ,info.lensRadius,info.objectiveZ,false);
+  BuildSight(root,stub,mats[Array.IndexOf(names,"glass")],Gen,info.axisHeight,info.lensZ,info.lensRadius,info.objectiveZ,false);
   string prefab=Gen+"/an_pvs22.prefab";PrefabUtility.SaveAsPrefabAsset(root,prefab);UnityEngine.Object.DestroyImmediate(root);
   AssetDatabase.SaveAssets();
 
