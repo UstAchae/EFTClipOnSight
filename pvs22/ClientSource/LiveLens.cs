@@ -12,8 +12,8 @@ namespace UstAchae.PVS22
     // the objective sees, shown 1x at infinity: a private camera at the front of the objective (so nothing behind
     // it, such as the sight behind or the clip-on itself, can show; parts of the weapon ahead of it can), aimed
     // like a window, along the directions from the eye through each point of the lens (an off-centre frustum),
-    // so the view through the lens shifts as the eye moves, then turned into the tube picture (no field-stop black
-    // edge: the user's choice). The native mask's slide with
+    // so the view through the lens shifts as the eye moves, black where that direction is beyond half the
+    // device's field of view (its field stop), then turned into the tube picture. The native mask's slide with
     // the eye is turned off: it models a scope's exit pupil at its eye relief, and from the distance this
     // eyepiece is seen at it only drew a large round shadow. The same disc is used when aiming through the
     // clip-on itself; its sight lens, fed by the game's optic camera with that mask, stays hidden.
@@ -47,6 +47,8 @@ namespace UstAchae.PVS22
         static readonly int switchId = Shader.PropertyToID("_SwitchToSight");
         static readonly int scalesId = Shader.PropertyToID("_Scales");
         static readonly int shiftsId = Shader.PropertyToID("_Shifts");
+        static readonly int fieldId = Shader.PropertyToID("_PVS22Field");
+        static readonly int fieldTanId = Shader.PropertyToID("_PVS22FieldTan");
         static readonly int thermalId = Shader.PropertyToID("_PVS22Thermal");
         static readonly int thermalParamsId = Shader.PropertyToID("_PVS22ThermalParams");
         // Set by EFT's ThermalVision around its camera's render: materials then write their heat into GBuffer0.
@@ -247,6 +249,9 @@ namespace UstAchae.PVS22
             ImageProfile profile = ImageProfile.For(clipOn);
             TubeEffect.Settings(profile, 1f, out float gain, out float noise, out float grain);
             float lensPixels = radius / distance / Mathf.Tan(eye.fieldOfView * 0.5f * Mathf.Deg2Rad) * eye.pixelHeight;
+            // The field stop: black where the eye's line through the lens is beyond half the field of view.
+            process.SetVector(fieldId, new Vector4(ex, ey, distance, span));
+            process.SetFloat(fieldTanId, Mathf.Tan(profile.Fov * 0.5f * Mathf.Deg2Rad));
             TubeEffect.SetGlobals(gain, noise, grain * size * 2f * Visible / Mathf.Max(lensPixels, 1f), profile.Phosphor);
             Shader.SetGlobalVector(thermalParamsId, new Vector4(PVS22Plugin.ThermalLevel, PVS22Plugin.ThermalGain, 0f, 0f));
             process.SetFloat(thermalId, thermal ? 1f : 0f);
