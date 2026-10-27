@@ -171,7 +171,7 @@ float3 pvs22_tube(float3 scene, float2 pixel) {
  public static Shader WriteTubeShader(string gen){
   WriteTubeInclude(gen);
   File.WriteAllText(gen+"/PVS22Tube.shader",@"Shader ""UstAchae/PVS22/Tube"" {
- Properties { _MainTex (""source"", 2D) = ""white"" {} _PVS22Thermal (""thermal"", Float) = 0 }
+ Properties { _MainTex (""source"", 2D) = ""white"" {} _PVS22Thermal (""thermal"", Float) = 0 _PVS22Field (""field stop"", Float) = 10 }
  SubShader {
   Cull Off ZWrite Off ZTest Always
   Pass {
@@ -184,11 +184,13 @@ float3 pvs22_tube(float3 scene, float2 pixel) {
    float4 _MainTex_TexelSize;
    float _PVS22Thermal;        // 1 for a thermal clip-on's live picture: the source holds the scene's heat
    float4 _PVS22ThermalParams; // x cold level, y gain
+   float _PVS22Field;          // a live picture's field stop, as a radius in uv: black beyond (10: none)
    fixed4 frag (v2f_img i) : SV_Target {
     float3 scene = tex2D(_MainTex, i.uv).rgb;
+    float stop = 1 - smoothstep(_PVS22Field - 0.01, _PVS22Field + 0.004, length(i.uv - 0.5));
     if (_PVS22Thermal > 0.5)  // white hot
-     return fixed4(saturate((dot(scene, float3(0.299, 0.587, 0.114)) - _PVS22ThermalParams.x) * _PVS22ThermalParams.y).xxx, 1);
-    return fixed4(pvs22_tube(scene, i.uv * _MainTex_TexelSize.zw), 1);
+     return fixed4(saturate((dot(scene, float3(0.299, 0.587, 0.114)) - _PVS22ThermalParams.x) * _PVS22ThermalParams.y).xxx * stop, 1);
+    return fixed4(pvs22_tube(scene, i.uv * _MainTex_TexelSize.zw) * stop, 1);
    }
    ENDCG
   }
