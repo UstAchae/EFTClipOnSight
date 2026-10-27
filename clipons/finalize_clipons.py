@@ -117,7 +117,7 @@ for key, cfg in ITEMS.items():
             t = o.read_typetree()
             kind = t['m_Name'].replace('mat_', '')  # CreateAsset renamed them after the asset file
             if kind in ('live', 'tube', 'blur'): continue  # keep their own shaders from the bundle
-            if kind == 'glass':
+            if kind in ('glass', 'eyeglass', 'backstop'):  # our coated-lens shader
                 point_lens_at_metal_cube(o, t); done.add(kind); continue
             finalize_material(o, t, kind, {'body': BODY, 'glass': GLASS}.get(kind))
             done.add(kind)
@@ -137,7 +137,7 @@ for key, cfg in ITEMS.items():
             assert t['ThermalVisionUtilities']['CurrentRampPalette'] == 2  # WhiteHot
             o.save_typetree(t)
             done.add('thermal')
-    expected = {'body', 'glass'} | ({'thermal'} if cfg['thermal'] else set())  # no sight lens: not a sight
+    expected = {'body', 'glass', 'eyeglass', 'backstop'} | ({'thermal'} if cfg['thermal'] else set())  # no sight lens: not a sight
     assert done == expected, (key, done)
 
     out = W / 'package/bundles' / bundle_key
@@ -151,7 +151,7 @@ for key, cfg in ITEMS.items():
     for o in refs.objects(check):
         if o.type.name == 'Material':
             t = o.read_typetree()
-            if t['m_Name'] in ('mat_live', 'mat_glass', 'mat_tube', 'mat_blur'):
+            if t['m_Name'] in ('mat_glass', 'mat_eyeglass', 'mat_backstop', 'mat_tube', 'mat_blur'):
                 assert t['m_Shader']['m_FileID'] == 0 and t['m_Shader']['m_PathID'], 'own shader must be in the bundle'
             else:
                 assert t['m_Shader']['m_FileID'] and o.assets_file.externals[t['m_Shader']['m_FileID'] - 1].path == refs.SHADERS

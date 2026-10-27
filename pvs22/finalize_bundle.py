@@ -28,7 +28,8 @@ LOOK = {
 # coated glass in photos of the real objective; opaque so the hollow inside of the tube never shows.
 GLASS = ((0.02, 0.02, 0.022), (1.0, 1.0, 1.0), 3.2, 2.4)
 GLASS_REFLECT = (0.80, 0.85, 1.0, 1.0)
-LIVE = 'an_pvs22_live'  # the live eyepiece disc: own shader, shipped in the bundle
+# Materials on our coated-lens shader: the objective, the eyepiece glass and the black disc behind it.
+LENSES = ('an_pvs22_glass', 'an_pvs22_eyeglass', 'an_pvs22_backstop')
 TEMPLATES = {'body': 'scope_base_armasight_vulcan_gen3_bravo_mg_3,5x_LOD0',
              'linza': 'scope_base_armasight_vulcan_gen3_bravo_mg_3,5x_LOD0_linza'}
 
@@ -65,8 +66,8 @@ for o in refs.objects(built):
         continue
     t = o.read_typetree()
     name = t['m_Name'].replace('mat_', 'an_pvs22_')  # CreateAsset renamed them after the asset file
-    if name in (LIVE, 'an_pvs22_tube', 'an_pvs22_blur'): continue  # keep their own shaders from the bundle
-    if name == 'an_pvs22_glass':
+    if name in ('an_pvs22_tube', 'an_pvs22_blur'): continue  # keep their own shaders from the bundle
+    if name in LENSES:
         point_lens_at_metal_cube(o, t); done.add(name); continue
     t['m_Name'] = name
     kind = 'linza' if name == 'an_pvs22_linza' else 'body'
@@ -101,7 +102,7 @@ for o in refs.objects(built):
     t['m_SavedProperties'] = props
     o.save_typetree(t)
     done.add(name)
-assert done == set(LOOK) | {'an_pvs22_glass'}, done  # no sight lens: the clip-on is not a sight
+assert done == set(LOOK) | set(LENSES), done  # no sight lens: the clip-on is not a sight
 
 out = W / 'package/bundles' / KEY
 out.parent.mkdir(parents=True, exist_ok=True)
@@ -116,7 +117,7 @@ check = UnityPy.Environment().load_file(out.read_bytes(), name=KEY)
 for o in refs.objects(check):
     if o.type.name == 'Material':
         t = o.read_typetree()
-        if t['m_Name'].replace('mat_', 'an_pvs22_') in (LIVE, 'an_pvs22_glass', 'an_pvs22_tube', 'an_pvs22_blur'):
+        if t['m_Name'].replace('mat_', 'an_pvs22_') in ('an_pvs22_tube', 'an_pvs22_blur') + LENSES:
             assert t['m_Shader']['m_FileID'] == 0 and t['m_Shader']['m_PathID'], 'own shader must be in the bundle'
             continue
         assert t['m_Shader']['m_FileID'] and o.assets_file.externals[t['m_Shader']['m_FileID'] - 1].path == refs.SHADERS

@@ -142,7 +142,6 @@ namespace UstAchae.PVS22
             List<Transform> sights = SightsAndMounts(root, removed);
             foreach (Transform clipOn in clipOns)
             {
-                LiveLens.Attach(clipOn);
                 Rig rig = GetRig(clipOn);
                 // Not on a weapon yet (a handguard being assembled, a pooled view): leave it where it is; the rig
                 // re-fits once the weapon is complete.

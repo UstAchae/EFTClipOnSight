@@ -23,25 +23,23 @@ public static class PVS22Builder {
  // so the game's sight system never draws on it). +Z is toward the muzzle. Thermal clip-ons carry a
  // ScopeThermalVisionData, filled from the REAP-IR by finalize_clipons.py, that the client applies to the optic
  // behind them.
- public static void BuildSight(GameObject root,Material backGlass,string gen,float axisHeight,float lensZ0,float lensRadius,bool thermal){
-  // The eyepiece disc mesh has the Vulcan lens's radius; its node is scaled to the clip-on's lens.
+ public static void BuildSight(GameObject root,Mesh body,Material backGlass,string gen,float axisHeight,float lensZ0,float lensRadius,bool thermal){
+  // The eyepiece glass mesh has the Vulcan lens's radius; its node is scaled to the clip-on's lens.
   const float r=0.016539544f;
   float y=axisHeight,lensZ=lensZ0-0.0005f,lensScale=lensRadius/r;
   var discRotation=new Quaternion(-0.7071068f,0,0,0.7071068f);  // local +Y (the disc's face) toward the shooter
 
   // A disc in the local XZ plane facing local +Y, radial uvs (centre 0.5, rim at 0.5 out).
-  const int seg=48;var disc=new Mesh{name="an_pvs22_linza"};
+  const int seg=48;
   var v=new Vector3[seg+1];var uv=new Vector2[seg+1];var n=new Vector3[seg+1];var t=new int[seg*3];
   v[0]=Vector3.zero;uv[0]=new Vector2(.5f,.5f);
   for(int i=0;i<seg;i++){float a=i*Mathf.PI*2/seg;v[i+1]=new Vector3(Mathf.Cos(a)*r,0,Mathf.Sin(a)*r);uv[i+1]=new Vector2(Mathf.Cos(a)*.5f+.5f,Mathf.Sin(a)*.5f+.5f);}
   for(int i=0;i<=seg;i++)n[i]=Vector3.up;
   // Faces local +Y: cross(b-a,c-a) must point along +Y.
   for(int i=0;i<seg;i++){t[i*3]=0;t[i*3+1]=1+(i+1)%seg;t[i*3+2]=1+i;}
-  disc.vertices=v;disc.uv=uv;disc.normals=n;disc.triangles=t;disc.RecalculateTangents();disc.RecalculateBounds();
-  AssetDatabase.CreateAsset(disc,gen+"/mesh_an_pvs22_linza.asset");
 
-  // Glass 3 mm behind the eyepiece disc that closes the hollow eyepiece tube (the client makes it plain black on a
-  // weapon; in the inspect view it reads as dark coated glass). Its normals form a convex dome.
+  // Dark coated glass that closes the hollow eyepiece tube. Its normals form a convex dome. The objective's glass
+  // without the inner-element rings and ghosts (they read as ripples on the small eyepiece).
   var dome=new Mesh{name="an_pvs22_eyepiece_glass"};var dn=new Vector3[seg+1];
   for(int i=0;i<=seg;i++)dn[i]=(Vector3.up*2.5f*r+new Vector3(v[i].x,0,v[i].z)).normalized;
   dome.vertices=v;dome.uv=uv;dome.normals=dn;dome.triangles=t;dome.RecalculateTangents();dome.RecalculateBounds();
@@ -49,15 +47,47 @@ public static class PVS22Builder {
   var back=new GameObject("eyepiece_glass");back.transform.SetParent(root.transform,false);back.transform.localPosition=new Vector3(0,y,lensZ+0.003f);
   back.transform.localRotation=discRotation;back.transform.localScale=new Vector3(lensScale,1,lensScale);
   back.AddComponent<MeshFilter>().sharedMesh=dome;
-  var backRenderer=back.AddComponent<MeshRenderer>();backRenderer.sharedMaterial=backGlass;backRenderer.shadowCastingMode=ShadowCastingMode.Off;
-
-  // The eyepiece as the shooter sees it: the client's live 1x picture on a coated lens (UstAchae/PVS22/Eyepiece,
-  // shipped in the bundle, depth-tested).
-  var liveMat=new Material(WriteEyepieceShader(gen)){name="an_pvs22_live"};AssetDatabase.CreateAsset(liveMat,gen+"/mat_live.asset");
-  var live=new GameObject("pvs22_live");live.transform.SetParent(root.transform,false);live.transform.localPosition=new Vector3(0,y,lensZ-0.002f);
-  live.transform.localRotation=discRotation;live.transform.localScale=new Vector3(lensScale,1,lensScale);
-  live.AddComponent<MeshFilter>().sharedMesh=disc;
-  var liveRenderer=live.AddComponent<MeshRenderer>();liveRenderer.sharedMaterial=liveMat;liveRenderer.shadowCastingMode=ShadowCastingMode.Off;liveRenderer.receiveShadows=false;
+  var eyeMat=new Material(backGlass){name=backGlass.name.Replace("glass","eyeglass")};eyeMat.SetFloat("_Elements",0);AssetDatabase.CreateAsset(eyeMat,gen+"/mat_eyeglass.asset");
+  var backRenderer=back.AddComponent<MeshRenderer>();backRenderer.sharedMaterial=eyeMat;backRenderer.shadowCastingMode=ShadowCastingMode.Off;
+  // Behind the eyepiece opening the models' bores widen and their walls often face outward, so from the eye the
+  // view went through the clip-on around the glass. The opening's narrowest radius (body vertices between the
+  // eyepiece end and the lens) bounds a plain black lining: a disc 2 mm behind the glass and an inward-facing
+  // tube from that narrowest point back to it. Both stay inside the opening's radius, so neither shows outside.
+  float zEnd=float.MaxValue,rim=float.MaxValue,zRim=lensZ,zStop=lensZ+0.005f;
+  foreach(var p in body.vertices)if(new Vector2(p.x,p.y-y).magnitude<lensRadius*2)zEnd=Mathf.Min(zEnd,p.z);
+  foreach(var p in body.vertices){
+   float pr=new Vector2(p.x,p.y-y).magnitude;
+   if(p.z<zEnd-1e-4f||p.z>lensZ0+0.001f||pr<lensRadius*0.9f||pr>lensRadius*2)continue;
+   if(pr<rim){rim=pr;zRim=p.z;}
+  }
+  if(rim==float.MaxValue){rim=lensRadius;zRim=lensZ;}
+  rim-=0.0002f;  // just inside the wall it follows
+  // A short opening (the UTC's 4 mm rim) leaks through its own rim walls too: line it from the very end. Longer
+  // ones (the PVS-22's eyecup with its threads) keep their own walls in front of the narrowest point.
+  if(zRim-zEnd<0.006f)zRim=zEnd+0.0002f;
+  Debug.Log($"EYEPIECE_LINING {root.name} end {zEnd*1000:F1} lens {lensZ0*1000:F1} r {lensRadius*1000:F1} opening r {rim*1000:F1} at {zRim*1000:F1} mm");
+  var stopMat=new Material(backGlass){name=backGlass.name.Replace("glass","backstop")};
+  stopMat.SetFloat("_Elements",0);stopMat.SetFloat("_Reflect",0);stopMat.SetFloat("_Highlight",0);
+  stopMat.SetColor("_CoatColor",Color.black);stopMat.SetColor("_CoatGrazing",Color.black);
+  AssetDatabase.CreateAsset(stopMat,gen+"/mat_backstop.asset");
+  var stop=new GameObject("eyepiece_backstop");stop.transform.SetParent(root.transform,false);stop.transform.localPosition=new Vector3(0,y,zStop);
+  stop.transform.localRotation=discRotation;stop.transform.localScale=new Vector3(rim/r,1,rim/r);
+  stop.AddComponent<MeshFilter>().sharedMesh=dome;
+  var stopRenderer=stop.AddComponent<MeshRenderer>();stopRenderer.sharedMaterial=stopMat;stopRenderer.shadowCastingMode=ShadowCastingMode.Off;
+  // The tube, in the root's frame; its faces point at the axis (cross(b-a,c-a) is the side drawn).
+  var sv=new Vector3[seg*2];var sn=new Vector3[seg*2];var su=new Vector2[seg*2];var st=new int[seg*6];
+  for(int i=0;i<seg;i++){
+   float a=i*Mathf.PI*2/seg;var radial=new Vector3(Mathf.Cos(a),Mathf.Sin(a),0);
+   sv[i]=new Vector3(0,y,0)+radial*rim+Vector3.forward*zRim;sv[seg+i]=new Vector3(0,y,0)+radial*rim+Vector3.forward*zStop;
+   sn[i]=sn[seg+i]=-radial;su[i]=new Vector2((float)i/seg,0);su[seg+i]=new Vector2((float)i/seg,1);
+   int j=(i+1)%seg;
+   st[i*6]=i;st[i*6+1]=seg+i;st[i*6+2]=j;st[i*6+3]=j;st[i*6+4]=seg+i;st[i*6+5]=seg+j;
+  }
+  var tube=new Mesh{name="an_pvs22_eyepiece_lining"};tube.vertices=sv;tube.normals=sn;tube.uv=su;tube.triangles=st;tube.RecalculateTangents();tube.RecalculateBounds();
+  AssetDatabase.CreateAsset(tube,gen+"/mesh_an_pvs22_eyepiece_lining.asset");
+  var lining=new GameObject("eyepiece_lining");lining.transform.SetParent(root.transform,false);
+  lining.AddComponent<MeshFilter>().sharedMesh=tube;
+  var liningRenderer=lining.AddComponent<MeshRenderer>();liningRenderer.sharedMaterial=stopMat;liningRenderer.shadowCastingMode=ShadowCastingMode.Off;
 
   // Carries the tube image effect's shader in the bundle (the client reads it from here); never drawn.
   var tubeMat=new Material(WriteTubeShader(gen)){name="an_pvs22_tube"};AssetDatabase.CreateAsset(tubeMat,gen+"/mat_tube.asset");
@@ -82,7 +112,7 @@ public static class PVS22Builder {
  }
  // The tube model both night-vision pictures use (see the comment at the top of PVS22Tube.cginc).
  public static void WriteTubeInclude(string gen){
-  File.WriteAllText(gen+"/PVS22Tube.cginc",@"// Image-intensifier model shared by the clip-ons' eyepiece picture and their optic-camera effect. Our own
+  File.WriteAllText(gen+"/PVS22Tube.cginc",@"// Image-intensifier model for the clip-ons' optic-camera effect. Our own
 // implementation of the usual tube model (as in BRNVG): the scene is weighted by the photocathode's
 // spectral response and amplified, then the output carries read noise plus shot noise that grows with the
 // square root of the signal, a coarser grain, a stationary fixed-pattern gain variation and brief 1-pixel
@@ -133,45 +163,10 @@ float3 pvs22_tube(float3 scene, float2 pixel) {
  }
  // Image effect for the optic camera when a night-vision clip-on sits in front of the scope (or is the
  // sight): it replaces the game's night vision. Shipped in the bundle on the hidden "pvs22_tube" renderer.
- // The eyepiece lens: the client's picture (_PVS22Picture, set per renderer; it spans the lens exactly, lens uv 0..1)
- // under one even coated-glass layer, dark with a faint sheen at grazing angles, the same over the whole lens from
- // every side. With _PVS22On 0 only the glass shows.
- public static Shader WriteEyepieceShader(string gen){
-  File.WriteAllText(gen+"/PVS22Eyepiece.shader",@"Shader ""UstAchae/PVS22/Eyepiece"" {
- Properties { _PVS22Picture (""picture"", 2D) = ""black"" {} _PVS22On (""on"", Float) = 0 }
- SubShader {
-  Tags { ""Queue""=""Geometry"" ""RenderType""=""Opaque"" }
-  Cull Off
-  Pass {
-   CGPROGRAM
-   #pragma vertex vert
-   #pragma fragment frag
-   #include ""UnityCG.cginc""
-   sampler2D _PVS22Picture;
-   float _PVS22On;
-   struct v2f { float4 pos : SV_POSITION; float2 uv : TEXCOORD0; float3 normal : TEXCOORD1; float3 view : TEXCOORD2; };
-   v2f vert (appdata_base v) {
-    v2f o; o.pos = UnityObjectToClipPos(v.vertex); o.uv = v.texcoord.xy;
-    o.normal = UnityObjectToWorldNormal(v.normal); o.view = WorldSpaceViewDir(v.vertex); return o;
-   }
-   fixed4 frag (v2f i) : SV_Target {
-    float r = length(i.uv - 0.5) * 2;  // 0 at the centre, 1 at the rim
-    float3 picture = tex2D(_PVS22Picture, i.uv).rgb * _PVS22On * (1 - 0.5 * smoothstep(0.85, 1.0, r));
-    float grazing = pow(1 - abs(dot(normalize(i.normal), normalize(i.view))), 5);  // drawn from either side
-    float3 glass = float3(0.005, 0.006, 0.009) + float3(0.06, 0.07, 0.09) * grazing;
-    return fixed4(picture + glass, 1);
-   }
-   ENDCG
-  }
- }
-}");
-  AssetDatabase.ImportAsset(gen+"/PVS22Eyepiece.shader",ImportAssetOptions.ForceSynchronousImport);
-  return AssetDatabase.LoadAssetAtPath<Shader>(gen+"/PVS22Eyepiece.shader");
- }
  public static Shader WriteTubeShader(string gen){
   WriteTubeInclude(gen);
   File.WriteAllText(gen+"/PVS22Tube.shader",@"Shader ""UstAchae/PVS22/Tube"" {
- Properties { _MainTex (""source"", 2D) = ""white"" {} _PVS22Thermal (""thermal"", Float) = 0 _PVS22Field (""field stop geometry"", Vector) = (0,0,1,1) _PVS22FieldTan (""field stop"", Float) = 10 _PVS22Lens (""lens edge"", Float) = 10 }
+ Properties { _MainTex (""source"", 2D) = ""white"" {} }
  SubShader {
   Cull Off ZWrite Off ZTest Always
   Pass {
@@ -182,21 +177,9 @@ float3 pvs22_tube(float3 scene, float2 pixel) {
    #include ""PVS22Tube.cginc""
    sampler2D _MainTex;
    float4 _MainTex_TexelSize;
-   float _PVS22Thermal;        // 1 for a thermal clip-on's live picture: the source holds the scene's heat
-   float4 _PVS22ThermalParams; // x cold level, y gain
-   // A live picture's field stop. The picture spans +-w on the lens plane; the eye sits at (x, y) off the axis and
-   // z in front of it: black where the eye's line through that lens point is beyond the field (tangent; 10: none).
-   float4 _PVS22Field;
-   float _PVS22FieldTan;
-   float _PVS22Lens;           // the lens's edge as a radius in uv: the picture beyond it is black (10: none)
    fixed4 frag (v2f_img i) : SV_Target {
     float3 scene = tex2D(_MainTex, i.uv).rgb;
-    float slope = length((i.uv - 0.5) * 2 * _PVS22Field.w - _PVS22Field.xy) / _PVS22Field.z;
-    float stop = (1 - smoothstep(_PVS22FieldTan * 0.97, _PVS22FieldTan * 1.01, slope))
-               * (1 - smoothstep(_PVS22Lens - 0.006, _PVS22Lens, length(i.uv - 0.5)));
-    if (_PVS22Thermal > 0.5)  // white hot
-     return fixed4(saturate((dot(scene, float3(0.299, 0.587, 0.114)) - _PVS22ThermalParams.x) * _PVS22ThermalParams.y).xxx * stop, 1);
-    return fixed4(pvs22_tube(scene, i.uv * _MainTex_TexelSize.zw) * stop, 1);
+    return fixed4(pvs22_tube(scene, i.uv * _MainTex_TexelSize.zw), 1);
    }
    ENDCG
   }
@@ -245,7 +228,7 @@ float3 pvs22_tube(float3 scene, float2 pixel) {
   AssetDatabase.ImportAsset(gen+"/PVS22Blur.shader",ImportAssetOptions.ForceSynchronousImport);
   return AssetDatabase.LoadAssetAtPath<Shader>(gen+"/PVS22Blur.shader");
  }
- // Coated objective glass, shipped in the bundle like the live shader. The lens UVs are radial (centre 0.5,
+ // Coated objective glass, shipped in the bundle like the tube shader. The lens UVs are radial (centre 0.5,
  // rim at distance 0.5). Layers, from the photos of these sights: a near-black body, a thin-film anti-reflection
  // coating whose reflected colour shifts from _CoatColor head-on to _CoatGrazing at grazing angles, the game's
  // crisp cubemap (finalize points _Cube at it) seen through that coating, a few lens elements inside the barrel
@@ -261,9 +244,13 @@ float3 pvs22_tube(float3 scene, float2 pixel) {
   _Base (""body"", Color) = (0.004, 0.005, 0.012, 1)
   _Reflect (""reflection strength"", Range(0, 2)) = 0.9
   _Elements (""inner element strength"", Range(0, 2)) = 1
+  _Highlight (""window highlight"", Range(0, 2)) = 1
  }
  SubShader {
-  Tags { ""Queue""=""Geometry"" ""RenderType""=""Opaque"" }
+  // Opaque, but drawn after the opaque queue: the game's screen-space effects (reflections, ambient occlusion) read
+  // the G-buffer, which this forward shader does not write, so in the opaque queue they drew whatever is behind the
+  // glass (the gun's front sight, the tube's inside) onto it.
+  Tags { ""Queue""=""Transparent-1"" ""RenderType""=""Opaque"" }
   Cull Off
   Pass {
    CGPROGRAM
@@ -272,7 +259,7 @@ float3 pvs22_tube(float3 scene, float2 pixel) {
    #include ""UnityCG.cginc""
    samplerCUBE _Cube;
    float4 _CoatColor, _CoatGrazing, _ElementColor, _Base;
-   float _Reflect, _Elements;
+   float _Reflect, _Elements, _Highlight;
    struct v2f { float4 pos : SV_POSITION; float2 uv : TEXCOORD0; float3 viewT : TEXCOORD1; float3 normalW : TEXCOORD2; float3 viewW : TEXCOORD3; };
    v2f vert (appdata_tan v) {
     v2f o; o.pos = UnityObjectToClipPos(v.vertex); o.uv = v.texcoord.xy;
@@ -322,7 +309,7 @@ float3 pvs22_tube(float3 scene, float2 pixel) {
     // Elements only show inside the barrel, and fade toward the front rim.
     col += inner * 0.4 * _Elements * (1 - smoothstep(0.85, 1.0, length(p)));
     // Crisp window highlight on the front surface, moving with the view like a real reflection.
-    col += float3(0.85, 0.88, 1.0) * 0.6 * blob(p - shift * 0.05, float2(-0.42, 0.45), 160);
+    col += float3(0.85, 0.88, 1.0) * 0.6 * _Highlight * blob(p - shift * 0.05, float2(-0.42, 0.45), 160);
     col += coat * 0.25 * fres;                       // coloured Fresnel rim
     return fixed4(col, 1);
    }
@@ -392,7 +379,7 @@ float3 pvs22_tube(float3 scene, float2 pixel) {
   // Markers the client plugin uses to find the clip-on on a weapon and measure it against the optic.
   var front=new GameObject("pvs22_front");front.transform.SetParent(root.transform,false);front.transform.localPosition=new Vector3(0,info.axisHeight,info.frontZ);
   var rear=new GameObject("pvs22_rear");rear.transform.SetParent(root.transform,false);rear.transform.localPosition=new Vector3(0,info.axisHeight,info.rearZ);
-  BuildSight(root,mats[Array.IndexOf(names,"glass")],Gen,info.axisHeight,info.lensZ,info.lensRadius,false);
+  BuildSight(root,mesh,mats[Array.IndexOf(names,"glass")],Gen,info.axisHeight,info.lensZ,info.lensRadius,false);
   string prefab=Gen+"/an_pvs22.prefab";PrefabUtility.SaveAsPrefabAsset(root,prefab);UnityEngine.Object.DestroyImmediate(root);
   AssetDatabase.SaveAssets();
 

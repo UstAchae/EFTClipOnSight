@@ -33,6 +33,29 @@ public static class ClipOnRenderCheck {
     var tex=new Texture2D(rt.width,rt.height,TextureFormat.RGB24,false);tex.ReadPixels(new Rect(0,0,rt.width,rt.height),0,0);tex.Apply();
     File.WriteAllBytes(Output+"/"+key+"_"+n+".png",tex.EncodeToPNG());cam.targetTexture=null;RenderTexture.active=null;
    }
+   // Close eyepiece views as the shooter sees them: on the axis and 12/25 degrees off it. A magenta board in front of
+   // the objective and a green background show anything seen through the clip-on.
+   cam.backgroundColor=new Color(0,1,0);
+   var board=GameObject.CreatePrimitive(PrimitiveType.Quad);board.transform.position=go.transform.TransformPoint(0,axis,b.max.z+0.15f);board.transform.localScale=Vector3.one*0.5f;
+   board.GetComponent<Renderer>().sharedMaterial=new Material(Shader.Find("Unlit/Color")){color=Color.magenta};
+   foreach(var deg in new[]{0f,12f,25f,45f,70f}){
+    var eyeEnd=go.transform.TransformPoint(0,axis,b.min.z);
+    var dir=Quaternion.Euler(-deg*0.4f,deg,0)*Vector3.back;
+    cam.transform.position=eyeEnd+dir*0.10f;cam.transform.LookAt(eyeEnd+Vector3.forward*0.01f);cam.fieldOfView=40;
+    var rt=new RenderTexture(960,600,24,RenderTextureFormat.ARGB32){antiAliasing=4};cam.targetTexture=rt;cam.Render();RenderTexture.active=rt;
+    var tex=new Texture2D(rt.width,rt.height,TextureFormat.RGB24,false);tex.ReadPixels(new Rect(0,0,rt.width,rt.height),0,0);tex.Apply();
+    File.WriteAllBytes(Output+"/"+key+"_eye"+deg+".png",tex.EncodeToPNG());cam.targetTexture=null;RenderTexture.active=null;
+   }
+   // The objective end from the side: its glass must stay inside the barrel.
+   foreach(var (deg,up) in new[]{(45f,13f),(70f,21f),(90f,27f),(70f,45f),(100f,35f)}){
+    var objEnd=go.transform.TransformPoint(0,axis,b.max.z);
+    var dir=Quaternion.Euler(-up,deg,0)*Vector3.forward;
+    cam.transform.position=objEnd+dir*0.16f;cam.transform.LookAt(objEnd-Vector3.forward*0.01f);cam.fieldOfView=40;
+    var rt=new RenderTexture(960,600,24,RenderTextureFormat.ARGB32){antiAliasing=4};cam.targetTexture=rt;cam.Render();RenderTexture.active=rt;
+    var tex=new Texture2D(rt.width,rt.height,TextureFormat.RGB24,false);tex.ReadPixels(new Rect(0,0,rt.width,rt.height),0,0);tex.Apply();
+    File.WriteAllBytes(Output+"/"+key+"_obj"+deg+"_"+up+".png",tex.EncodeToPNG());cam.targetTexture=null;RenderTexture.active=null;
+   }
+   UnityEngine.Object.DestroyImmediate(board);cam.backgroundColor=new Color(.55f,.58f,.62f);cam.fieldOfView=30;
    UnityEngine.Object.DestroyImmediate(go);bundle.Unload(true);
    Debug.Log("CLIPON_RENDER "+key);
   }

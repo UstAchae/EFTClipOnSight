@@ -47,8 +47,13 @@ ITEMS = {
         'mount_centre': 0.017,
         'eyepiece': {'along': 0.114, 'y': 0.038, 'radius': 0.0172},
         'materials': {'MI_PVS30': 'body'},
-        'objective_lens': {'y': 0.042, 'radius': 0.0362, 'depth': (0.0095, 0.0135)},
-        'drop_depth': 0.0045,     # the domed eyepiece lens sits up to 4 mm behind its front pole
+        # The painted lens's front surface is 10.5 mm in. Its painted circle (centre 42 mm, r 36) is wider than the
+        # barrel's bore there, which is centred on the optical axis (38 mm) with r 31.9: the disc fills the bore.
+        'objective_lens': {'y': 0.042, 'radius': 0.0362, 'depth': (0.0095, 0.0135), 'disc': 0.0104,
+                           'disc_y': 0.038, 'disc_radius': 0.0317},
+        'drop_depth': 0.008,      # the domed eyepiece lens reaches 7.2 mm behind its front pole (its 9-sided back)
+        'drop_from': -0.001,      # its front pole stands 0.5 mm proud of the eyepiece plane
+        'drop_radius': 0.019,     # and its rim meets the bore at 18.8 mm, wider than the image lens
         'textures': {'body': {'base': SRC + '/pvs30/raw/Sight_PVS30_v01/Textures/PBR_PVS30_tx/PVS30_BaseColor.png',
                               'normal': SRC + '/pvs30/raw/Sight_PVS30_v01/Textures/PBR_PVS30_tx/PVS30_Normal.png',
                               'rough': SRC + '/pvs30/raw/Sight_PVS30_v01/Textures/PBR_PVS30_tx/PVS30_Roughness.png',
@@ -67,7 +72,8 @@ ITEMS = {
         'mount_centre': -0.0016 / (0.158 / 0.6031),
         'eyepiece': {'along': 0.244 - 0.004 / (0.158 / 0.6031), 'y': 0.035 / (0.158 / 0.6031), 'radius': 0.0134 / (0.158 / 0.6031)},
         'materials': {'UTCX2': 'body'},
-        'objective_lens': {'y': 0.0514 / (0.158 / 0.6031), 'radius': 0.031 / (0.158 / 0.6031), 'depth': (0.0075 / (0.158 / 0.6031), 0.0105 / (0.158 / 0.6031))},
+        # The lens's widest surface (r 30.9 mm) is 10 mm in; the barrel is narrower further out.
+        'objective_lens': {'y': 0.0514 / (0.158 / 0.6031), 'radius': 0.0309 / (0.158 / 0.6031), 'depth': (0.0075 / (0.158 / 0.6031), 0.0105 / (0.158 / 0.6031)), 'disc': 0.0099 / (0.158 / 0.6031)},
         'drop_depth': 0.001 / (0.158 / 0.6031),
         'textures': {'body': {'base': SRC + '/utc/pack/textures/UTCX2_BaseColor.png',
                               'normal': SRC + '/utc/pack/textures/UTCX2_Normal.png',

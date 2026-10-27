@@ -80,7 +80,10 @@ def prepare_mesh(key, cfg, out):
         p = V[[c[0] for c in corners]]
         depth = (eye['along'] - p[:, ax]) * rear
         radius = np.hypot(p[:, across], p[:, 1] - eye['y'])
-        if cfg['drop_depth'] > 0 and (radius < eye['radius'] * 1.02).all() and (depth > -1e-4).all() and (depth < cfg['drop_depth']).all():
+        # Lens faces face along the axis; the bore wall around them (same radius, same depth) faces across it.
+        normal = np.cross(p[1] - p[0], p[2] - p[0])
+        axial = abs(normal[ax]) > 0.5 * np.linalg.norm(normal)
+        if cfg['drop_depth'] > 0 and axial and (radius < cfg.get('drop_radius', eye['radius'] * 1.02)).all()                 and (depth > cfg.get('drop_from', -1e-4)).all() and (depth < cfg['drop_depth']).all():
             continue
         if 'depth' in lens:
             in_from_front = front - p[:, ax] * cfg['objective']
@@ -90,14 +93,17 @@ def prepare_mesh(key, cfg, out):
         keep.append((SUBMESHES.index(role), corners))
     faces = keep
     outward = np.zeros(3); outward[ax] = cfg['objective']  # the objective lens faces this way
+    # The new glass disc fills the barrel's bore, which need not be the painted lens's circle (`disc_y`, `disc_radius`).
+    disc_y, disc_r = lens.get('disc_y', lens['y']), lens.get('disc_radius', lens['radius'])
     if 'depth' in lens:
-        # One glass disc at the front of the lens depth range, wound to face out of the objective.
+        # One glass disc at the front of the lens depth range (or at `disc`, the painted lens's own front surface,
+        # when a retaining ring narrower than the lens stands in that range), wound to face out of the objective.
         seg, centre = 48, np.zeros(3)
-        centre[ax] = (front - lens['depth'][0]) * cfg['objective']; centre[1] = lens['y']
+        centre[ax] = (front - lens.get('disc', lens['depth'][0])) * cfg['objective']; centre[1] = disc_y
         ring = []
         for i in range(seg):
             q = centre.copy(); a = 2 * np.pi * i / seg
-            q[across] += np.cos(a) * lens['radius']; q[1] += np.sin(a) * lens['radius']
+            q[across] += np.cos(a) * disc_r; q[1] += np.sin(a) * disc_r
             ring.append(q)
         if face_normal(np.array(ring)) @ outward < 0: ring.reverse()
         base = len(V)
@@ -125,13 +131,13 @@ def prepare_mesh(key, cfg, out):
             if sm == 1:
                 # Glass: normals of a convex dome (radius of curvature 2.5x the lens radius), so the cubemap
                 # reflection sweeps across the lens like on real curved glass instead of one flat colour.
-                radial = V[v] - V[v] * np.abs(outward); radial[1] -= lens['y']
-                n = outward * 2.5 * lens['radius'] + radial
+                radial = V[v] - V[v] * np.abs(outward); radial[1] -= disc_y
+                n = outward * 2.5 * disc_r + radial
             else:
                 n = sum(FN[g] * w for g, w in around[v] if FN[g] @ FN[fi] > cos_limit)
             n = tuple(np.round(M @ (n / np.linalg.norm(n)), 5))
             # Glass UVs are radial (centre 0.5, rim at 0.5 out) for the coated-lens shader.
-            uv = tuple(np.clip(np.array([radial[across], radial[1]]) / lens['radius'] * 0.5 + 0.5, 0, 1)) if sm == 1 else tuple(VT[vt])
+            uv = tuple(np.clip(np.array([radial[across], radial[1]]) / disc_r * 0.5 + 0.5, 0, 1)) if sm == 1 else tuple(VT[vt])
             key_ = (v, vt, n, uv)
             if key_ not in index:
                 index[key_] = len(verts)

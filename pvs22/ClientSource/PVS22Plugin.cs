@@ -24,16 +24,9 @@ namespace UstAchae.PVS22
 
         static ConfigEntry<float> gain;
         static ConfigEntry<float> noise;
-        static ConfigEntry<float> liveResolution;
-        static ConfigEntry<float> thermalLevel;
-        static ConfigEntry<float> thermalGain;
 
-        // Read by LiveLens, which draws the eyepiece when no optic camera does.
         internal static float Gain => gain.Value;
         internal static float Noise => noise.Value;
-        internal static float LiveResolution => liveResolution.Value;
-        internal static float ThermalLevel => thermalLevel.Value;
-        internal static float ThermalGain => thermalGain.Value;
 
         static readonly AccessTools.FieldRef<OpticComponentUpdater, OpticSight> sightRef = AccessTools.FieldRefAccess<OpticComponentUpdater, OpticSight>("_opticSight");
         static readonly AccessTools.FieldRef<OpticComponentUpdater, Camera> cameraRef = AccessTools.FieldRefAccess<OpticComponentUpdater, Camera>("opticCamera");
@@ -59,9 +52,6 @@ namespace UstAchae.PVS22
             // New section and keys: the old "PVS-22" values were for the game's own night-vision effect.
             gain = Config.Bind("Night vision", "Gain", 30f, new ConfigDescription("Image tube gain of the night-vision clip-ons (the PVS-22; the PVS-27 and PVS-30 are brighter by design).", new AcceptableValueRange<float>(1f, 200f)));
             noise = Config.Bind("Night vision", "Noise", 1f, new ConfigDescription("Scale of the tube noise: grain, scintillation and fixed pattern. 0 turns it off.", new AcceptableValueRange<float>(0f, 3f)));
-            thermalLevel = Config.Bind("Thermal", "Live cold level", 0.2f, new ConfigDescription("Heat level shown as black in the thermal eyepiece picture behind a red dot or holographic sight.", new AcceptableValueRange<float>(0f, 1f)));
-            thermalGain = Config.Bind("Thermal", "Live gain", 2.5f, new ConfigDescription("Contrast of that thermal picture.", new AcceptableValueRange<float>(0.5f, 10f)));
-            liveResolution = Config.Bind("PVS-22", "Live resolution", 0.5f, new ConfigDescription("Resolution of the live eyepiece picture (behind a red dot or holographic sight, or with no sight behind the clip-on): 0.5 renders 1024 x 1024 pixels (the lens shows the middle third), 1 renders 2048 x 2048. It costs one extra scene render every other frame.", new AcceptableValueRange<float>(0.25f, 1f)));
             var harmony = new Harmony("com.ustachae.pvs22");
             harmony.Patch(AccessTools.Method(typeof(OpticComponentUpdater), "LateUpdate"),
                 postfix: new HarmonyMethod(typeof(PVS22Plugin), nameof(AfterOpticLateUpdate)));
