@@ -1,0 +1,50 @@
+{
+  "manifest": [
+    {
+      "key": "ustachae_clipons/pvs27.bundle",
+      "dependencyKeys": [
+        "shaders",
+        "cubemaps",
+        "assets/systems/effects/opticsight/opticsightsmasks.bundle"
+      ]
+    },
+    {
+      "key": "ustachae_clipons/pvs30.bundle",
+      "dependencyKeys": [
+        "shaders",
+        "cubemaps",
+        "assets/systems/effects/opticsight/opticsightsmasks.bundle"
+      ]
+    },
+    {
+      "key": "ustachae_clipons/utc.bundle",
+      "dependencyKeys": [
+        "shaders",
+        "cubemaps",
+        "assets/systems/effects/opticsight/opticsightsmasks.bundle",
+        "assets/content/items/mods/scopes/scope_base_trijicon_reap-ir.bundle",
+        "assets/systems/effects/nightvision.bundle",
+        "assets/systems/effects/nightvision/mask_nv_textures"
+      ]
+    },
+    {
+      "key": "ustachae_clipons/pvs27_fde.bundle",
+      "dependencyKeys": [
+        "shaders",
+        "cubemaps",
+        "assets/systems/effects/opticsight/opticsightsmasks.bundle"
+      ]
+    },
+    {
+      "key": "ustachae_clipons/utc_fde.bundle",
+      "dependencyKeys": [
+        "shaders",
+        "cubemaps",
+        "assets/systems/effects/opticsight/opticsightsmasks.bundle",
+        "assets/content/items/mods/scopes/scope_base_trijicon_reap-ir.bundle",
+        "assets/systems/effects/nightvision.bundle",
+        "assets/systems/effects/nightvision/mask_nv_textures"
+      ]
+    }
+  ]
+}

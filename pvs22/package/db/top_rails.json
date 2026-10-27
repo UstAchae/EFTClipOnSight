@@ -1,0 +1,5442 @@
+{
+ "020020308308000000000000": {
+  "mod_sight_front": false,
+  "mod_sight_rear": false,
+  "mod_scope": false,
+  "mod_tactical_000": false,
+  "mod_mount": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false
+ },
+ "020020aa14aa140000000000": {
+  "mod_sight_rear": false,
+  "mod_mount": false
+ },
+ "020020ae101ae10100000000": {
+  "mod_sight_rear": false
+ },
+ "020020ae103ae10300000000": {
+  "mod_sight_rear": false
+ },
+ "020020ae74aae74a00000000": {
+  "mod_sight_rear": false
+ },
+ "020020fa100fa10000000000": {
+  "mod_sight_rear": false
+ },
+ "0217b4f8593e2bba9c58b5da": {
+  "mod_tactical": false
+ },
+ "023023a12a12a12000000000": {
+  "mod_sight_front": false,
+  "mod_sight_rear": false,
+  "mod_scope": false
+ },
+ "03f6c86c56945862820e1006": {
+  "mod_scope": true,
+  "mod_tactical_000": false
+ },
+ "040040fba556556040000000": {
+  "mod_scope": true
+ },
+ "040040fba762762040000000": {
+  "mod_scope": true
+ },
+ "04104110ab10ab4100000000": {
+  "mod_mount_000": false,
+  "mod_scope": true,
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_sight_front": true
+ },
+ "041041725725041000000000": {
+  "mod_mount_000": true
+ },
+ "041041a12a12041000000000": {
+  "mod_mount_001": false,
+  "mod_mount_002": false
+ },
+ "041041aacbbb1c0000000000": {
+  "mod_tactical_001": false,
+  "mod_mount_001": false
+ },
+ "041041aacbbfde0000000000": {
+  "mod_tactical_001": false,
+  "mod_mount_001": false
+ },
+ "041041ab76ab764100000000": {
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_tactical": false,
+  "mod_tactical_000": false
+ },
+ "041041bef1bef14100000000": {
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_sight_front": true
+ },
+ "041041c0da4c0da400000000": {
+  "mod_scope": true,
+  "mod_sight_front": true,
+  "mod_tactical": true,
+  "mod_tactical001": false,
+  "mod_tactical002": false
+ },
+ "041041df056df05641000000": {
+  "mod_mount_002": false,
+  "mod_mount_001": false
+ },
+ "041041f150f1504100000000": {
+  "mod_sight_front": false,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false
+ },
+ "041041f15ff15f4100000000": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_mount_003": false,
+  "mod_sight_front": true,
+  "mod_scope": true
+ },
+ "0410aabba03bba03aa000000": {
+  "mod_scope": true,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false
+ },
+ "0410ccc64c64ccc000000000": {
+  "mod_sight_front": true,
+  "mod_scope_000": true,
+  "mod_scope_001": true,
+  "mod_mount_000": false,
+  "mod_mount_001": false
+ },
+ "0410ebaa14aa14eb00000000": {
+  "mod_scope": true,
+  "mod_tactical_000": true,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false,
+  "mod_tactical_003": false
+ },
+ "0410ffa12a120ff000000000": {
+  "mod_tactical": true
+ },
+ "0410ffc64c64fff000000000": {
+  "mod_sight_front": true,
+  "mod_scope_000": true,
+  "mod_scope_001": true,
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_mount_003": false,
+  "mod_mount_004": false,
+  "mod_tactical": true
+ },
+ "04114110ab10ab4110000000": {
+  "mod_scope": true,
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_sight_front": true
+ },
+ "041141aacbbb1c4110000000": {
+  "mod_tactical_001": false,
+  "mod_tactical_000": false,
+  "mod_mount_001": false
+ },
+ "041141df056df05641100000": {
+  "mod_tactical_001": false
+ },
+ "041141f15ff1514100000000": {
+  "mod_sight_front": false,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false
+ },
+ "041241725725241000000000": {
+  "mod_mount_000": true
+ },
+ "041241aacbbb1c4120000000": {
+  "mod_tactical_001": false,
+  "mod_tactical_002": false,
+  "mod_mount_000": false
+ },
+ "041241f15ff1524100000000": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_mount_003": false,
+  "mod_sight_front": true,
+  "mod_scope": true
+ },
+ "041341725725341000000000": {
+  "mod_tactical_001": false,
+  "mod_tactical_002": false
+ },
+ "041341aacbbb1c4130000000": {
+  "mod_tactical_001": false,
+  "mod_mount_002": false
+ },
+ "041341dbbdbb341000000000": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false
+ },
+ "041341f15ff1534100000000": {
+  "mod_sight_front": true,
+  "mod_scope": true,
+  "mod_tactical_000": false,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false
+ },
+ "041441aacbbb1c4140000000": {
+  "mod_tactical_001": false,
+  "mod_tactical_002": false
+ },
+ "041441f15ff1544100000000": {
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_sight_front": true,
+  "mod_scope": true,
+  "mod_tactical_000": false
+ },
+ "041541aacbbb1c4150000000": {
+  "mod_tactical_001": false,
+  "mod_tactical_002": false
+ },
+ "041541aacbbfde4150000000": {
+  "mod_tactical_001": false,
+  "mod_tactical_002": false
+ },
+ "041641aacbbb1c4160000000": {
+  "mod_tactical": false,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false
+ },
+ "041741aacbbb1c4170000000": {
+  "mod_tactical": false,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false
+ },
+ "041841aacbbb1c4180000000": {
+  "mod_tactical_001": false,
+  "mod_tactical_002": false
+ },
+ "041941aacbbb1c4190000000": {
+  "mod_tactical": false,
+  "mod_sight_front": true,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false,
+  "mod_tactical_000": false
+ },
+ "041a41a12a12a41000000000": {
+  "mod_mount_001": false,
+  "mod_mount_002": false
+ },
+ "041a41aacbbb1c41a0000000": {
+  "mod_tactical_001": false,
+  "mod_tactical_002": false
+ },
+ "041a41ab76ab7641aa000000": {
+  "mod_tactical_001": false,
+  "mod_tactical_002": false,
+  "mod_tactical": false,
+  "mod_tactical_000": false
+ },
+ "041a41bef1bef141aa000000": {
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_sight_front": true,
+  "mod_tactical": false
+ },
+ "041affa12a12aff000000000": {
+  "mod_tactical": true
+ },
+ "041b41a12a12b41000000000": {
+  "mod_mount_001": false,
+  "mod_mount_002": false
+ },
+ "041b41aacbbb1c41b0000000": {
+  "mod_tactical_001": false,
+  "mod_tactical_002": false,
+  "mod_tactical_000": false,
+  "mod_tactical_003": true,
+  "mod_sight_front": true,
+  "mod_tactical": false
+ },
+ "041b41bef1bef141bb000000": {
+  "mod_sight_front": true,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false
+ },
+ "041b41f150f15b4100000000": {
+  "mod_tactical_000": false,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false,
+  "mod_tactical_003": false,
+  "mod_tactical_004": false,
+  "mod_tactical": false
+ },
+ "041b90adbadb041000000000": {
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_mount_003": false,
+  "mod_mount_004": false
+ },
+ "041befbba03bba03bef00000": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_mount_003": false,
+  "mod_mount_004": false,
+  "mod_tactical": true,
+  "mod_scope": true,
+  "mod_mount": true
+ },
+ "041bffa12a12bff000000000": {
+  "mod_tactical": true
+ },
+ "041c41a12a12c41000000000": {
+  "mod_tactical_001": false,
+  "mod_tactical_002": false,
+  "mod_tactical_000": false
+ },
+ "041c41aacbbb1c41c0000000": {
+  "mod_sight_front": true,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false,
+  "mod_tactical_000": false
+ },
+ "041c41f150f15c4100000000": {
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_sight_front": false
+ },
+ "041d41f150f15d4100000000": {
+  "mod_sight_front": false,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false
+ },
+ "041e41f150f15e4100000000": {
+  "mod_sight_front": false,
+  "mod_tactical": true,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false,
+  "mod_mount": false
+ },
+ "042042aacbb3000000000000": {
+  "mod_scope": true,
+  "mod_sight_rear": true,
+  "mod_sight_front": true,
+  "mod_mount": true
+ },
+ "042042aacbbb1c0000000000": {
+  "mod_scope": true,
+  "mod_sight_rear": true,
+  "mod_sight_front": true,
+  "mod_mount": true
+ },
+ "042042aacbbbbf0000000000": {
+  "mod_scope": true,
+  "mod_sight_rear": true,
+  "mod_sight_front": true,
+  "mod_mount": true
+ },
+ "042042aacbbcfb0000000000": {
+  "mod_scope": true,
+  "mod_sight_rear": true,
+  "mod_sight_front": true,
+  "mod_mount": true
+ },
+ "042042aacbbfde0000000000": {
+  "mod_scope": true,
+  "mod_sight_rear": true,
+  "mod_sight_front": true,
+  "mod_mount": true
+ },
+ "042042bef1bef10000000000": {
+  "mod_scope": false,
+  "mod_sight_rear": true
+ },
+ "042042c0da4c0da400000000": {
+  "mod_scope": false,
+  "mod_sight_rear": true
+ },
+ "042042f150f1500000000000": {
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_scope": true,
+  "mod_sight_rear": true,
+  "mod_sight_front": true
+ },
+ "042042f151f1510000000000": {
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_scope": false,
+  "mod_sight_rear": true,
+  "mod_sight_front": false
+ },
+ "042042f152f1520000000000": {
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_scope": false,
+  "mod_sight_rear": true,
+  "mod_sight_front": false
+ },
+ "042042f15df15d0000000000": {
+  "mod_scope": true,
+  "mod_sight_rear": true
+ },
+ "042042f15ef15e0000000000": {
+  "mod_scope": true,
+  "mod_sight_rear": true
+ },
+ "042042f15ff15f0000000000": {
+  "mod_scope": true,
+  "mod_sight_rear": true
+ },
+ "042042fba762762000000000": {
+  "mod_mount_001": false,
+  "mod_mount": false,
+  "mod_mount_002": false
+ },
+ "042042fbbfbb570000000000": {
+  "mod_scope": true,
+  "mod_tactical": false,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false
+ },
+ "042042ff762ff76200000000": {
+  "mod_mount": true
+ },
+ "042142fa100fa10010000000": {
+  "mod_scope": true
+ },
+ "042142fba762762111000000": {
+  "mod_sight_front": true,
+  "mod_tactical_000": false,
+  "mod_tactical_002": false
+ },
+ "042242fba762762222000000": {
+  "mod_scope": true,
+  "mod_tactical_000": false,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false
+ },
+ "042342fba762762333000000": {
+  "mod_tactical_001": false,
+  "mod_tactical_002": false
+ },
+ "042a42fba762762aaa000000": {
+  "mod_sight_front": true,
+  "mod_tactical_000": false,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false
+ },
+ "042b90adbadb042000000000": {
+  "mod_tactical_000": false,
+  "mod_tactical_001": false,
+  "mod_scope": true
+ },
+ "042c42fba762762ccc000000": {
+  "mod_tactical_000": true,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false
+ },
+ "04404410ab10ab4400000000": {
+  "mod_sight_front": true,
+  "mod_scope": true,
+  "mod_sight_rear": true
+ },
+ "044044fba762762000000000": {
+  "mod_tactical_000": true
+ },
+ "04414410ab10ab4410000000": {
+  "mod_sight_front": true,
+  "mod_scope": true,
+  "mod_sight_rear": true
+ },
+ "044aaabba03bba030a000000": {
+  "mod_scope": true
+ },
+ "04604610ab10ab4600000000": {
+  "mod_tactical": true
+ },
+ "046046ab50ab504600000000": {
+  "mod_tactical_001": false,
+  "mod_tactical_002": false
+ },
+ "046046bba97bba9746000000": {
+  "mod_scope": true
+ },
+ "048048bba97bba9748000000": {
+  "mod_tactical": true
+ },
+ "048048bef1bef14800000000": {
+  "mod_tactical": true
+ },
+ "048048df056df05648000000": {
+  "mod_tactical": true
+ },
+ "048048f150f1504800000000": {
+  "mod_tactical": true
+ },
+ "048048f15df15d4800000000": {
+  "mod_tactical": true
+ },
+ "048048f15ef15e4800000000": {
+  "mod_tactical": true
+ },
+ "048048f15ff15f4800000000": {
+  "mod_tactical": true
+ },
+ "048248df056df05648200000": {
+  "mod_tactical_001": false,
+  "mod_tactical_002": false
+ },
+ "048248f15ef15e4820000000": {
+  "mod_tactical": true
+ },
+ "048248f15ff15f4820000000": {
+  "mod_tactical": true
+ },
+ "048c48f150f15c4800000000": {
+  "mod_tactical": true
+ },
+ "04a04aaa14aa14aa00000000": {
+  "mod_sight_front": true
+ },
+ "04b04b72572504b000000000": {
+  "mod_mount": true
+ },
+ "04b04bdbbdbb04b000000000": {
+  "mod_sight_front": true,
+  "mod_sight_rear": true,
+  "mod_scope": true
+ },
+ "04b14b72572514b000000000": {
+  "mod_mount": true
+ },
+ "04b24b72572524b000000000": {
+  "mod_mount": true
+ },
+ "04ba4bab50ab50ab00000000": {
+  "mod_scope": true
+ },
+ "04bb4bab50ab50bb00000000": {
+  "mod_scope": true,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false
+ },
+ "04bbab762762bab04b000000": {
+  "mod_sight_rear": true
+ },
+ "04bc4bab50ab50cb00000000": {
+  "mod_scope": true,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false
+ },
+ "04bd4bab50ab50db00000000": {
+  "mod_scope": true,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false
+ },
+ "04f3ff7257253ff000000000": {
+  "mod_scope": true
+ },
+ "08608633a507ac3c20847a3e": {
+  "mod_tactical": false
+ },
+ "0a1d8043d11b5d0a755c22d7": {
+  "mod_mount": true,
+  "mod_tactical": true
+ },
+ "0cb4a36dd2e587b46e813dbe": {
+  "mod_sight_rear": false,
+  "mod_mount_000": false
+ },
+ "1bf618e47cce6d69bec01e9f": {
+  "mod_scope": false
+ },
+ "23c2b6d726de79c1e1a91972": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_tactical_000": false,
+  "mod_scope": false,
+  "mod_sight_front": false,
+  "mod_sight_rear": false
+ },
+ "3de520947dda3e4b2c5ed419": {
+  "mod_mount": true,
+  "mod_tactical": true
+ },
+ "4d2a129c980d2cd94016bad3": {
+  "mod_tactical": false
+ },
+ "4efd57bf8ef993ea989884cd": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_mount_003": true
+ },
+ "513f324d9f3a327b5a220327": {
+  "mod_tactical": false
+ },
+ "5208756a9ed713d489a3d53b": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_scope": true
+ },
+ "54491c4f4bdc2db1078b4568": {
+  "mod_mount_001": false,
+  "mod_mount_000": false
+ },
+ "544a3a774bdc2d3a388b4567": {
+  "mod_scope": true
+ },
+ "55801eed4bdc2d89578b4588": {
+  "mod_scope": false,
+  "mod_sight_rear": false,
+  "mod_tactical": false
+ },
+ "558ada594bdc2db9688b456a": {
+  "mod_mount_000": true
+ },
+ "55d355e64bdc2d962f8b4569": {
+  "mod_scope": true,
+  "mod_sight_rear": true
+ },
+ "55d449444bdc2d962f8b456d": {
+  "mod_mount": false
+ },
+ "55d459824bdc2d892f8b4573": {
+  "mod_tactical": true,
+  "mod_tactical_2": false,
+  "mod_mount": true,
+  "mod_tactical_003": false
+ },
+ "55d45f484bdc2d972f8b456d": {
+  "mod_tactical_000": false,
+  "mod_tactical_001": false
+ },
+ "55d48a634bdc2d8b2f8b456a": {
+  "mod_scope": true
+ },
+ "55d48ebc4bdc2d8c2f8b456c": {
+  "mod_tactical_001": false,
+  "mod_tactical_002": false,
+  "mod_tactical_003": false
+ },
+ "55f84c3c4bdc2d5f408b4576": {
+  "mod_scope": true,
+  "mod_tactical001": false,
+  "mod_tactical002": false,
+  "mod_sight_front": true,
+  "mod_tactical": true
+ },
+ "560835c74bdc2dc8488b456f": {
+  "mod_mount": false
+ },
+ "560836b64bdc2d57468b4567": {
+  "mod_mount": false
+ },
+ "560837154bdc2da74d8b4568": {
+  "mod_mount": false
+ },
+ "560837544bdc2de22e8b456e": {
+  "mod_mount": false
+ },
+ "5608379a4bdc2d26448b4569": {
+  "mod_mount": false
+ },
+ "56083a334bdc2dc8488b4571": {
+  "mod_scope": true
+ },
+ "5644bd2b4bdc2d3b4c8b4572": {
+  "mod_sight_rear": false,
+  "mod_mount_000": false
+ },
+ "5648ae314bdc2d3d1c8b457f": {
+  "mod_scope": true,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false
+ },
+ "5648b4534bdc2d3d1c8b4580": {
+  "mod_scope": true,
+  "mod_tactical_002": false
+ },
+ "5649a2464bdc2d91118b45a8": {
+  "mod_scope": false
+ },
+ "5649af094bdc2df8348b4586": {
+  "mod_mount": true
+ },
+ "5649af884bdc2d1b2b8b4589": {
+  "mod_scope": true
+ },
+ "5649b0544bdc2d1b2b8b458a": {
+  "mod_sight_rear": true
+ },
+ "5649b2314bd2fd79388b4576": {
+  "mod_mount_000": true
+ },
+ "5649d9a14bdc2d79388b4580": {
+  "mod_scope": true
+ },
+ "566cb2314bdc2d79388b4576": {
+  "mod_mount_000": false
+ },
+ "56d59856d2720bd8418b456a": {
+  "mod_tactical": false
+ },
+ "56d5a407d2720bb3418b456b": {
+  "mod_sight_rear": true,
+  "mod_sight_front": true
+ },
+ "56dee2bdd2720bc8328b4567": {
+  "mod_mount": false,
+  "mod_mount_000": false
+ },
+ "56deec93d2720bec348b4568": {
+  "mod_mount": false
+ },
+ "56ea7293d2720b8d4b8b45ba": {
+  "mod_scope": true
+ },
+ "56ea8d2fd2720b7c698b4570": {
+  "mod_sight_front": true
+ },
+ "571a12c42459771f627b58a0": {
+  "mod_tactical": false
+ },
+ "576165642459773c7a400233": {
+  "mod_mount_000": false,
+  "mod_sight_rear": false,
+  "mod_mount_001": false
+ },
+ "576a581d2459771e7b1bc4f1": {
+  "mod_mount": false
+ },
+ "576a7c512459771e796e0e17": {
+  "mod_tactical": true
+ },
+ "576fd4ec2459777f0b518431": {
+  "mod_tactical": false
+ },
+ "577d128124597739d65d0e56": {
+  "mod_scope": true
+ },
+ "57838ad32459774a17445cd2": {
+  "mod_mount_000": false,
+  "mod_mount_004": false
+ },
+ "57838c962459774a1651ec63": {
+  "mod_sight_rear": true,
+  "mod_mount_000": false
+ },
+ "5783954024597777256959b5": {
+  "mod_scope": true,
+  "mod_mount": true
+ },
+ "57a3459f245977764a01f703": {
+  "mod_tactical": true
+ },
+ "57ac965c24597706be5f975c": {
+  "mod_mount": true
+ },
+ "57aca93d2459771f2c7e26db": {
+  "mod_mount": true
+ },
+ "57acb6222459771ec34b5cb0": {
+  "mod_scope": false
+ },
+ "57adff4f24597737f373b6e6": {
+  "mod_scope": true
+ },
+ "57c44b372459772d2b39b8ce": {
+  "mod_mount_004": false,
+  "mod_mount_000": false
+ },
+ "57c44dd02459772d2e0ae249": {
+  "mod_sight_rear": true,
+  "mod_mount_000": false
+ },
+ "57c69dd424597774c03b7bbc": {
+  "mod_scope": true
+ },
+ "57cff947245977638e6f2a19": {
+  "mod_mount_003": false,
+  "mod_mount_000": false
+ },
+ "57cffd8224597763b03fc609": {
+  "mod_mount_003": false,
+  "mod_mount_000": false
+ },
+ "57cffddc24597763133760c6": {
+  "mod_mount_003": false,
+  "mod_mount_000": false
+ },
+ "57cffe0024597763b03fc60b": {
+  "mod_mount_003": false,
+  "mod_mount_000": false
+ },
+ "57cffe20245977632f391a9d": {
+  "mod_mount_003": false,
+  "mod_mount_000": false
+ },
+ "57d14d2524597714373db789": {
+  "mod_mount": false
+ },
+ "57dc334d245977597164366f": {
+  "mod_mount_000": true
+ },
+ "57ee59b42459771c7b045da5": {
+  "mod_scope": true,
+  "mod_tactical": false
+ },
+ "57f4c844245977379d5c14d1": {
+  "mod_mount": false
+ },
+ "57ffa9f4245977728561e844": {
+  "mod_tactical_000": false,
+  "mod_tactical_001": false
+ },
+ "57ffa9f424597772857ee844": {
+  "mod_tactical_000": false,
+  "mod_tactical_001": false
+ },
+ "57ffaea724597779f52b3a4d": {
+  "mod_scope": false,
+  "mod_tactical": false
+ },
+ "57ffb0062459777a045af529": {
+  "mod_scope": true
+ },
+ "5827272a24597748c74bdeea": {
+  "mod_scope": true,
+  "mod_tactical_000": true,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false
+ },
+ "58272b392459774b4c7b3ccd": {
+  "mod_scope": true,
+  "mod_tactical_000": true,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false
+ },
+ "58272b842459774abc128d50": {
+  "mod_scope": true
+ },
+ "583990e32459771419544dd2": {
+  "mod_mount_000": false
+ },
+ "5839a40f24597726f856b511": {
+  "mod_mount_000": false
+ },
+ "587e02ff24597743df3deaeb": {
+  "mod_mount": false
+ },
+ "587e08ee245977446b4410cf": {
+  "mod_scope": false
+ },
+ "588200af24597742fa221dfb": {
+  "mod_mount": false
+ },
+ "588200c224597743990da9ed": {
+  "mod_mount": false
+ },
+ "588200cf2459774414733d55": {
+  "mod_mount": false
+ },
+ "588892092459774ac91d4b11": {
+  "mod_scope": false
+ },
+ "5888976c24597754281f93f5": {
+  "mod_tactical_000": true,
+  "mod_tactical_001": false
+ },
+ "588b56d02459771481110ae2": {
+  "mod_scope": true,
+  "mod_tactical001": false,
+  "mod_tactical002": false,
+  "mod_sight_front": true,
+  "mod_tactical": true
+ },
+ "5894a42086f77426d2590762": {
+  "mod_sight_front": true,
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false
+ },
+ "5894a5b586f77426d2590767": {
+  "mod_scope": true,
+  "mod_sight_rear": true,
+  "mod_tactical_000": true
+ },
+ "58a56f8d86f774651579314c": {
+  "mod_tactical": true
+ },
+ "58d2664f86f7747fec5834f6": {
+  "mod_scope": true
+ },
+ "58d39b0386f77443380bf13c": {
+  "mod_scope": true
+ },
+ "58d39d3d86f77445bb794ae7": {
+  "mod_scope": true
+ },
+ "591c4efa86f7741030027726": {
+  "mod_tactical": true
+ },
+ "591ee00d86f774592f7b841e": {
+  "mod_scope": false,
+  "mod_tactical": false
+ },
+ "5926c0df86f77462f647f764": {
+  "mod_sight_rear": true,
+  "mod_mount": false
+ },
+ "5926d33d86f77410de68ebc0": {
+  "mod_mount": true
+ },
+ "5926dad986f7741f82604363": {
+  "mod_scope": true
+ },
+ "5926f2e086f7745aae644231": {
+  "mod_sight_rear": true,
+  "mod_mount": false
+ },
+ "593d1fa786f7746da62d61ac": {
+  "mod_scope": true,
+  "mod_tactical_000": true,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false,
+  "mod_tactical_003": false
+ },
+ "5947db3f86f77447880cf76f": {
+  "mod_tactical": false
+ },
+ "595cf16b86f77427440c32e2": {
+  "mod_scope": true,
+  "mod_tactical": true,
+  "mod_mount_000": false,
+  "mod_mount_002": false,
+  "mod_mount_003": false,
+  "mod_mount_004": false,
+  "mod_sight_front": true
+ },
+ "595cfa8b86f77427437e845b": {
+  "mod_scope": true,
+  "mod_tactical": true,
+  "mod_mount_000": false,
+  "mod_mount_002": false,
+  "mod_mount_003": false,
+  "mod_mount_004": false,
+  "mod_sight_front": true
+ },
+ "59984ab886f7743e98271174": {
+  "mod_sight_rear": false,
+  "mod_scope": false
+ },
+ "59985a6c86f77414ec448d17": {
+  "mod_scope": true
+ },
+ "59bfe68886f7746004266202": {
+  "mod_scope": true,
+  "mod_sight_rear": true
+ },
+ "59c63b4486f7747afb151c1c": {
+  "mod_tactical_000": false,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false
+ },
+ "59ccfdba86f7747f2109a587": {
+  "mod_scope": true,
+  "mod_tactical_000": true
+ },
+ "59d6088586f774275f37482f": {
+  "mod_sight_rear": false,
+  "mod_sight_front": false
+ },
+ "59d6507c86f7741b846413a2": {
+  "mod_mount": true
+ },
+ "59d650cf86f7741b846413a4": {
+  "mod_sight_rear": true
+ },
+ "59db7e1086f77448be30ddf3": {
+  "mod_mount": true
+ },
+ "59db7eed86f77461f8380365": {
+  "mod_scope": true
+ },
+ "59e0bdb186f774156f04ce82": {
+  "mod_tactical": true
+ },
+ "59e0be5d86f7742d48765bd2": {
+  "mod_tactical": true
+ },
+ "59e6152586f77473dc057aa1": {
+  "mod_sight_rear": false,
+  "mod_sight_front": false
+ },
+ "59e6449086f7746c9f75e822": {
+  "mod_mount": true
+ },
+ "59e6687d86f77411d949b251": {
+  "mod_sight_rear": false,
+  "mod_sight_front": false
+ },
+ "59e8977386f77415a553c453": {
+  "mod_sight_rear": true
+ },
+ "59eb7ebe86f7740b373438ce": {
+  "mod_tactical_000": false,
+  "mod_tactical_001": true
+ },
+ "59f98b4986f7746f546d2cef": {
+  "mod_mount": false
+ },
+ "59f9cabd86f7743a10721f46": {
+  "mod_sight_rear": false
+ },
+ "59fb375986f7741b681b81a6": {
+  "mod_scope": true,
+  "mod_tactical": true,
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_mount_003": false
+ },
+ "59ff346386f77477562ff5e2": {
+  "mod_sight_rear": false,
+  "mod_sight_front": false
+ },
+ "5a0ec13bfcdbcb00165aa685": {
+  "mod_sight_rear": false,
+  "mod_mount_000": false,
+  "mod_sight_front": false
+ },
+ "5a154d5cfcdbcb001a3b00da": {
+  "mod_mount": false
+ },
+ "5a17f98cfcdbcb0980087290": {
+  "mod_sight_front": false,
+  "mod_sight_rear": false
+ },
+ "5a1eaa87fcdbcb001865f75e": {
+  "mod_tactical": true
+ },
+ "5a1ead28fcdbcb001912fa9f": {
+  "mod_scope": true
+ },
+ "5a27b281c4a28200741e1e52": {
+  "mod_tactical_000": false,
+  "mod_mount": false
+ },
+ "5a27bad7c4a282000b15184b": {
+  "mod_tactical_000": true,
+  "mod_mount": false,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false,
+  "mod_scope": false
+ },
+ "5a329052c4a28200741e22d3": {
+  "mod_scope": true,
+  "mod_tactical": true,
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_mount_003": false,
+  "mod_mount_004": false
+ },
+ "5a32aa0cc4a28232996e405f": {
+  "mod_scope": true
+ },
+ "5a33a8ebc4a282000c5a950d": {
+  "mod_scope": true
+ },
+ "5a33b2c9c4a282000c5a9511": {
+  "mod_scope": true
+ },
+ "5a33b652c4a28232996e407c": {
+  "mod_scope": true
+ },
+ "5a33bab6c4a28200741e22f8": {
+  "mod_scope": true
+ },
+ "5a34fbadc4a28200741e230a": {
+  "mod_sight_front": true
+ },
+ "5a367e5dc4a282000e49738f": {
+  "mod_scope": false,
+  "mod_sight_rear": false
+ },
+ "5a37ca54c4a282000d72296a": {
+  "mod_scope_000": false,
+  "mod_scope_001": true
+ },
+ "5a38e6bac4a2826c6e06d79b": {
+  "mod_mount_000": false
+ },
+ "5a398b75c4a282000a51a266": {
+  "mod_mount": true
+ },
+ "5a6f5e048dc32e00094b97da": {
+  "mod_sight_rear": true,
+  "mod_sight_front": true
+ },
+ "5a6f5f078dc32e00094b97dd": {
+  "mod_sight_rear": true,
+  "mod_sight_front": true
+ },
+ "5a702d198dc32e000b452fc3": {
+  "mod_sight_rear": true,
+  "mod_sight_front": true
+ },
+ "5a7033908dc32e000a311392": {
+  "mod_sight_rear": true,
+  "mod_sight_front": true
+ },
+ "5a71e22f8dc32e00094b97f4": {
+  "mod_sight_rear": true,
+  "mod_sight_front": true,
+  "mod_scope": true
+ },
+ "5a71e4f48dc32e001207fb26": {
+  "mod_sight_rear": true,
+  "mod_sight_front": true,
+  "mod_scope": true
+ },
+ "5a7828548dc32e5a9c28b516": {
+  "mod_mount": false
+ },
+ "5a787ebcc5856700142fdd98": {
+  "mod_mount": false
+ },
+ "5a787f7ac5856700177af660": {
+  "mod_mount": false
+ },
+ "5a787fadc5856700155a6ca1": {
+  "mod_mount": false,
+  "mod_scope": true
+ },
+ "5a787fdfc5856700142fdd9a": {
+  "mod_scope": true
+ },
+ "5a788031c585673f2b5c1c79": {
+  "mod_tactical_001": false,
+  "mod_tactical_000": false
+ },
+ "5a788068c5856700137e4c8f": {
+  "mod_mount_000": false,
+  "mod_mount_001": false
+ },
+ "5a789261c5856700186c65d3": {
+  "mod_tactical_000": false,
+  "mod_tactical_001": false
+ },
+ "5a7893c1c585673f2b5c374d": {
+  "mod_scope": true
+ },
+ "5a78948ec5856700177b1124": {
+  "mod_scope": true
+ },
+ "5a7ad4af51dfba0013379717": {
+  "mod_scope": true
+ },
+ "5a7ad55551dfba0015068f42": {
+  "mod_scope": true
+ },
+ "5a7ad74e51dfba0015068f45": {
+  "mod_tactical": true
+ },
+ "5a7ae0c351dfba0017554310": {
+  "mod_tactical": false,
+  "mod_mount": false
+ },
+ "5a7afa25e899ef00135e31b0": {
+  "mod_sight_rear": true,
+  "mod_sight_front": true
+ },
+ "5a7b4900e899ef197b331a2a": {
+  "mod_scope": false,
+  "mod_tactical": true
+ },
+ "5a7c74b3e899ef0014332c29": {
+  "mod_tactical": false
+ },
+ "5a9548c9159bd400133e97b3": {
+  "mod_tactical_000": false,
+  "mod_tactical_001": false
+ },
+ "5a957c3fa2750c00137fa5f7": {
+  "mod_scope": true,
+  "mod_tactical_000": false,
+  "mod_tactical_001": false,
+  "mod_tactical_002": true
+ },
+ "5a966ec8a2750c00171b3f36": {
+  "mod_scope": true
+ },
+ "5a9685b1a2750c0032157104": {
+  "mod_sight_rear": true,
+  "mod_sight_front": true
+ },
+ "5a9d56c8a2750c0032157146": {
+  "mod_scope": true,
+  "mod_mount_000": false,
+  "mod_mount_002": false
+ },
+ "5a9d6d00a2750c5c985b5305": {
+  "mod_tactical": true
+ },
+ "5a9d6d21a2750c00137fa649": {
+  "mod_mount": true,
+  "mod_tactical": true
+ },
+ "5a9d6d34a2750c00141e07da": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_tactical": true
+ },
+ "5a9fc7e6a2750c0032157184": {
+  "mod_tactical": false,
+  "mod_scope": false
+ },
+ "5aa66a9be5b5b0214e506e89": {
+  "mod_scope": true
+ },
+ "5aa66c72e5b5b00016327c93": {
+  "mod_scope_000": false,
+  "mod_scope_001": true,
+  "mod_scope_002": false,
+  "mod_scope_003": false
+ },
+ "5aaf8e43e5b5b00015693246": {
+  "mod_mount": true
+ },
+ "5aafa1c2e5b5b00015042a56": {
+  "mod_sight_front": true
+ },
+ "5aafa857e5b5b00018480968": {
+  "mod_sight_rear": false,
+  "mod_mount": false
+ },
+ "5ab24ef9e5b5b00fe93c9209": {
+  "mod_scope": true
+ },
+ "5ab372a310e891001717f0d8": {
+  "mod_scope": true,
+  "mod_mount": true,
+  "mod_tactical_000": true,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false,
+  "mod_tactical_003": false,
+  "mod_sight_front": true,
+  "mod_sight_rear": true
+ },
+ "5ab3afb2d8ce87001660304d": {
+  "mod_sight_front": false
+ },
+ "5ab8e9fcd8ce870019439434": {
+  "mod_sight_rear": false,
+  "mod_mount_000": false
+ },
+ "5abcbc27d8ce8700182eceeb": {
+  "mod_sight_rear": false,
+  "mod_sight_front": false,
+  "mod_mount_001": false
+ },
+ "5abccb7dd8ce87001773e277": {
+  "mod_sight_front": false,
+  "mod_sight_rear": false
+ },
+ "5ac4cd105acfc40016339859": {
+  "mod_sight_rear": false,
+  "mod_mount_000": false
+ },
+ "5ac50da15acfc4001718d287": {
+  "mod_mount": true
+ },
+ "5ac66cb05acfc40198510a10": {
+  "mod_sight_rear": false,
+  "mod_mount_000": false
+ },
+ "5ac66d015acfc400180ae6e4": {
+  "mod_sight_rear": false,
+  "mod_mount_000": false
+ },
+ "5ac66d2e5acfc43b321d4b53": {
+  "mod_sight_rear": false,
+  "mod_mount_000": false
+ },
+ "5ac66d725acfc43b321d4b60": {
+  "mod_sight_rear": false,
+  "mod_mount_000": false
+ },
+ "5ac66d9b5acfc4001633997a": {
+  "mod_sight_rear": false,
+  "mod_mount_000": false
+ },
+ "5ac72e475acfc400180ae6fe": {
+  "mod_sight_rear": true
+ },
+ "5ac733a45acfc400192630e2": {
+  "mod_sight_rear": true
+ },
+ "5ac8d6885acfc400180ae7b0": {
+  "mod_mount": false
+ },
+ "5addbb6e5acfc408fb1393fd": {
+  "mod_sight_front": true
+ },
+ "5addbb825acfc408fb139400": {
+  "mod_sight_front": true
+ },
+ "5addbb945acfc4001a5fc44e": {
+  "mod_sight_front": true
+ },
+ "5addbbb25acfc40015621bd9": {
+  "mod_sight_front": true
+ },
+ "5addbf175acfc408fb13965b": {
+  "mod_mount": true,
+  "mod_tactical": false
+ },
+ "5addbfbb5acfc400194dbcf7": {
+  "mod_scope": true,
+  "mod_tactical": true
+ },
+ "5addbfd15acfc40015621bde": {
+  "mod_scope": true,
+  "mod_tactical": true
+ },
+ "5addbfe15acfc4001a5fc58b": {
+  "mod_scope": false
+ },
+ "5addbfef5acfc400185c2857": {
+  "mod_scope": false
+ },
+ "5addbffe5acfc4001714dfac": {
+  "mod_scope": true
+ },
+ "5addc00b5acfc4001669f144": {
+  "mod_scope_000": true,
+  "mod_scope_001": true,
+  "mod_tactical": true,
+  "mod_mount_000": false,
+  "mod_mount_001": false
+ },
+ "5addc7005acfc4001669f275": {
+  "mod_scope": true,
+  "mod_tactical_000": true,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false,
+  "mod_tactical_003": false
+ },
+ "5ae08f0a5acfc408fb1398a1": {
+  "mod_mount": false
+ },
+ "5ae09bff5acfc4001562219d": {
+  "mod_sight_front": false,
+  "mod_sight_rear": false
+ },
+ "5ae09bff5acfc4001562ccca": {
+  "mod_sight_front": false,
+  "mod_sight_rear": false
+ },
+ "5ae30bad5acfc400185c2dc4": {
+  "mod_scope": true
+ },
+ "5afd7ded5acfc40017541f5e": {
+  "mod_mount": false
+ },
+ "5b099a9d5acfc47a8607efe7": {
+  "mod_tactical_000": true,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false,
+  "mod_mount": true
+ },
+ "5b099bb25acfc400186331e8": {
+  "mod_scope": true
+ },
+ "5b0bbe4e5acfc40dc528a72d": {
+  "mod_sight_rear": false
+ },
+ "5b1fa9b25acfc40018633c01": {
+  "mod_tactical": false,
+  "mod_mount": false
+ },
+ "5b1faa0f5acfc40dc528aeb5": {
+  "mod_sight_rear": true,
+  "mod_sight_front": false
+ },
+ "5b237e425acfc4771e1be0b6": {
+  "mod_scope": true,
+  "mod_tactical": true,
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false
+ },
+ "5b2389515acfc4771e1be0c0": {
+  "mod_scope_000": false,
+  "mod_scope_001": true,
+  "mod_scope_002": true
+ },
+ "5b2cfa535acfc432ff4db7a0": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false
+ },
+ "5b30bc165acfc40016387293": {
+  "mod_tactical": true
+ },
+ "5b30bc285acfc47a8608615d": {
+  "mod_tactical": true
+ },
+ "5b31163c5acfc400153b71cb": {
+  "mod_scope": true
+ },
+ "5b3a08b25acfc4001754880c": {
+  "mod_scope": false,
+  "mod_tactical": true
+ },
+ "5b3b6dc75acfc47a8773fb1e": {
+  "mod_scope": true
+ },
+ "5b3b6e495acfc4330140bd88": {
+  "mod_scope": false,
+  "mod_tactical": false
+ },
+ "5b3b713c5acfc4330140bd8d": {
+  "mod_tactical": false
+ },
+ "5b3b99265acfc4704b4a1afb": {
+  "mod_scope": true
+ },
+ "5b3f7bf05acfc433000ecf6b": {
+  "mod_mount": true
+ },
+ "5b3f7c005acfc4704b4a1de8": {
+  "mod_scope": false
+ },
+ "5b432d215acfc4771e1c6624": {
+  "mod_mount": false
+ },
+ "5b4736a986f774040571e998": {
+  "mod_tactical": true
+ },
+ "5b7be1ca5acfc400170e2d2f": {
+  "mod_tactical_000": true,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false,
+  "mod_mount": true,
+  "mod_tactical_003": false
+ },
+ "5b7be2345acfc400196d524a": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_mount_003": false,
+  "mod_mount_004": false,
+  "mod_mount_005": false
+ },
+ "5b7be4575acfc400161d0832": {
+  "mod_tactical": true
+ },
+ "5b7be4645acfc400170e2dcc": {
+  "mod_tactical": true
+ },
+ "5b7be47f5acfc400170e2dd2": {
+  "mod_tactical": true
+ },
+ "5b7bebc85acfc43bca706666": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_mount_003": false,
+  "mod_tactical": true,
+  "mod_scope": true
+ },
+ "5b7bedd75acfc43d825283f9": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_mount_003": false,
+  "mod_tactical": true,
+  "mod_scope": true
+ },
+ "5b7bee755acfc400196d5383": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_scope": true
+ },
+ "5b800e9286f7747a8b04f3ff": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_mount_003": false
+ },
+ "5b800ed086f7747baf6e2f9e": {
+  "mod_tactical": true
+ },
+ "5b80242286f77429445e0b47": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_mount_003": false
+ },
+ "5b84038986f774774913b0c1": {
+  "mod_tactical": true
+ },
+ "5ba26383d4351e00334c93d9": {
+  "mod_sight_front": false,
+  "mod_sight_rear": false,
+  "mod_scope": false,
+  "mod_tactical_000": false,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false
+ },
+ "5bb20d53d4351e4502010a69": {
+  "mod_scope": true,
+  "mod_sight_rear": true
+ },
+ "5bb20de5d4351e0035629e59": {
+  "mod_scope": true,
+  "mod_sight_front": true,
+  "mod_tactical_000": true,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false
+ },
+ "5bb20df1d4351e00347787d5": {
+  "mod_scope": true,
+  "mod_tactical_000": true,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false
+ },
+ "5bb20dfcd4351e00334c9e24": {
+  "mod_scope": true,
+  "mod_sight_front": true,
+  "mod_tactical_000": true,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false
+ },
+ "5bbdb811d4351e45020113c7": {
+  "mod_scope": true,
+  "mod_tactical_000": false,
+  "mod_tactical_001": false
+ },
+ "5bbdb811d4351e45020243c7": {
+  "mod_scope": true,
+  "mod_tactical": true
+ },
+ "5bc5a372d4351e44f824d17f": {
+  "mod_scope": true
+ },
+ "5bd70322209c4d00d7167b8f": {
+  "mod_sight_front": false,
+  "mod_sight_rear": false,
+  "mod_scope": false,
+  "mod_tactical_000": false,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false
+ },
+ "5beec3e30db8340019619424": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_scope": true,
+  "mod_tactical_000": true
+ },
+ "5beec91a0db834001961942d": {
+  "mod_scope": true,
+  "mod_sight_rear": true
+ },
+ "5beec9450db83400970084fd": {
+  "mod_sight_rear": true
+ },
+ "5beecbb80db834001d2c465e": {
+  "mod_tactical_000": true
+ },
+ "5bf3e03b0db834001d2c4a9c": {
+  "mod_sight_rear": false
+ },
+ "5bf3e0490db83400196199af": {
+  "mod_sight_rear": false
+ },
+ "5bfd4cbe0db834001b73449f": {
+  "mod_sight_front": false,
+  "mod_sight_rear": false
+ },
+ "5bfd4cd60db834001c38f095": {
+  "mod_sight_rear": false
+ },
+ "5bfea6e90db834001b7347f3": {
+  "mod_mount": false
+ },
+ "5bfeb32b0db834001a6694d9": {
+  "mod_tactical": true
+ },
+ "5bfebc530db834001d23eb65": {
+  "mod_scope": true,
+  "mod_sight_rear": true
+ },
+ "5bfebc5e0db834001a6694e5": {
+  "mod_scope": true
+ },
+ "5bffe7c50db834001d23ece1": {
+  "mod_sight_rear": true,
+  "mod_sight_front": true
+ },
+ "5c0009510db834001966907f": {
+  "mod_sight_rear": true,
+  "mod_sight_front": true
+ },
+ "5c0102aa0db834001b734ba1": {
+  "mod_tactical": true
+ },
+ "5c010a700db834001d23ef5d": {
+  "mod_sight_rear": true,
+  "mod_sight_front": true
+ },
+ "5c0125fc0db834001a669aa3": {
+  "mod_sight_rear": true,
+  "mod_sight_front": true
+ },
+ "5c05293e0db83400232fff80": {
+  "mod_mount": true
+ },
+ "5c052a900db834001a66acbd": {
+  "mod_mount": true
+ },
+ "5c064c400db834001d234f68": {
+  "mod_scope": true
+ },
+ "5c064c400db834001d23f468": {
+  "mod_scope": true
+ },
+ "5c07a8770db8340023300450": {
+  "mod_scope": true,
+  "mod_sight_rear": true
+ },
+ "5c0e2f26d174af02a9625114": {
+  "mod_scope": true,
+  "mod_sight_rear": true
+ },
+ "5c17664f2e2216398b5a7e3c": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_mount_003": false
+ },
+ "5c17a7ed2e2216152142459c": {
+  "mod_mount": false
+ },
+ "5c1cdd302e221602b3137250": {
+  "mod_scope": true
+ },
+ "5c46fbd72e2216398b5a8c9c": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false
+ },
+ "5c471bfc2e221602b21d4e17": {
+  "mod_sight_front": true
+ },
+ "5c471c2d2e22164bef5d077f": {
+  "mod_sight_rear": true
+ },
+ "5c471cb32e221602b177afaa": {
+  "mod_mount": true
+ },
+ "5c488a752e221602b412af63": {
+  "mod_scope": false,
+  "mod_sight_rear": false
+ },
+ "5c48a14f2e2216152006edd7": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_tactical": true,
+  "mod_sight_front": true
+ },
+ "5c4eecc32e221602b412b440": {
+  "mod_tactical": true
+ },
+ "5c501a4d2e221602b412b540": {
+  "mod_sight_rear": false,
+  "mod_mount": false
+ },
+ "5c59529a2e221602b177d160": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_mount_003": false,
+  "mod_mount_004": false
+ },
+ "5c5db5f22e2216000e5e47e8": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_sight_front": true
+ },
+ "5c5db5fc2e2216000f1b2842": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_sight_front": true
+ },
+ "5c5db6302e2216000e5e47f0": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_mount_003": false,
+  "mod_sight_front": true,
+  "mod_tactical": true
+ },
+ "5c5db63a2e2216000f1b284a": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_mount_003": false,
+  "mod_mount_004": false,
+  "mod_mount_005": false,
+  "mod_mount_006": false,
+  "mod_sight_front": true,
+  "mod_tactical": true
+ },
+ "5c6162682e22160010261a2b": {
+  "mod_mount_000": true
+ },
+ "5c61627a2e22160012542c55": {
+  "mod_scope": false
+ },
+ "5c617a5f2e2216000f1e81b3": {
+  "mod_tactical": false
+ },
+ "5c61a40d2e2216001403158d": {
+  "mod_scope": false
+ },
+ "5c6c2c9c2e2216000f2002e4": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_tactical": true,
+  "mod_scope": true,
+  "mod_sight_front": true
+ },
+ "5c6d10e82e221601da357b07": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_mount_003": false,
+  "mod_mount_004": false,
+  "mod_tactical": true,
+  "mod_scope": true,
+  "mod_sight_front": true
+ },
+ "5c6d10fa2e221600106f3f23": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_tactical": true,
+  "mod_scope": true,
+  "mod_sight_front": true
+ },
+ "5c6d11072e2216000e69d2e4": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_tactical": true,
+  "mod_scope": true,
+  "mod_sight_front": true
+ },
+ "5c6d11152e2216000f2003e7": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_tactical": true,
+  "mod_scope": true
+ },
+ "5c6d5d8b2e221644fc630b39": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_tactical": true,
+  "mod_scope": true,
+  "mod_sight_front": true
+ },
+ "5c78f2492e221600114c9f04": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_scope": true,
+  "mod_sight_front": true,
+  "mod_tactical_000": true,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false,
+  "mod_tactical_003": false
+ },
+ "5c78f2612e221600114c9f0d": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_scope": true,
+  "mod_sight_front": true,
+  "mod_tactical_000": true,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false,
+  "mod_tactical_003": false
+ },
+ "5c78f26f2e221601da3581d1": {
+  "mod_mount_000": false,
+  "mod_mount_001": false
+ },
+ "5c78f2792e221600106f4683": {
+  "mod_mount_000": false,
+  "mod_mount_001": false
+ },
+ "5c7d55f52e221644f31bff6a": {
+  "mod_scope": true
+ },
+ "5c7d560b2e22160bc12c6139": {
+  "mod_scope": true
+ },
+ "5c82342f2e221644f31c060e": {
+  "mod_tactical": false
+ },
+ "5c82343a2e221644f31c0611": {
+  "mod_tactical": false
+ },
+ "5c86592b2e2216000e69e77c": {
+  "mod_scope": true
+ },
+ "5c90c3622e221601da359851": {
+  "mod_scope": false
+ },
+ "5c9a07572e221644f31c4b32": {
+  "mod_mount_000": false,
+  "mod_mount_001": false
+ },
+ "5c9a1c3a2e2216000e69fb6a": {
+  "mod_mount_000": false,
+  "mod_mount_001": false
+ },
+ "5c9a1c422e221600106f69f0": {
+  "mod_mount_000": false,
+  "mod_mount_001": false
+ },
+ "5c9a25172e2216000f20314e": {
+  "mod_scope": true,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false,
+  "mod_sight_front": true,
+  "mod_tactical_000": true
+ },
+ "5c9a26332e2216001219ea70": {
+  "mod_tactical_001": false,
+  "mod_tactical_002": false,
+  "mod_tactical_000": true
+ },
+ "5cadc190ae921500103bb3b6": {
+  "mod_tactical": false
+ },
+ "5cadc55cae921500103bb3be": {
+  "mod_sight_rear": true,
+  "mod_sight_front": true
+ },
+ "5cadd954ae921500103bb3c2": {
+  "mod_scope": true
+ },
+ "5cadfbf7ae92152ac412eeef": {
+  "mod_sight_rear": false,
+  "mod_sight_front": false,
+  "mod_scope": false,
+  "mod_tactical_000": false,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false
+ },
+ "5caf1691ae92152ac412ecc2": {
+  "mod_scope": true,
+  "mod_tactical_000": true
+ },
+ "5caf1691ae92152ac412efb9": {
+  "mod_scope": true
+ },
+ "5cbda392ae92155f3c17c39f": {
+  "mod_tactical_000": false
+ },
+ "5cc700ede4a949033c734315": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_scope": true
+ },
+ "5cc70102e4a949035e43ba74": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false
+ },
+ "5cc7012ae4a949001252b43e": {
+  "mod_tactical": true
+ },
+ "5cc70146e4a949000d73bf6b": {
+  "mod_tactical": true
+ },
+ "5cc7015ae4a949001152b4c6": {
+  "mod_scope": true,
+  "mod_sight_front": true,
+  "mod_sight_rear": true
+ },
+ "5ccd3716a4b9361bc8618872": {
+  "mod_mount": false
+ },
+ "5cde7afdd7f00c000d36b89d": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_tactical_000": true,
+  "mod_sight_front": true
+ },
+ "5cde7b43d7f00c000d36b93e": {
+  "mod_scope": true,
+  "mod_sight_rear": true
+ },
+ "5cdeac22d7f00c000f26168f": {
+  "mod_mount_000": true,
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_mount_003": false
+ },
+ "5cdeaca5d7f00c00b61c4b70": {
+  "mod_tactical_000": true,
+  "mod_sight_front": true
+ },
+ "5cf4e3f3d7f00c06595bc7f0": {
+  "mod_scope": true,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false,
+  "mod_tactical_000": false,
+  "mod_tactical_003": false
+ },
+ "5cf638cbd7f00c06595bc936": {
+  "mod_tactical": false
+ },
+ "5cf656f2d7f00c06585fb6eb": {
+  "mod_scope": true,
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false
+ },
+ "5cf7acfcd7f00c1084477cf2": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false
+ },
+ "5d00e0cbd7ad1a6c6566a42d": {
+  "mod_mount_000": false,
+  "mod_mount_001": false
+ },
+ "5d00ede1d7ad1a0940739a76": {
+  "mod_mount": true,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false,
+  "mod_sight_front": true,
+  "mod_tactical_000": true
+ },
+ "5d00ef6dd7ad1a0940739b16": {
+  "mod_mount": true,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false,
+  "mod_sight_front": true,
+  "mod_tactical_000": true,
+  "mod_tactical_003": false
+ },
+ "5d00f63bd7ad1a59283b1c1e": {
+  "mod_mount_000": false,
+  "mod_mount_001": false
+ },
+ "5d010d1cd7ad1a59283b1ce7": {
+  "mod_tactical_000": false,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false,
+  "mod_tactical_003": false
+ },
+ "5d0236dad7ad1a0940739d29": {
+  "mod_tactical_000": false,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false
+ },
+ "5d024f5cd7ad1a04a067e91a": {
+  "mod_scope": false
+ },
+ "5d024f5cd7ad1a04a067e92b": {
+  "mod_scope": false,
+  "mod_tactical": false
+ },
+ "5d0a29ead7ad1a0026013f27": {
+  "mod_scope": false
+ },
+ "5d0a29fed7ad1a002769ad08": {
+  "mod_scope": true
+ },
+ "5d0a3a58d7ad1a669c15ca14": {
+  "mod_tactical": true
+ },
+ "5d0a3e8cd7ad1a6f6a3d35bd": {
+  "mod_tactical": true
+ },
+ "5d122e7bd7ad1a07102d6d7f": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_scope": true,
+  "mod_sight_front": true,
+  "mod_tactical_000": true,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false
+ },
+ "5d123102d7ad1a004e475fe5": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_sight_front": true,
+  "mod_tactical_000": true,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false
+ },
+ "5d15ce51d7ad1a1eff619092": {
+  "mod_tactical_000": false,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false,
+  "mod_tactical_003": false,
+  "mod_scope": true
+ },
+ "5d19cd96d7ad1a4a992c9f52": {
+  "mod_tactical_000": false,
+  "mod_tactical_001": false
+ },
+ "5d1b198cd7ad1a604869ad72": {
+  "mod_mount_001": false
+ },
+ "5d1b5e94d7ad1a2b865a96b0": {
+  "mod_tactical": true
+ },
+ "5d25d0ac8abbc3054f3e61f7": {
+  "mod_mount_000": true
+ },
+ "5d2c33cc48f0355d95672c25": {
+  "mod_scope": true
+ },
+ "5d2c76ed48f03532f2136169": {
+  "mod_scope": true
+ },
+ "5d2c770c48f03543da07c100": {
+  "mod_scope": true
+ },
+ "5d2c770c48f0354b4a07c100": {
+  "mod_scope": true
+ },
+ "5d2c772c48f0355d95672c25": {
+  "mod_scope": true
+ },
+ "5d2f261548f03576f500e7b7": {
+  "mod_sight_rear": true,
+  "mod_mount": false
+ },
+ "5d3eb3b0a4b93615055e84d2": {
+  "mod_tactical": false
+ },
+ "5d3eb44aa4b93650d64e4979": {
+  "mod_sight_rear": true,
+  "mod_sight_front": true
+ },
+ "5d4405aaa4b9361e6a4e6bd3": {
+  "mod_scope": true,
+  "mod_sight_rear": true
+ },
+ "5d4405f0a4b9361e6a4e6bd9": {
+  "mod_scope": true,
+  "mod_tactical": true,
+  "mod_mount_000": false,
+  "mod_mount_002": false,
+  "mod_mount_003": false,
+  "mod_mount_004": false,
+  "mod_sight_front": true,
+  "mod_mount_001": false
+ },
+ "5d4aaa54a4b9365392071170": {
+  "mod_mount_001": false
+ },
+ "5d4aaa73a4b9365392071175": {
+  "mod_mount_001": false
+ },
+ "5d4aab30a4b9365435358c55": {
+  "mod_scope": true,
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false
+ },
+ "5d52cc5ba4b9367408500062": {
+  "mod_scope": false
+ },
+ "5d5e7d28a4b936645d161203": {
+  "mod_mount": false
+ },
+ "5d5e9c74a4b9364855191c40": {
+  "mod_mount": false
+ },
+ "5d67abc1a4b93614ec50137f": {
+  "mod_tactical": false
+ },
+ "5d6d3716a4b9361bc8618872": {
+  "mod_mount": false
+ },
+ "5d7b6bafa4b93652786f4c76": {
+  "mod_scope": true
+ },
+ "5dcbd56fdbd3d91b3e5468d5": {
+  "mod_scope": false,
+  "mod_sight_rear": false
+ },
+ "5dcbd6b46ec07c0c4347a564": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_tactical": true,
+  "mod_sight_front": true
+ },
+ "5de652c31b7e3716273428be": {
+  "mod_mount": false
+ },
+ "5de6558e9f98ac2bc65950fc": {
+  "mod_scope": true
+ },
+ "5de8e67c4a9f347bc92edbd7": {
+  "mod_scope": false,
+  "mod_sight_rear": false,
+  "mod_mount": false
+ },
+ "5de8f237bbaf010b10528a70": {
+  "mod_tactical": false
+ },
+ "5de8fc0b205ddc616a6bc51b": {
+  "mod_tactical": true
+ },
+ "5df24cf80dee1b22f862e9bc": {
+  "mod_mount": false
+ },
+ "5df25d3bfd6b4e6e2276dc9a": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": true,
+  "mod_mount_003": false
+ },
+ "5df35e970b92095fd441e4d2": {
+  "mod_scope": true
+ },
+ "5df35ea9c41b2312ea3334d8": {
+  "mod_tactical": true
+ },
+ "5df35eb2b11454561e3923e2": {
+  "mod_tactical": true
+ },
+ "5df8e4080b92095fd441e594": {
+  "mod_scope": true,
+  "mod_sight_rear": true
+ },
+ "5df916dfbb49d91fb446d6b9": {
+  "mod_scope": true,
+  "mod_tactical": true,
+  "mod_mount_000": false,
+  "mod_mount_002": false,
+  "mod_sight_front": true,
+  "mod_mount_001": false
+ },
+ "5dfcd0e547101c39625f66f9": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_tactical": true,
+  "mod_scope": true,
+  "mod_mount": true
+ },
+ "5dfe14f30b92095fd441edaf": {
+  "mod_scope": true
+ },
+ "5dff77c759400025ea5150cf": {
+  "mod_scope": true
+ },
+ "5dff8db859400025ea5150d4": {
+  "mod_scope": false
+ },
+ "5e00903ae9dc277128008b87": {
+  "mod_mount_000": false
+ },
+ "5e0090f7e9dc277128008b93": {
+  "mod_scope": false,
+  "mod_sight_rear": false,
+  "mod_mount": false
+ },
+ "5e4bfc1586f774264f7582d3": {
+  "mod_mount": false
+ },
+ "5e56991336989c75ab4f03f6": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_tactical": true,
+  "mod_scope": true,
+  "mod_mount_003": false
+ },
+ "5e5699df2161e06ac158df6f": {
+  "mod_scope": true,
+  "mod_tactical_000": false,
+  "mod_tactical_001": false,
+  "mod_tactical_002": true,
+  "mod_tactical_003": false
+ },
+ "5e569a0156edd02abe09f27d": {
+  "mod_scope": true
+ },
+ "5e569a132642e66b0b68015c": {
+  "mod_tactical_000": true
+ },
+ "5e569a2e56edd02abe09f280": {
+  "mod_scope": false
+ },
+ "5e81c3cbac2bb513793cdc75": {
+  "mod_mount_000": false,
+  "mod_mount_001": false
+ },
+ "5e81ebcd8e146c7080625e15": {
+  "mod_sight_front": false,
+  "mod_sight_rear": false,
+  "mod_scope": false,
+  "mod_tactical_000": false,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false
+ },
+ "5e81edc13397a21db957f6a1": {
+  "mod_sight_rear": false,
+  "mod_sight_front": false
+ },
+ "5e848cc2988a8701445df1e8": {
+  "mod_scope": false
+ },
+ "5e870397991fd70db46995c8": {
+  "mod_mount": false
+ },
+ "5e87071478f43e51ca2de5e1": {
+  "mod_sight_front": true
+ },
+ "5ea05cf85ad9772e6624305d": {
+  "mod_mount": false
+ },
+ "5ea16acdfadf1d18c87b0784": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_tactical_000": true,
+  "mod_scope": true,
+  "mod_sight_front": true
+ },
+ "5ea16ada09aa976f2e7a51be": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_tactical_000": true,
+  "mod_scope": true,
+  "mod_sight_front": true
+ },
+ "5eea21647547d6330471b3c9": {
+  "mod_mount_000": false,
+  "mod_mount_001": false
+ },
+ "5eeb2ff5ea4f8b73c827350b": {
+  "mod_scope": true,
+  "mod_tactical_000": true,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false,
+  "mod_tactical_003": false,
+  "mod_mount": true,
+  "mod_sight_front": true,
+  "mod_sight_rear": true
+ },
+ "5ef369b08cef260c0642acaf": {
+  "mod_tactical": true
+ },
+ "5ef5d994dfbc9f3c660ded95": {
+  "mod_scope": true
+ },
+ "5efaf417aeb21837e749c7f2": {
+  "mod_scope": true,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false,
+  "mod_tactical_000": false
+ },
+ "5f2a9575926fd9352339381f": {
+  "mod_mount": false
+ },
+ "5f2aa46b878ef416f538b567": {
+  "mod_mount": true
+ },
+ "5f2aa47a200e2c0ee46efa71": {
+  "mod_mount_000": true
+ },
+ "5f2aa49f9b44de6b1b4e68d4": {
+  "mod_scope": true,
+  "mod_sight_rear": true,
+  "mod_sight_front": true
+ },
+ "5f36a0e5fbf956000b716b65": {
+  "mod_mount_000": false
+ },
+ "5f3e7823ddc4f03b010e2045": {
+  "mod_sight_rear": true,
+  "mod_sight_front": false
+ },
+ "5f60b34a41e30a4ab12a6947": {
+  "mod_mount": false
+ },
+ "5f6331e097199b7db2128dc2": {
+  "mod_scope": true,
+  "mod_tactical_000": true,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false,
+  "mod_mount": true
+ },
+ "5f6336bbda967c74a42e9932": {
+  "mod_mount_000": false,
+  "mod_mount_001": false
+ },
+ "5f63418ef5750b524b45f116": {
+  "mod_scope": true,
+  "mod_tactical_000": true,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false,
+  "mod_tactical_003": false,
+  "mod_tactical_004": false
+ },
+ "5fb64bc92b1b027b1f50bcf2": {
+  "mod_sight_front": false,
+  "mod_sight_rear": false,
+  "mod_scope": false,
+  "mod_tactical_000": false,
+  "mod_mount": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false
+ },
+ "5fbb978207e8a97d1f0902d3": {
+  "mod_tactical_000": false,
+  "mod_tactical_001": false
+ },
+ "5fbc226eca32ed67276c155d": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_sight_front": true
+ },
+ "5fbc227aa56d053a3543f79e": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_sight_front": true,
+  "mod_mount_002": false
+ },
+ "5fbcc3e4d6fa9c00c571bb58": {
+  "mod_scope": true,
+  "mod_sight_rear": true,
+  "mod_tactical": true,
+  "mod_mount": true
+ },
+ "5fc235db2770a0045c59c683": {
+  "mod_scope": true,
+  "mod_tactical_000": true,
+  "mod_mount_000": false,
+  "mod_mount_002": false,
+  "mod_sight_front": true,
+  "mod_mount_001": false
+ },
+ "5fc278107283c4046c581489": {
+  "mod_scope": true,
+  "mod_sight_rear": true
+ },
+ "5fc3e272f8b6a877a729eac5": {
+  "mod_scope": false,
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false
+ },
+ "5fc3f2d5900b1d5091531e57": {
+  "mod_sight_front": false,
+  "mod_sight_rear": false,
+  "mod_scope": false,
+  "mod_tactical_000": false,
+  "mod_mount": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false
+ },
+ "5fc5396e900b1d5091531e72": {
+  "mod_tactical": true
+ },
+ "5fce0f9b55375d18a253eff2": {
+  "mod_tactical": true
+ },
+ "60228924961b8d75ee233c32": {
+  "mod_sight_rear": true,
+  "mod_sight_front": true
+ },
+ "602a9740da11d6478d5a06dc": {
+  "mod_tactical": false
+ },
+ "602e63fb6335467b0c5ac94d": {
+  "mod_scope": true,
+  "mod_sight_rear": true
+ },
+ "60339954d62c9b14ed777c06": {
+  "mod_tactical_000": false
+ },
+ "6034e3cb0ddce744014cb870": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_tactical": true,
+  "mod_sight_front": true
+ },
+ "6034e3d953a60014f970617b": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_tactical": true,
+  "mod_sight_front": true
+ },
+ "6034e3e20ddce744014cb878": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_tactical": true,
+  "mod_sight_front": true
+ },
+ "606587a88900dc2d9a55b659": {
+  "mod_scope": true,
+  "mod_sight_rear": true
+ },
+ "6065880c132d4d12c81fd8da": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_tactical_000": true,
+  "mod_sight_front": true,
+  "mod_scope": true
+ },
+ "6065881d1246154cad35d637": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_tactical_000": true,
+  "mod_sight_front": true,
+  "mod_scope": true
+ },
+ "606dae0ab0e443224b421bb7": {
+  "mod_mount": false
+ },
+ "606ee5c81246154cad35d65e": {
+  "mod_mount_000": true
+ },
+ "606eef756d0bd7580617baf8": {
+  "mod_tactical": false
+ },
+ "60785ce5132d4d12c81fd918": {
+  "mod_scope": true,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false,
+  "mod_mount_000": false,
+  "mod_sight_front": true,
+  "mod_sight_rear": true
+ },
+ "607ea812232e5a31c233d53c": {
+  "mod_tactical": true
+ },
+ "6086b5392535c57a13424d70": {
+  "mod_tactical": true
+ },
+ "6086b5731246154cad35d6c7": {
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_mount_003": false
+ },
+ "609a4b4fe2ff132951242d04": {
+  "mod_scope": false
+ },
+ "60c448ce6e45c670be05189b": {
+  "mod_tactical": true
+ },
+ "612368f58b401f4f51239b33": {
+  "mod_mount": false
+ },
+ "615d8d878004cc50514c3233": {
+  "mod_scope": true
+ },
+ "615d8da4d3a39d50044c10e8": {
+  "mod_scope": true
+ },
+ "615d8dbd290d254f5e6b2ed6": {
+  "mod_sight_rear": true,
+  "mod_sight_front": true,
+  "mod_mount": true
+ },
+ "616554fe50224f204c1da2aa": {
+  "mod_scope": true
+ },
+ "616584766ef05c2ce828ef57": {
+  "mod_scope": true
+ },
+ "6165adcdd3a39d50044c120f": {
+  "mod_scope": true,
+  "mod_sight_rear": true,
+  "mod_sight_front": true,
+  "mod_tactical_000": true,
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": true
+ },
+ "6165aeedfaa1272e431521e3": {
+  "mod_scope": true,
+  "mod_sight_rear": true,
+  "mod_sight_front": true,
+  "mod_tactical_000": true,
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": true
+ },
+ "61703001d92c473c77021497": {
+  "mod_scope": true,
+  "mod_tactical_000": true,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false
+ },
+ "61712eae6c780c1e710c9a1d": {
+  "mod_scope": true,
+  "mod_tactical_000": true,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false
+ },
+ "61713a8fd92c473c770214a4": {
+  "mod_scope": true,
+  "mod_sight_rear": true
+ },
+ "61713cc4d8e3106d9806c109": {
+  "mod_scope_000": false,
+  "mod_scope_001": true,
+  "mod_scope_002": true
+ },
+ "6171407e50224f204c1da3c5": {
+  "mod_scope_000": false,
+  "mod_scope_001": true,
+  "mod_scope_002": true
+ },
+ "61714b2467085e45ef140b2c": {
+  "mod_scope": true
+ },
+ "618168b350224f204c1da4d8": {
+  "mod_sight_front": true
+ },
+ "61816df1d3a39d50044c139e": {
+  "mod_mount": true
+ },
+ "61816dfa6ef05c2ce828f1ad": {
+  "mod_tactical_000": false,
+  "mod_tactical_001": false
+ },
+ "6183b0711cb55961fa0fdcad": {
+  "mod_sight_front": true
+ },
+ "6183b084a112697a4b3a6e6c": {
+  "mod_sight_front": true
+ },
+ "6183fc15d3a39d50044c13e9": {
+  "mod_sight_front": true
+ },
+ "6183fd911cb55961fa0fdce9": {
+  "mod_sight_front": true
+ },
+ "6183fd9e8004cc50514c358f": {
+  "mod_sight_front": true
+ },
+ "618405198004cc50514c3594": {
+  "mod_scope": true,
+  "mod_sight_rear": true,
+  "mod_sight_front": true,
+  "mod_tactical_000": true,
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": true
+ },
+ "618426d96c780c1e710c9b9f": {
+  "mod_scope": true,
+  "mod_sight_rear": true,
+  "mod_sight_front": true,
+  "mod_tactical_000": true,
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": true
+ },
+ "618a75c9a3884f56c957ca1b": {
+  "mod_scope": false
+ },
+ "618a75f0bd321d49084cd399": {
+  "mod_tactical": true
+ },
+ "618b9643526131765025ab35": {
+  "mod_scope": true,
+  "mod_mount": true
+ },
+ "618b9682a3884f56c957ca78": {
+  "mod_scope": true
+ },
+ "618ba92152ecee1505530bd3": {
+  "mod_scope": true
+ },
+ "618bab21526131765025ab3f": {
+  "mod_scope": true,
+  "mod_mount": true
+ },
+ "6193a720f8ee7e52e42109ed": {
+  "mod_mount_000": false
+ },
+ "6193d382ed0429009f543e65": {
+  "mod_sight_rear": true,
+  "mod_sight_front": true
+ },
+ "6194f41f9fb0c665d5490e75": {
+  "mod_sight_rear": true,
+  "mod_sight_front": true
+ },
+ "6194f5722d2c397d6600348f": {
+  "mod_sight_rear": true,
+  "mod_sight_front": true
+ },
+ "6194f5a318a3974e5e7421eb": {
+  "mod_sight_rear": true,
+  "mod_sight_front": true
+ },
+ "6194f5d418a3974e5e7421ef": {
+  "mod_sight_rear": true,
+  "mod_sight_front": true
+ },
+ "619624b26db0f2477964e6b0": {
+  "mod_tactical": true
+ },
+ "6196255558ef8c428c287d1c": {
+  "mod_tactical": true
+ },
+ "61963a852d2c397d660036ad": {
+  "mod_scope": true
+ },
+ "61965d9058ef8c428c287e0d": {
+  "mod_tactical_000": true,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false,
+  "mod_tactical_003": false
+ },
+ "619666f4af1f5202c57a952d": {
+  "mod_tactical_000": true,
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false
+ },
+ "619b5db699fb192e7430664f": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_tactical": true,
+  "mod_sight_front": true
+ },
+ "61a4c8884f95bc3b2c5dc96f": {
+  "mod_sight_rear": false,
+  "mod_sight_front": false,
+  "mod_tactical": false
+ },
+ "61bca7cda0eae612383adf57": {
+  "mod_mount": false
+ },
+ "61f4012adfc9f01a816adda1": {
+  "mod_scope": true
+ },
+ "61f804acfcba9556ea304cb8": {
+  "mod_scope": true
+ },
+ "6218f0852e8a4513103874c3": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_scope": true
+ },
+ "622b3c081b89c677a33bcca6": {
+  "mod_scope": true
+ },
+ "622b3c081b89c677a33bccc6": {
+  "mod_scope": true,
+  "mod_tactical": true
+ },
+ "622b3c081b89c677a33bcda6": {
+  "mod_scope": false,
+  "mod_tactical": false,
+  "mod_sight_front": false,
+  "mod_sight_rear": false
+ },
+ "622b3d5cf9cfc87d675d2d6c": {
+  "mod_scope_000": false,
+  "mod_mount": false,
+  "mod_tactical_000": false,
+  "mod_tactical_001": false
+ },
+ "622b3d5cf9cfc87d675d2de9": {
+  "mod_scope": true,
+  "mod_tactical": true,
+  "mod_mount": true
+ },
+ "622b4d7df9cfc87d675d2ded": {
+  "mod_scope": true
+ },
+ "622efdf8ec80d870d349b4e5": {
+  "mod_scope": true
+ },
+ "622efdf8ec80d870d38cb4e5": {
+  "mod_scope_000": true,
+  "mod_scope_001": true,
+  "mod_tactical": true
+ },
+ "623063e994fc3f7b302a9696": {
+  "mod_mount": false,
+  "mod_scope": false,
+  "mod_sight_front": false
+ },
+ "62316545e1b5bc3baa1078e5": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false
+ },
+ "62386b2adf47d66e835094b2": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_tactical": false
+ },
+ "62386b7153757417e92b4e9f": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_tactical_001": false,
+  "mod_tactical_000": true
+ },
+ "62386b7153757417e93a4e9f": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_tactical": false
+ },
+ "623c2f4242aee3103f1c44b7": {
+  "mod_tactical": true
+ },
+ "623c2f652febb22c2777d8d7": {
+  "mod_tactical": true
+ },
+ "623c3c1f37b4b31470357737": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false
+ },
+ "62444cd3674028188b052799": {
+  "mod_tactical": true
+ },
+ "624c2e8614da335f1e034d8c": {
+  "mod_sight_front": false
+ },
+ "6259b864ebedf17603599e88": {
+  "mod_mount": false,
+  "mod_sight_rear": false
+ },
+ "6259c2c1d714855d182bad85": {
+  "mod_mount": false
+ },
+ "625ed7c64d9b6612df732146": {
+  "mod_scope": true
+ },
+ "6269220d70b6c02e665f2635": {
+  "mod_tactical": true
+ },
+ "6269545d0e57f218e4548ca2": {
+  "mod_tactical": false
+ },
+ "6275303a9f372d6ea97f9ec7": {
+  "mod_scope": false,
+  "mod_tactical_000": false,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false
+ },
+ "62811f461d5df4475f46a332": {
+  "mod_scope": true
+ },
+ "62811fbf09427b40ab14e767": {
+  "mod_scope": true,
+  "mod_sight_rear": true
+ },
+ "6281209662cba23f6c43ca19": {
+  "mod_mount_000": true,
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_mount_003": false
+ },
+ "6281209662cba23f6c4d7a19": {
+  "mod_mount_000": true,
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_mount_003": false
+ },
+ "628120c21d5df4475f46a333": {
+  "mod_sight_front": true,
+  "mod_tactical": true,
+  "mod_scope": true,
+  "mod_mount": true,
+  "mod_sight_rear": true
+ },
+ "628120c21d5df4475f46a337": {
+  "mod_sight_front": true,
+  "mod_tactical": true
+ },
+ "628120d309427b40ab14e76d": {
+  "mod_tactical_000": true
+ },
+ "628120dd308cb521f87a8fa1": {
+  "mod_tactical_000": true
+ },
+ "6281dc9662cba23f6c43ca1a": {
+  "mod_mount_000": true,
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_mount_003": false
+ },
+ "6284bd5f95250a29bc628a30": {
+  "mod_scope": true,
+  "mod_tactical_000": false,
+  "mod_tactical_001": false
+ },
+ "628a60ae6b1d481ff772e9c8": {
+  "mod_sight_rear": false,
+  "mod_mount_000": false
+ },
+ "628a83c29179c324ed269508": {
+  "mod_tactical_000": true,
+  "mod_mount_000": false,
+  "mod_mount_001": false
+ },
+ "628a83c29179c324ed26955a": {
+  "mod_tactical_000": true,
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_scope": true
+ },
+ "628a83c29179c324ed2695ab": {
+  "mod_tactical_000": true,
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_scope": true
+ },
+ "628a83c29179c324ed64943d": {
+  "mod_tactical_000": true,
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_scope": true
+ },
+ "628a83c29179c324ed64955a": {
+  "mod_tactical_000": true,
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_scope": true
+ },
+ "628b916469015a4e1711ed8d": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_tactical_000": true,
+  "mod_scope": true
+ },
+ "628b9be6cff66b70c002b14c": {
+  "mod_sight_rear": true,
+  "mod_scope": true
+ },
+ "628b9be6cff66b70c662b14c": {
+  "mod_sight_rear": true,
+  "mod_scope": true
+ },
+ "62e15547db1a5c41971c1b5e": {
+  "mod_mount_000": false,
+  "mod_mount_001": false
+ },
+ "62e27a7865f0b1592a49e17b": {
+  "mod_mount": true
+ },
+ "62e281349ecd3f493f6df954": {
+  "mod_scope": true
+ },
+ "62e7c72df68e7a0676050c77": {
+  "mod_mount": true,
+  "mod_tactical": false
+ },
+ "62e7c8f91cd3fde4d503d690": {
+  "mod_scope": true,
+  "mod_sight_front": true,
+  "mod_sight_rear": true
+ },
+ "62ebba1fb658e07ef9082b5a": {
+  "mod_scope": true
+ },
+ "62ebd290c427473eff0baafb": {
+  "mod_scope": true,
+  "mod_tactical": false
+ },
+ "62ed189fb3608410ef5a2bfc": {
+  "mod_tactical": false
+ },
+ "62ed1921b3608410ef5a2c04": {
+  "mod_tactical": false
+ },
+ "62ff9920fe938a24c90c10d2": {
+  "mod_tactical": true
+ },
+ "63075cc5962d0247b029dc2a": {
+  "mod_sight_rear": true,
+  "mod_sight_front": true
+ },
+ "63088377b5cd696784087147": {
+  "mod_tactical": false,
+  "mod_mount": false
+ },
+ "633ec7c2a6918cb895019c6c": {
+  "mod_tactical": false,
+  "mod_scope": false
+ },
+ "634eff66517ccc8a960fc735": {
+  "mod_mount_000": false,
+  "mod_mount_001": false
+ },
+ "634f02331f9f536910079b51": {
+  "mod_mount_000": false,
+  "mod_mount_001": false
+ },
+ "634f02d7517ccc8a960fc744": {
+  "mod_mount_000": true
+ },
+ "634f036a517ccc8a960fc746": {
+  "mod_mount_000": true
+ },
+ "634f04d82e5def262d0b30c6": {
+  "mod_sight_rear": false
+ },
+ "634f05a21f9f536910079b56": {
+  "mod_sight_rear": false
+ },
+ "6374a822e629013b9c0645c8": {
+  "mod_sight_rear": true
+ },
+ "637b6d610aef6cfc5e02dd14": {
+  "mod_tactical": true
+ },
+ "637ba19df7ca6372bf2613d7": {
+  "mod_mount_000": false,
+  "mod_mount_001": false
+ },
+ "637f57c532b66e7e320a6676": {
+  "mod_tactical_003": true
+ },
+ "637f57d2f5ef8c33840d36c4": {
+  "mod_tactical_003": true
+ },
+ "63888bbd28e5cc32cc09d2b6": {
+  "mod_mount_000": true,
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_mount_003": false
+ },
+ "6388c4478d895f557a0c6512": {
+  "mod_tactical": true
+ },
+ "6388c5d19c00405f4717c0f0": {
+  "mod_sight_front": true,
+  "mod_tactical": true
+ },
+ "6389f1dfc879ce63f72fc43e": {
+  "mod_scope": true,
+  "mod_mount_000": false,
+  "mod_mount_002": false,
+  "mod_tactical": true
+ },
+ "638db77630c4240f9e06f8b6": {
+  "mod_scope": false
+ },
+ "638f2003bbd47aeb9e0ff637": {
+  "mod_tactical_003": true
+ },
+ "63d114019e35b334d82302f7": {
+  "mod_scope": false
+ },
+ "63f4ba71f31d4a33b87bd046": {
+  "mod_tactical": true
+ },
+ "63f5ed14534b2c3d5479a677": {
+  "mod_scope": true,
+  "mod_sight_rear": true
+ },
+ "63fc449f5bd61c6cf3784a88": {
+  "mod_scope": true
+ },
+ "63fc44e2429a8a166c7f61e6": {
+  "mod_tactical_001": false,
+  "mod_tactical_000": false
+ },
+ "640b20359ab20e15ee445fa9": {
+  "mod_mount_002": false,
+  "mod_mount_001": false,
+  "mod_tactical": true,
+  "mod_sight_front": true,
+  "mod_mount_000": true,
+  "mod_mount_003": false
+ },
+ "6410758c857473525b08bb77": {
+  "mod_sight_rear": true
+ },
+ "64119d1f2c6d6f921a0929f8": {
+  "mod_sight_front": true
+ },
+ "6415c694da439c6a97048b56": {
+  "mod_scope": true
+ },
+ "6415d33eda439c6a97048b5b": {
+  "mod_scope": false
+ },
+ "641dc35e19604f20c800be18": {
+  "mod_scope": true
+ },
+ "643ea5b23db6f9f57107d9fd": {
+  "mod_scope": false
+ },
+ "644674a13d52156624001fbc": {
+  "mod_scope": false
+ },
+ "64527a3a7da7133e5a09ca99": {
+  "mod_mount": true
+ },
+ "645e0c6b3b381ede770e1cc9": {
+  "mod_scope": false
+ },
+ "64637076203536ad5600c990": {
+  "mod_sight_rear": false
+ },
+ "646f6322f43d0c5d62063715": {
+  "mod_tactical": true
+ },
+ "647db1eca8d3399c380d195c": {
+  "mod_mount_000": false,
+  "mod_mount_001": false
+ },
+ "647dba3142c479dde701b654": {
+  "mod_scope": true
+ },
+ "647dd2b8a12ebf96c3031655": {
+  "mod_scope": true,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false,
+  "mod_tactical_000": false
+ },
+ "647de824196bf69818044c93": {
+  "mod_scope": true
+ },
+ "6491c6f6ef312a876705191b": {
+  "mod_tactical_000": false,
+  "mod_mount": true,
+  "mod_tactical_001": false
+ },
+ "6492c6dd60fdb10a020621a2": {
+  "mod_scope": true
+ },
+ "6492c8bba6e68e06fb0bae87": {
+  "mod_scope": true
+ },
+ "649ec127c93611967b034957": {
+  "mod_mount_001": false,
+  "mod_tactical": true
+ },
+ "649ec2da59cbb3c813042dca": {
+  "mod_sight_rear": true
+ },
+ "649ec2f3961514b22506b111": {
+  "mod_scope": true,
+  "mod_sight_rear": true
+ },
+ "64ca3d3954fc657e230529cc": {
+  "mod_sight_rear": false,
+  "mod_scope": false
+ },
+ "6513ef33e06849f06c0957ca": {
+  "mod_sight_rear": false
+ },
+ "65144f546ddb773afa0e35e1": {
+  "mod_mount": true
+ },
+ "65144ff50e00edc79406836f": {
+  "mod_mount": true
+ },
+ "651450ce0e00edc794068371": {
+  "mod_mount_004": false,
+  "mod_mount_000": false
+ },
+ "651bfe4d1065f87f082e7209": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false
+ },
+ "652910ef50dc782999054b97": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_sight_front": true,
+  "mod_mount_002": false,
+  "mod_tactical": true
+ },
+ "6529119424cbe3c74a05e5bb": {
+  "mod_scope": false,
+  "mod_sight_rear": true,
+  "mod_mount": false
+ },
+ "65392f611406374f82152ba5": {
+  "mod_tactical": false,
+  "mod_scope": true
+ },
+ "653931da5db71d30ab1d6296": {
+  "mod_tactical": false,
+  "mod_scope": true
+ },
+ "653ecd065a1690d9d90491e6": {
+  "mod_tactical": true
+ },
+ "653ece125a1690d9d90491e8": {
+  "mod_tactical": true
+ },
+ "65434a4e4e3a01736a6c9706": {
+  "mod_tactical": true
+ },
+ "655cb6b5d680a544f30607fa": {
+  "mod_scope": true
+ },
+ "6565c3ab977bcc2dbb01c2e7": {
+  "mod_mount": true
+ },
+ "6567e751a715f85433025998": {
+  "mod_scope": true
+ },
+ "6568a6bf2c5fb7afc70bc424": {
+  "mod_tactical": false,
+  "mod_scope": true
+ },
+ "65709d2d21b9f815e208ff95": {
+  "mod_mount": false
+ },
+ "65719f0775149d62ce0a670b": {
+  "mod_mount": false
+ },
+ "657857faeff4c850222dff1b": {
+  "mod_sight_rear": false
+ },
+ "65ae4f57e343f0acc00824da": {
+  "mod_tactical": false,
+  "mod_scope": false
+ },
+ "65f064eec4da400cbb0dc1fe": {
+  "mod_scope": true,
+  "mod_sight_rear": true
+ },
+ "65f1b1176dbd6c5ba2082eed": {
+  "mod_mount": true
+ },
+ "65f1b2a5c14a07890801fc70": {
+  "mod_scope": false
+ },
+ "65fb023261d5829b2d090755": {
+  "mod_sight_rear": false,
+  "mod_scope": false
+ },
+ "660126f7c752a02bbe05e688": {
+  "mod_sight_front": true
+ },
+ "66012788c752a02bbe05e68e": {
+  "mod_sight_front": true
+ },
+ "6601279cc752a02bbe05e692": {
+  "mod_sight_front": true
+ },
+ "66012d003dff5074ed002e2c": {
+  "mod_tactical_001": false,
+  "mod_tactical_000": false
+ },
+ "66012d64c752a02bbe05e69b": {
+  "mod_tactical_001": false,
+  "mod_tactical_000": false
+ },
+ "661ceb1b9311543c7104149b": {
+  "mod_sight_rear": false,
+  "mod_scope": false
+ },
+ "661cec09b2c6356b4d0c7a36": {
+  "mod_sight_rear": false,
+  "mod_scope": false
+ },
+ "661fbe066751ee51930b01f2": {
+  "mod_tactical_001": false,
+  "mod_tactical_000": false
+ },
+ "66225d88a1c7e3b81600c76f": {
+  "mod_sight_front": true
+ },
+ "664a5fdb05fd8090a514f00f": {
+  "mod_scope": true,
+  "mod_sight_rear": true
+ },
+ "664a6025593a58418347808f": {
+  "mod_sight_front": false,
+  "mod_tactical_000": false,
+  "mod_scope": false,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false
+ },
+ "6657bc8faeddd6b0a9b40224": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false
+ },
+ "6657bd4d3a4d6e7c33fd2fdc": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false
+ },
+ "6657bdc55b6dea8c9e65dc93": {
+  "mod_mount": false
+ },
+ "6657bdd3ceb56099bc50c188": {
+  "mod_sight_front": false
+ },
+ "6657bdde5fb53ba8b0657bd6": {
+  "mod_sight_front": false
+ },
+ "6657bde9e47c756d6b149a5b": {
+  "mod_sight_front": false
+ },
+ "665fe0e865683281eb8e7ed6": {
+  "mod_tactical": false
+ },
+ "665fe62bfdf6dce07f16e726": {
+  "mod_sight_front": false,
+  "mod_scope": false
+ },
+ "6671ebcdd32bd95eb398e920": {
+  "mod_scope": false
+ },
+ "6671ece3365d10b3362eb40f": {
+  "mod_tactical_001": false,
+  "mod_tactical_002": false,
+  "mod_tactical_003": false
+ },
+ "668031bde3e7eb26e8004cd7": {
+  "mod_mount_001": false
+ },
+ "6680326874b8f2050c0b9178": {
+  "mod_scope": true
+ },
+ "6683957f2e516f6146af483d": {
+  "mod_scope": false
+ },
+ "66839591f4d0cba7b041b2af": {
+  "mod_scope": false,
+  "mod_sight_rear": false
+ },
+ "668e71a8dadf42204c032ce1": {
+  "mod_mount_000": false
+ },
+ "668ea3f68117e4968b0cff4a": {
+  "mod_tactical_000": false,
+  "mod_tactical_001": false
+ },
+ "668fe5f62a0f85eea407cc18": {
+  "mod_sight_front": true,
+  "mod_scope": true
+ },
+ "668fe60b56984d93550462c6": {
+  "mod_sight_rear": true
+ },
+ "6698c8f4710a4525fe0e9e57": {
+  "mod_tactical": true
+ },
+ "6698c90829e062525d0ad8ad": {
+  "mod_scope": true
+ },
+ "66992b349950f5f4cd06029f": {
+  "mod_mount_000": false,
+  "mod_mount_001": false
+ },
+ "66992f7d9950f5f4cd0602a8": {
+  "mod_tactical": true
+ },
+ "66993149558c59581e03c028": {
+  "mod_mount_000": false,
+  "mod_mount_001": false
+ },
+ "669a6a4a525be1d2d004b8eb": {
+  "mod_tactical": true
+ },
+ "669fa39b48fc9f8db6035a0c": {
+  "mod_tactical": false
+ },
+ "669fa3d876116c89840b1217": {
+  "mod_tactical": false
+ },
+ "669fa47da0bab4e8510d9526": {
+  "mod_sight_front": true,
+  "mod_scope": true
+ },
+ "669fa48fa0bab4e8510d952a": {
+  "mod_sight_front": true,
+  "mod_scope": true
+ },
+ "669fa4ba1bd4416eaa09b3c6": {
+  "mod_sight_front": true,
+  "mod_scope": true
+ },
+ "669fa4c61bd4416eaa09b3ca": {
+  "mod_sight_front": true,
+  "mod_scope": true
+ },
+ "669fa4d97a09bc295603b496": {
+  "mod_sight_rear": true
+ },
+ "669fa5019aa2a422600442f6": {
+  "mod_sight_rear": true
+ },
+ "669fa5127a09bc295603b499": {
+  "mod_sight_rear": true
+ },
+ "669fa5271bd4416eaa09b3ce": {
+  "mod_sight_rear": true
+ },
+ "669fcbd899f4dc2f8ed7d113": {
+  "mod_mount": false
+ },
+ "66a47e98c486ec9d1af3a4da": {
+  "mod_tactical_004": false,
+  "mod_scope": false,
+  "mod_sight_rear": false,
+  "mod_sight_front": false,
+  "mod_tactical_000": false,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false,
+  "mod_tactical_003": false
+ },
+ "66a544c956621d3364f6085e": {
+  "mod_tactical_004": false,
+  "mod_scope": false,
+  "mod_sight_rear": false,
+  "mod_sight_front": false,
+  "mod_tactical_000": false,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false,
+  "mod_tactical_003": false
+ },
+ "66a545898022784400d6c836": {
+  "mod_tactical_004": false,
+  "mod_scope": false,
+  "mod_sight_rear": false,
+  "mod_sight_front": false,
+  "mod_tactical_000": false,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false,
+  "mod_tactical_003": false
+ },
+ "66ba249b102a9dd6040a6e7e": {
+  "mod_sight_front": false,
+  "mod_scope": false,
+  "mod_sight_rear": false,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false,
+  "mod_tactical_003": false
+ },
+ "66ba26a6925f9921573224c9": {
+  "mod_sight_front": false,
+  "mod_scope": false,
+  "mod_sight_rear": false,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false,
+  "mod_tactical_003": false
+ },
+ "66e718dc498d978477e0ba75": {
+  "mod_scope_000": false
+ },
+ "66e71adf394bded29410a37e": {
+  "mod_sight_front": false
+ },
+ "66e71b6cb468c3edc99fc21e": {
+  "mod_tactical_001": false,
+  "mod_tactical_003": false
+ },
+ "66e71b8f65fdd1ff1cdf2777": {
+  "mod_sight_front": false
+ },
+ "66e71d9c49892c1cf24d5b1a": {
+  "mod_tactical_001": false,
+  "mod_tactical_003": false,
+  "mod_tactical_002": false
+ },
+ "66e71dc8fa3ebda7f1034a2b": {
+  "mod_tactical_001": false,
+  "mod_tactical_003": false
+ },
+ "66e71dea56f10f22730b6a2d": {
+  "mod_tactical_001": false,
+  "mod_tactical_003": false
+ },
+ "66e88596febdcf9daade16a8": {
+  "mod_sight_rear": false,
+  "mod_mount_000": false
+ },
+ "66e8891c2072d5483a2595e9": {
+  "mod_scope": false
+ },
+ "66ffc6ceb7ff397142017c3a": {
+  "mod_tactical_000": true,
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false
+ },
+ "66ffc72082d36dec82030c1f": {
+  "mod_mount": true
+ },
+ "66ffc903fe9b382596065304": {
+  "mod_mount": true
+ },
+ "66ffe2fbab3336cc0106382b": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false
+ },
+ "66ffe5edfe9b38259606530d": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false
+ },
+ "66ffe6c36f11538c7d0581e3": {
+  "mod_mount_000": false,
+  "mod_mount_001": false
+ },
+ "66ffe7bab8da88805e07a03e": {
+  "mod_mount_000": false,
+  "mod_mount_001": false
+ },
+ "66ffe811f5d758d71101e89a": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false
+ },
+ "66ffea06132225f0fe061394": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false
+ },
+ "66ffea456be19fd81e0ef742": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_003": false,
+  "mod_mount_004": false,
+  "mod_mount_002": false
+ },
+ "66ffeab4ab3336cc01063833": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_003": false,
+  "mod_mount_004": false,
+  "mod_mount_002": false
+ },
+ "67069c8cee8138ed2f05ad34": {
+  "mod_scope": false,
+  "mod_tactical": false
+ },
+ "67069cbbb29a2cd33803338c": {
+  "mod_scope": false,
+  "mod_tactical": false
+ },
+ "67069cf1af4890b09f0006e8": {
+  "mod_tactical_000": false,
+  "mod_tactical_001": false
+ },
+ "67069d02ad91f3a63c0bc2b0": {
+  "mod_tactical_000": false,
+  "mod_tactical_001": false
+ },
+ "67069d3bb29a2cd338033390": {
+  "mod_tactical": true
+ },
+ "67069d66af4890b09f0006ec": {
+  "mod_tactical_000": true,
+  "mod_tactical_003": false,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false
+ },
+ "67069d8dad91f3a63c0bc2b4": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_tactical_001": false,
+  "mod_tactical_000": true
+ },
+ "670fced86a7e274b1a0964e8": {
+  "mod_mount": true
+ },
+ "670fd0a8d8d4eae4790c8187": {
+  "mod_mount": true
+ },
+ "6710cea62bb09af72f0e6bf8": {
+  "mod_tactical_001": false,
+  "mod_tactical_002": false,
+  "mod_tactical_000": false,
+  "mod_tactical_003": false
+ },
+ "67110d8d388bded67304ceb4": {
+  "mod_mount": true,
+  "mod_tactical": false
+ },
+ "67110dd41ad01bb88705347b": {
+  "mod_scope": true,
+  "mod_sight_front": true,
+  "mod_sight_rear": true,
+  "mod_tactical": true
+ },
+ "6711107e1ad01bb88705347e": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false
+ },
+ "67111094d1758189fc0bd223": {
+  "mod_tactical": true
+ },
+ "67124dcfa3541f2a1f0e788b": {
+  "mod_scope": false
+ },
+ "673cb212e695740be0047a46": {
+  "mod_mount_000": true
+ },
+ "673cb491280680de5e02ff36": {
+  "mod_mount": false
+ },
+ "673cb51e093e0ea7fd0b8746": {
+  "mod_scope": true,
+  "mod_sight_rear": true
+ },
+ "673cb5d1280680de5e02ff3b": {
+  "mod_tactical_000": true,
+  "mod_sight_front": true,
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_tactical_001": false
+ },
+ "673dd5f73f92dc7e120d20a9": {
+  "mod_tactical": true
+ },
+ "673dd617912f68467c0615b6": {
+  "mod_tactical": true
+ },
+ "67405ef125beb509e8070276": {
+  "mod_sight_front": true,
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_tactical": false
+ },
+ "67405fd0812f476fb2020066": {
+  "mod_tactical": true,
+  "mod_sight_front": true,
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false
+ },
+ "674d6121c09f69dfb201a888": {
+  "mod_mount_000": false,
+  "mod_scope": false
+ },
+ "674fe57721a9aa6be6045b96": {
+  "mod_tactical_000": false,
+  "mod_tactical_001": false,
+  "mod_mount": true
+ },
+ "674fe89a4472d471fb0f07d8": {
+  "mod_scope": true,
+  "mod_tactical": true,
+  "mod_sight_front": true,
+  "mod_mount": true
+ },
+ "674fe8b9362ea1f88b0e278d": {
+  "mod_scope": true,
+  "mod_sight_rear": true
+ },
+ "674fe9a75e51f1c47c04ec23": {
+  "mod_mount_000": false,
+  "mod_sight_rear": false,
+  "mod_mount_001": false
+ },
+ "675956062f6ddfe8ff0e2806": {
+  "mod_mount": false
+ },
+ "6759655674aa5e0825040d62": {
+  "mod_mount": false
+ },
+ "675ce9f95e28aaf887778a4b": {
+  "mod_sight_front": false,
+  "mod_scope": false
+ },
+ "675ceb83e25d80bc676e15a6": {
+  "mod_tactical": false
+ },
+ "676149fbe2cf1419500357ee": {
+  "mod_sight_front": true,
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false
+ },
+ "67614a0be889e1972605d6c0": {
+  "mod_sight_front": true,
+  "mod_mount_000": false,
+  "mod_mount_001": false
+ },
+ "67614a225152c0eaed08ec86": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_sight_front": true
+ },
+ "67614a31062e6212f5058c38": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_sight_front": true
+ },
+ "67614a3ce2cf1419500357f4": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_sight_front": true
+ },
+ "6761759e7ee06333f108bf86": {
+  "mod_scope": true
+ },
+ "676177591f08ed5e8800b7a9": {
+  "mod_tactical_000": false,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false
+ },
+ "676177b09cfcc4c25b027446": {
+  "mod_tactical_000": false
+ },
+ "676177df1f08ed5e8800b7ae": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_tactical": true
+ },
+ "6761b213607f9a6f79017c83": {
+  "mod_sight_rear": false,
+  "mod_sight_front": false,
+  "mod_scope": false,
+  "mod_mount_000": false,
+  "mod_mount_001": false
+ },
+ "6761b213607f9a6f79017cd9": {
+  "mod_mount": false
+ },
+ "6761b213607f9a6f79017cda": {
+  "mod_mount": false
+ },
+ "6761b213607f9a6f79017d23": {
+  "mod_mount": false
+ },
+ "6761b213607f9a6f79017d42": {
+  "mod_scope": false,
+  "mod_tactical": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_sight_front": false
+ },
+ "6761b213607f9a6f79017d43": {
+  "mod_scope": false,
+  "mod_sight_rear": false
+ },
+ "6761b213607f9a6f79017d52": {
+  "mod_tactical": false,
+  "mod_tactical_001": false
+ },
+ "6761b213607f9a6f79017d56": {
+  "mod_scope": false
+ },
+ "67641a851b2899700609901a": {
+  "mod_scope": true
+ },
+ "67641b461c2eb66ade05dba6": {
+  "mod_tactical": true
+ },
+ "676b5088bc973cdc82247b3f": {
+  "mod_scope": false,
+  "mod_tactical": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_sight_front": false
+ },
+ "676b5124f0892bbed71bc377": {
+  "mod_scope": false,
+  "mod_sight_rear": false
+ },
+ "676c3d1dcf722dad840e520b": {
+  "mod_scope": false,
+  "mod_tactical": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_sight_front": false
+ },
+ "677c9a47baecf3c4b2453365": {
+  "mod_mount_000": false
+ },
+ "677c9c6fe5cf70ff4c9e1338": {
+  "mod_sight_front": false,
+  "mod_sight_rear": false
+ },
+ "677c9fd38e377bba81c0760f": {
+  "mod_sight_front": false,
+  "mod_sight_rear": false
+ },
+ "677c9ff40e9b640153417d1a": {
+  "mod_sight_front": false,
+  "mod_sight_rear": false
+ },
+ "677ca334da2787e0538c882d": {
+  "mod_mount_000": false
+ },
+ "677ca3e62e9e964a11a55d8e": {
+  "mod_mount_000": false
+ },
+ "677ca5064c772ce35dfdbc80": {
+  "mod_tactical": false
+ },
+ "6787c587daf18caae2c47bda": {
+  "mod_scope": false,
+  "mod_tactical_000": false
+ },
+ "678fe4a4906c7bd23722c71f": {
+  "mod_mount_000": false
+ },
+ "6794f4da11230d3fe4eeab7e": {
+  "mod_tactical_000": false,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false,
+  "mod_tactical_003": false
+ },
+ "679a6a534f3d279c99b135b9": {
+  "mod_mount_000": false,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false,
+  "mod_tactical_003": false
+ },
+ "67b05e25d83f07b7b587c0b5": {
+  "mod_scope": false,
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false
+ },
+ "67c5412bb032bbdb530201ba": {
+  "mod_tactical": true
+ },
+ "67c541fcb032bbdb530201be": {
+  "mod_scope": true
+ },
+ "67c54210d0538d12ec036c0e": {
+  "mod_scope": true,
+  "mod_sight_rear": true,
+  "mod_tactical": true
+ },
+ "67c5425e26265106dd0697a7": {
+  "mod_sight_front": false,
+  "mod_sight_rear": false
+ },
+ "67c5429fac40c364490664f8": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false
+ },
+ "67c542aeb032bbdb530201c6": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false
+ },
+ "67c542baac40c36449066500": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_mount_003": false
+ },
+ "67c542ecac40c36449066508": {
+  "mod_tactical": true
+ },
+ "67c6de3ce39861860909e8e5": {
+  "mod_mount": false
+ },
+ "67d416e19bd76ef20f0e743b": {
+  "mod_scope": true,
+  "mod_sight_rear": true,
+  "mod_mount": true
+ },
+ "67d417c023ec241bb70d4896": {
+  "mod_mount_000": false,
+  "mod_mount_002": false,
+  "mod_mount_001": false,
+  "mod_tactical": true,
+  "mod_sight_front": true
+ },
+ "67f425638b8cbfdc0cd1b5f2": {
+  "mod_scope": false,
+  "mod_sight_rear": false,
+  "mod_sight_front": false,
+  "mod_tactical_000": false,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false,
+  "mod_tactical_004": false,
+  "mod_tactical_003": false
+ },
+ "67ff24b9079850d544096ea6": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false
+ },
+ "67ff24c0abb53266190dfc66": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false
+ },
+ "67ff26a2abb53266190dfc6c": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false
+ },
+ "67ff2792ea587611b0080956": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_mount_003": false
+ },
+ "67ff279dea587611b008095d": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_mount_003": false
+ },
+ "680b884f1a335f66240ecde7": {
+  "mod_scope": true
+ },
+ "680f47b20407db2e550c4311": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_tactical": true,
+  "mod_sight_front": true,
+  "mod_mount_003": true
+ },
+ "680f55788692125dc00a3354": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_tactical": true,
+  "mod_sight_front": true,
+  "mod_mount_003": true
+ },
+ "680f55b71e275ac1230f2dc6": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_tactical": true,
+  "mod_sight_front": true
+ },
+ "680f5953b93ecb502102816a": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_tactical": true,
+  "mod_sight_front": true
+ },
+ "681096b551511048940afed9": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_tactical": true,
+  "mod_sight_front": true,
+  "mod_mount_003": false,
+  "mod_mount_004": true
+ },
+ "68109a1f327033533604170a": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_tactical": true,
+  "mod_sight_front": true,
+  "mod_mount_003": false,
+  "mod_mount_004": true
+ },
+ "6810a469f6c2827d680d1f4c": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_tactical": true,
+  "mod_sight_front": true
+ },
+ "6810aa1474bf67765c02e91a": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_tactical": true,
+  "mod_sight_front": true
+ },
+ "6810ca87002deee76b04970b": {
+  "mod_mount_001": false,
+  "mod_mount_002": false
+ },
+ "6810d2c6485a5ea11b01e3ad": {
+  "mod_sight_front": true
+ },
+ "6810d3d8dc7bbeec2f0081c9": {
+  "mod_mount_001": false,
+  "mod_mount_002": false
+ },
+ "6811f4854922782caa087440": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_sight_front": true
+ },
+ "68120dcbb90552f01004e5ca": {
+  "mod_mount_000": false,
+  "mod_sight_front": true,
+  "mod_mount_002": false,
+  "mod_mount_001": false
+ },
+ "6812180dc20f5c52bc04d6cc": {
+  "mod_mount_000": false,
+  "mod_sight_front": true,
+  "mod_mount_002": false,
+  "mod_mount_001": false
+ },
+ "681236df5cbf0518e00557a0": {
+  "mod_mount_000": false,
+  "mod_sight_front": true,
+  "mod_mount_002": false,
+  "mod_mount_001": false
+ },
+ "682315b0f8d8f8681e0744b0": {
+  "mod_mount_001": false,
+  "mod_tactical": true,
+  "mod_mount_000": false,
+  "mod_mount_002": false
+ },
+ "682315bdf8d8f8681e0744b5": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false
+ },
+ "682315c58639961c6001dbe7": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_mount_003": false
+ },
+ "682315d08639961c6001dbec": {
+  "mod_mount_000": false,
+  "mod_mount_001": false
+ },
+ "682317390ee6ef08a60e4547": {
+  "mod_tactical": true
+ },
+ "682d3dd16900cb35564c8825": {
+  "mod_scope": false
+ },
+ "682d460e951a926af552d764": {
+  "mod_scope": false,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false,
+  "mod_tactical_003": false,
+  "mod_tactical_004": false
+ },
+ "682d4820e48f3c573ec332b5": {
+  "mod_tactical_001": false,
+  "mod_scope": false
+ },
+ "682d49d1a02a06db42af2642": {
+  "mod_tactical_000": false
+ },
+ "682d4c5c3d80d3692ba0208a": {
+  "mod_tactical_000": false
+ },
+ "682d4e58cabfe180bea4e231": {
+  "mod_tactical_001": true
+ },
+ "68305fdc84a12bb973021fc0": {
+  "mod_tactical_000": false,
+  "mod_tactical_001": false,
+  "mod_tactical_002": true
+ },
+ "683a4db6867acb7f16bcfd26": {
+  "mod_scope": false
+ },
+ "6840ebf5b8687ba34f8dfbca": {
+  "mod_scope": false,
+  "mod_tactical_001": false
+ },
+ "68433b58a8f9a618b11082d4": {
+  "mod_sight_rear": false,
+  "mod_tactical": false
+ },
+ "684374b3ba4ad4561eb645ca": {
+  "mod_scope": false
+ },
+ "684374be10b9487f8bd998cc": {
+  "mod_tactical": false
+ },
+ "68452c3da87156b67d9ec538": {
+  "mod_tactical_000": false,
+  "mod_tactical_001": false
+ },
+ "68452da6051e580c48ede835": {
+  "mod_sight_front": false
+ },
+ "68452ddf08572b1e3c35081c": {
+  "mod_scope": false
+ },
+ "6846034815241b9ba61936c6": {
+  "mod_scope": false
+ },
+ "68460744bf2da4e1fb5b4195": {
+  "mod_scope": false
+ },
+ "684b257022b8260501141308": {
+  "mod_tactical": false
+ },
+ "684b2623dd333cf908b7c695": {
+  "mod_scope": false
+ },
+ "684b64658c4c5f37f2c4e56a": {
+  "mod_tactical": false
+ },
+ "684b65e1f87ada48dcd107c4": {
+  "mod_scope": false
+ },
+ "684e32eaec9f5eb3cacc7ca7": {
+  "mod_sight_rear": false,
+  "mod_sight_front": false,
+  "mod_tactical_000": false,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false,
+  "mod_tactical_003": false,
+  "mod_tactical_004": false,
+  "mod_scope": false
+ },
+ "68540a100103119fd00e115a": {
+  "mod_mount": false
+ },
+ "686093d590c3dce07984c38a": {
+  "mod_sight_rear": false,
+  "mod_mount_000": false
+ },
+ "68609fd8eca031127ee6038e": {
+  "mod_tactical_001": false
+ },
+ "6860a1c747b4a81fe5f9ae32": {
+  "mod_tactical_000": false
+ },
+ "68677d09339b397ed3d37522": {
+  "mod_sight_front": false,
+  "mod_sight_rear": false,
+  "mod_tactical_000": false
+ },
+ "6868d249cdee524f8c0ba45f": {
+  "mod_tactical": false
+ },
+ "6871284e9a353bb50606f3ed": {
+  "mod_mount_004": false,
+  "mod_mount_000": false
+ },
+ "687128c4505fed5f370b1625": {
+  "mod_tactical": true,
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": true,
+  "mod_mount_003": false,
+  "mod_sight_front": true
+ },
+ "68712b57a1be89347f0d8179": {
+  "mod_tactical": true
+ },
+ "68712bd4251b8d4c6c04ec19": {
+  "mod_scope": true,
+  "mod_sight_rear": true
+ },
+ "687afda52dc9fd6c0e14c602": {
+  "mod_scope": false,
+  "mod_sight_rear": false
+ },
+ "687b02e550e15d9a28c5681e": {
+  "mod_sight_front": false,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false,
+  "mod_tactical_004": false,
+  "mod_tactical_005": false
+ },
+ "687fb46ac2f7551f2ce2e4b1": {
+  "mod_sight_front": false,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false,
+  "mod_tactical_004": false
+ },
+ "6881c17e9ece0d7057d4347a": {
+  "mod_sight_front": false,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false,
+  "mod_tactical_003": false,
+  "mod_tactical_004": false
+ },
+ "6881c18aaa553ed3873788da": {
+  "mod_sight_front": false,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false
+ },
+ "68827b0e8586d3f82920066a": {
+  "mod_sight_front": false,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false,
+  "mod_tactical_003": false,
+  "mod_tactical_004": false
+ },
+ "688444f512ee012a2d264c9f": {
+  "mod_sight_front": false,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false,
+  "mod_tactical_004": false
+ },
+ "6884454536540bf509854155": {
+  "mod_sight_front": false,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false,
+  "mod_tactical_004": false
+ },
+ "688445a5a3ee7a07104c6047": {
+  "mod_sight_front": false,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false,
+  "mod_tactical_003": false,
+  "mod_tactical_004": false
+ },
+ "6888954ba66a069e0405a9aa": {
+  "mod_scope": true
+ },
+ "68889c930b29b8032504f369": {
+  "mod_scope": true
+ },
+ "688a0bf28cdd409ce60911ce": {
+  "mod_scope": true
+ },
+ "688b54a11cef2a61d005273b": {
+  "mod_scope": true
+ },
+ "688b79b5eb234c75d900e050": {
+  "mod_mount_001": true,
+  "mod_mount_003": false
+ },
+ "688b7b0d934c59b7bf0af0b7": {
+  "mod_scope": true
+ },
+ "688b7c1b0e99e554a90c0fb7": {
+  "mod_tactical": true
+ },
+ "688c86420e99e554a90c0fd6": {
+  "mod_tactical_002": false,
+  "mod_scope": true,
+  "mod_tactical_001": false
+ },
+ "689166debd91cc17c109c753": {
+  "mod_mount_001": false,
+  "mod_tactical": false
+ },
+ "689167248f19dbc8190728ed": {
+  "mod_scope": true,
+  "mod_sight_rear": true
+ },
+ "68916765fa628c6b9f0ed6f6": {
+  "mod_sight_rear": true
+ },
+ "6895bd19d55f0ebf6a0c0306": {
+  "mod_scope": true,
+  "mod_tactical_000": true,
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_sight_front": true
+ },
+ "6895becad55f0ebf6a0c0311": {
+  "mod_scope": true,
+  "mod_sight_rear": true
+ },
+ "689c8981bce76ccfbf01862f": {
+  "mod_tactical": true
+ },
+ "689c8a2b4b91399db3085f27": {
+  "mod_tactical": true
+ },
+ "689c8b454b91399db3085f2a": {
+  "mod_tactical": true
+ },
+ "68a397372b4bebb5474a0bb2": {
+  "mod_scope": true,
+  "mod_sight_rear": true
+ },
+ "68a39f96b225dcbbc8387d2c": {
+  "mod_mount_000": true,
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_mount_003": false
+ },
+ "68a5dc0c2cd64a8b58023b87": {
+  "mod_tactical": true
+ },
+ "68a5dc4eed35a7eac1048ff6": {
+  "mod_mount_002": false,
+  "mod_mount_001": false,
+  "mod_mount_000": false
+ },
+ "68a63b90e1fb670852024659": {
+  "mod_scope": true
+ },
+ "68a63b9b8e1fe612970728f7": {
+  "mod_scope": true
+ },
+ "68a63cdac92ee33ffa01bf5f": {
+  "mod_mount": false,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false,
+  "mod_sight_front": false,
+  "mod_tactical_000": false
+ },
+ "68a63ce2e1fb670852024667": {
+  "mod_tactical": false
+ },
+ "68a63d1522b1e0bd360afe67": {
+  "mod_scope": true
+ },
+ "68a6e8fd4ac5b037cb0e9b86": {
+  "mod_tactical": true,
+  "mod_mount": false
+ },
+ "68a6f3b27279296357007cd7": {
+  "mod_mount_002": false,
+  "mod_mount_001": false,
+  "mod_mount_000": true
+ },
+ "68a6fbb07279296357007ce2": {
+  "mod_mount_002": false,
+  "mod_mount_001": false,
+  "mod_mount_000": true
+ },
+ "68a6fbfdd31595bb360c73bd": {
+  "mod_mount_002": false,
+  "mod_mount_001": false,
+  "mod_mount_000": true
+ },
+ "68a6ff732885e0bbd30bb6f9": {
+  "mod_tactical": true,
+  "mod_mount": false
+ },
+ "68a6ff952885e0bbd30bb6fd": {
+  "mod_tactical": true,
+  "mod_mount": false
+ },
+ "68a6fff085a17dc1cb008066": {
+  "mod_tactical": true
+ },
+ "68a7000d7708ac5120060527": {
+  "mod_tactical": true
+ },
+ "68a73465322d08c3199b94ff": {
+  "mod_sight_front": true,
+  "mod_tactical": true
+ },
+ "68a73560e0b8a9d684145f83": {
+  "mod_tactical_000": true
+ },
+ "68a73563a634aa2a969dc629": {
+  "mod_tactical_000": true
+ },
+ "68a9b3ca0a9c4f9398032c46": {
+  "mod_mount": false
+ },
+ "68a9b5a5863d2a71fa0494a6": {
+  "mod_mount": false
+ },
+ "68a9be93f260f4e1c2038686": {
+  "mod_mount": false
+ },
+ "68a9beecbba00932ed0bc256": {
+  "mod_mount": false
+ },
+ "68aee763130c00663d08aea8": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false
+ },
+ "68aee8f8130c00663d08aeb3": {
+  "mod_scope": true,
+  "mod_sight_rear": true
+ },
+ "68aee9fe130c00663d08aeb6": {
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_tactical": true,
+  "mod_mount_003": true,
+  "mod_sight_front": true
+ },
+ "68b7f4060a4536984f82cf4b": {
+  "mod_tactical": false
+ },
+ "68b7f985dd6565e47eb9ee44": {
+  "mod_sight_rear": false,
+  "mod_sight_front": false
+ },
+ "68b966e44b7f808d5609ac04": {
+  "mod_mount_000": true
+ },
+ "68b97e7fd9dbc47f4808b09d": {
+  "mod_tactical": true
+ },
+ "68b9ca430428f3ba43bfe630": {
+  "mod_scope": false
+ },
+ "68b9cb8a59d59d6131028a1e": {
+  "mod_tactical_000": false
+ },
+ "68b9cc3737f7a7e5da9e41cf": {
+  "mod_tactical_000": false
+ },
+ "68b9ce4e6ac219f4b866616d": {
+  "mod_scope": false
+ },
+ "68badf5030572e90770cd688": {
+  "mod_scope": true
+ },
+ "68bf41bbb786f6e9315a5cab": {
+  "mod_tactical": false
+ },
+ "68bf4653cb23058364f3fd40": {
+  "mod_scope": false
+ },
+ "68bf473184358e175b34bbd5": {
+  "mod_sight_rear": false,
+  "mod_sight_front": false,
+  "mod_scope": false
+ },
+ "68bf480bd16b24dea69469c7": {
+  "mod_sight_rear": false,
+  "mod_sight_front": false,
+  "mod_scope": false
+ },
+ "68bf4827920c30deef7b96b3": {
+  "mod_sight_rear": false,
+  "mod_sight_front": false,
+  "mod_scope": false
+ },
+ "68c16e84fc90c174e50de1a8": {
+  "mod_scope": true,
+  "mod_sight_rear": true
+ },
+ "68c1707983e2d814b0093f7e": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_tactical": true,
+  "mod_sight_front": true
+ },
+ "68c170e383e2d814b0093f87": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_tactical": true,
+  "mod_scope": true,
+  "mod_sight_front": true
+ },
+ "68c23b960f579b9b5fe021e7": {
+  "mod_sight_rear": false
+ },
+ "68c294360f5ebd68290d6c16": {
+  "mod_scope": true,
+  "mod_sight_rear": true
+ },
+ "68c2989dc9061bb2f50478f6": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_tactical": true,
+  "mod_scope": true,
+  "mod_sight_front": true
+ },
+ "68caac28f42a4476cf0be2ac": {
+  "mod_tactical_001": false,
+  "mod_tactical_002": false,
+  "mod_sight_front": true,
+  "mod_tactical_003": false
+ },
+ "68caac360bfe742288085e16": {
+  "mod_scope": true,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false,
+  "mod_sight_front": true,
+  "mod_tactical_000": true,
+  "mod_tactical_003": false
+ },
+ "68caac500bfe742288085e1e": {
+  "mod_mount": true
+ },
+ "68caacb4c8ac87b10507c5a6": {
+  "mod_scope": true,
+  "mod_mount": true,
+  "mod_tactical": true
+ },
+ "68caacc7933990601c07f479": {
+  "mod_scope": true,
+  "mod_mount": true
+ },
+ "68caacf7c8ac87b10507c5a9": {
+  "mod_scope": true
+ },
+ "68cae1561e2d372b839a3fed": {
+  "mod_sight_rear": true,
+  "mod_mount_000": false
+ },
+ "68cc2ae66e59cb54f4054f47": {
+  "mod_tactical_001": false,
+  "mod_tactical_002": false,
+  "mod_sight_front": true,
+  "mod_tactical_003": false
+ },
+ "68cf56067ff6ceab0c2fd49e": {
+  "mod_sight_rear": false
+ },
+ "68d03088e031ff364882e0d1": {
+  "mod_sight_front": true,
+  "mod_tactical_000": true,
+  "mod_scope": true,
+  "mod_mount_000": false,
+  "mod_mount_001": false
+ },
+ "68d031b9dadab8b4e2ac9f56": {
+  "mod_sight_front": true,
+  "mod_tactical_000": true,
+  "mod_scope": true,
+  "mod_mount_000": false,
+  "mod_mount_001": false
+ },
+ "68d40fb07130ef271f60991f": {
+  "mod_tactical": false
+ },
+ "68d411fe0fe5406a6566ce17": {
+  "mod_mount": false
+ },
+ "68d5676f43adc7372a0c8ae0": {
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_tactical": true,
+  "mod_mount_003": true,
+  "mod_sight_front": true
+ },
+ "68d593bf2809950ce8e620de": {
+  "mod_scope": false
+ },
+ "68d5b3d19fbee23bd61f9779": {
+  "mod_tactical": false
+ },
+ "68d60cbe2fcd09bfc84bd29f": {
+  "mod_mount": false
+ },
+ "68d70444b480beeadf9b6ffa": {
+  "mod_mount": false
+ },
+ "68e0002a0d6a4dab56810fbd": {
+  "mod_mount_001": false,
+  "mod_mount_002": false
+ },
+ "68e00e6f68065099baaf5791": {
+  "mod_tactical": false
+ },
+ "68e03bc3709d4e16c56555ce": {
+  "mod_tactical_000": false,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false,
+  "mod_tactical_003": false,
+  "mod_scope": false
+ },
+ "68e0717d51eff1d09e8a2eba": {
+  "mod_scope": false
+ },
+ "68fd4feab87d77a5aaf6bf64": {
+  "mod_scope": false
+ },
+ "68fd75e399c0ae29b3d0d2ae": {
+  "mod_tactical": false
+ },
+ "68fd7a61f2b8d96bb3119b19": {
+  "mod_scope": false
+ },
+ "68fd7d14ff5a09197b5ab82a": {
+  "mod_scope": false
+ },
+ "69066d9a1072a5b68f32ca8e": {
+  "mod_mount_000": false,
+  "mod_mount_001": false
+ },
+ "690ec46edbfedf019246b350": {
+  "mod_scope": true,
+  "mod_sight_rear": true
+ },
+ "69101c13a363be1fac6e260e": {
+  "mod_scope": false,
+  "mod_tactical": false,
+  "mod_sight_front": false,
+  "mod_sight_rear": false
+ },
+ "69101c65d4c0a6aa81d18453": {
+  "mod_scope": false,
+  "mod_tactical": false,
+  "mod_sight_front": false,
+  "mod_sight_rear": false
+ },
+ "69101cf471c52daba356641c": {
+  "mod_scope": false,
+  "mod_tactical": false,
+  "mod_sight_front": false,
+  "mod_sight_rear": false
+ },
+ "691225bcb5266532f914655a": {
+  "mod_mount_000": false,
+  "mod_mount_001": false
+ },
+ "6913fcc0bbdaffdf2398de93": {
+  "mod_tactical_000": false,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false
+ },
+ "6913fd2540e7d9282674b48a": {
+  "mod_tactical_000": false,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false
+ },
+ "6913fd67321c124d34d73afc": {
+  "mod_tactical_000": false,
+  "mod_tactical_001": false
+ },
+ "6913fe5e597fc50652c10a9e": {
+  "mod_tactical_000": false,
+  "mod_tactical_001": false
+ },
+ "6913ff570c18ac678e2c7e7f": {
+  "mod_tactical_000": false,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false,
+  "mod_tactical_003": false
+ },
+ "6913ffae5f8c4cd1fc523a8d": {
+  "mod_tactical_000": false,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false,
+  "mod_tactical_003": false
+ },
+ "69140391a2ffb7e8e0f320b1": {
+  "mod_tactical_000": false,
+  "mod_tactical_001": false
+ },
+ "691403d630e88f815a0eb65f": {
+  "mod_tactical_000": false,
+  "mod_tactical_001": false
+ },
+ "69140a1b2d23f5cfe36bf7b2": {
+  "mod_tactical_000": false,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false,
+  "mod_tactical_003": false
+ },
+ "69140f886648853180548434": {
+  "mod_tactical_000": false,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false,
+  "mod_tactical_003": false
+ },
+ "691410a4991a22c2782fe0a6": {
+  "mod_tactical_000": false,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false,
+  "mod_tactical_003": false
+ },
+ "69141131ab15cbd47ee148b7": {
+  "mod_tactical_000": false,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false,
+  "mod_tactical_003": false
+ },
+ "691610a32a16d7557fc9bf3d": {
+  "mod_tactical_000": false,
+  "mod_tactical_001": false
+ },
+ "69161150f5bffc3b2da93fde": {
+  "mod_tactical_000": false,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false
+ },
+ "6916138ba4d10131d13c63b0": {
+  "mod_tactical_000": false,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false,
+  "mod_tactical_003": false
+ },
+ "69161451e951cccc2355deef": {
+  "mod_tactical_000": false,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false,
+  "mod_tactical_003": false
+ },
+ "6916175c3882b02e89b5cfcd": {
+  "mod_tactical_000": false,
+  "mod_tactical_001": false
+ },
+ "691617ec4a1edaefd126bbdd": {
+  "mod_tactical_000": false,
+  "mod_tactical_001": false
+ },
+ "6916183c4556f899f8658e08": {
+  "mod_tactical_000": false,
+  "mod_tactical_001": false
+ },
+ "691618d83af6725048cc02f6": {
+  "mod_tactical_000": false,
+  "mod_tactical_001": false
+ },
+ "69161926101e09f9a44a334a": {
+  "mod_tactical_000": false,
+  "mod_tactical_001": false
+ },
+ "6916197a55ad8590aaef2d29": {
+  "mod_tactical_000": false,
+  "mod_tactical_001": false
+ },
+ "6920a431c8f2ed5000c540a0": {
+  "mod_scope": false
+ },
+ "6920a76e1cfe52219e3de69d": {
+  "mod_tactical_000": false,
+  "mod_tactical_001": false
+ },
+ "6920a93320601fc76c8de492": {
+  "mod_tactical_000": false,
+  "mod_tactical_001": false
+ },
+ "6920a984e029afb5f903bc42": {
+  "mod_tactical_000": false,
+  "mod_tactical_001": false
+ },
+ "6920aa1a180357c341f46152": {
+  "mod_tactical_000": false,
+  "mod_tactical_001": false
+ },
+ "6920aa4f836ff80290857b1f": {
+  "mod_tactical_000": false,
+  "mod_tactical_001": false
+ },
+ "6920ab11d0871a1e648537a2": {
+  "mod_tactical": false
+ },
+ "6920acb7ae53665dbdb3227e": {
+  "mod_tactical_000": false,
+  "mod_tactical_001": false
+ },
+ "6920ad9d2ac0e4eedf575708": {
+  "mod_tactical_000": false,
+  "mod_tactical_001": false
+ },
+ "6920adc519d0f248cbd1721f": {
+  "mod_tactical_000": false,
+  "mod_tactical_001": false
+ },
+ "6920b0749d500a4b9cc54d97": {
+  "mod_scope": false
+ },
+ "6920b0dc50776307c3a94978": {
+  "mod_scope": false,
+  "mod_tactical": false
+ },
+ "6920b28eabc4f9d229cb7e49": {
+  "mod_scope": false
+ },
+ "69236a0b2d1260dbca41ef92": {
+  "mod_sight_rear": false,
+  "mod_tactical_000": false,
+  "mod_scope": false
+ },
+ "6924c2f800ff4b8d9d689a5c": {
+  "mod_tactical": false,
+  "mod_mount": false
+ },
+ "692662f440a8e88017858d23": {
+  "mod_scope": false
+ },
+ "692f77045371aadbbb0ada2e": {
+  "mod_tactical": false
+ },
+ "692f77045371aadbbb0ada30": {
+  "mod_sight_rear": true,
+  "mod_sight_front": true,
+  "mod_mount": true
+ },
+ "692f93612d8e1a750403fce0": {
+  "mod_scope": true
+ },
+ "6932ac58be542622170428aa": {
+  "mod_scope": true,
+  "mod_sight_rear": true
+ },
+ "6932aec6cccd2b808a043856": {
+  "mod_mount": true,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false,
+  "mod_tactical_000": true,
+  "mod_tactical_003": false
+ },
+ "6932aed9be542622170428b0": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_scope": true,
+  "mod_sight_front": true,
+  "mod_tactical_000": true,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false,
+  "mod_tactical_003": false
+ },
+ "6936bd64b2b5b688e50cde36": {
+  "mod_mount": true,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false,
+  "mod_tactical_000": true,
+  "mod_tactical_003": false
+ },
+ "6936bd6f4737190b66053ba6": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_scope": true,
+  "mod_sight_front": true,
+  "mod_tactical_000": true,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false,
+  "mod_tactical_003": false
+ },
+ "693742e7eab3af9d89349410": {
+  "mod_sight_rear": false,
+  "mod_tactical_001": false,
+  "mod_tactical": false,
+  "mod_sight_front": false,
+  "mod_scope": false
+ },
+ "693be003582cc8870b090b41": {
+  "mod_mount": false
+ },
+ "694162205fffc8182d005266": {
+  "mod_scope": true,
+  "mod_sight_rear": true
+ },
+ "69417a3f787395b8cc0ab136": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_tactical_000": true,
+  "mod_scope": true,
+  "mod_mount": false,
+  "mod_sight_front": true
+ },
+ "69417a3f787395b8cc0ab13e": {
+  "mod_mount": false
+ },
+ "6945dc69fe52c2415de357f7": {
+  "mod_sight_rear": false,
+  "mod_tactical_001": false,
+  "mod_tactical": false,
+  "mod_sight_front": false,
+  "mod_scope": false
+ },
+ "69555be939fb0a1a6f0ad12e": {
+  "mod_sight_rear": false,
+  "mod_scope_000": false,
+  "mod_tactical_000": false,
+  "mod_tactical_001": false
+ },
+ "6958447bfc5cad58acf95c0f": {
+  "mod_scope": false,
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false
+ },
+ "695ab544a219218449041700": {
+  "mod_scope": false
+ },
+ "6962f22fddc6698c6309b620": {
+  "mod_sight_rear": false
+ },
+ "696801005966cfdf3708c740": {
+  "mod_scope": true,
+  "mod_sight_front": true
+ },
+ "696801005966cfdf3708c742": {
+  "mod_mount": true
+ },
+ "6968029b5966cfdf3708c74a": {
+  "mod_scope": true,
+  "mod_sight_front": true,
+  "mod_sight_rear": true
+ },
+ "696808315966cfdf3708c74e": {
+  "mod_tactical_000": false,
+  "mod_tactical_001": false
+ },
+ "6968098d5966cfdf3708c750": {
+  "mod_tactical_000": false,
+  "mod_tactical_001": false,
+  "mod_tactical_003": false
+ },
+ "696958420d2309811a0fd1d5": {
+  "mod_scope": true
+ },
+ "6969867592a994a633084f70": {
+  "mod_sight_rear": false
+ },
+ "696e417f1a038d893a04a422": {
+  "mod_tactical_000": false,
+  "mod_tactical_001": false
+ },
+ "696e43e31a038d893a04a424": {
+  "mod_scope_000": true,
+  "mod_sight_rear": true,
+  "mod_sight_front": true,
+  "mod_tactical": true,
+  "mod_scope": true
+ },
+ "696fc24464572d85f30aac0d": {
+  "mod_tactical_000": false,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false,
+  "mod_tactical_003": true
+ },
+ "696fe221cf7469bf38051736": {
+  "mod_tactical_000": false,
+  "mod_tactical_001": false
+ },
+ "696fe281cf7469bf3805173b": {
+  "mod_tactical_000": false,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false,
+  "mod_tactical_003": true
+ },
+ "696fe281cf7469bf3805173d": {
+  "mod_scope_000": true,
+  "mod_sight_rear": true,
+  "mod_sight_front": true,
+  "mod_tactical": true,
+  "mod_scope": true
+ },
+ "69777201f57d45a2ec02aafc": {
+  "mod_sight_rear": false
+ },
+ "6981d72ed009ad83920da43a": {
+  "mod_mount_000": false,
+  "mod_sight_rear": false,
+  "mod_mount_001": false
+ },
+ "6981f97f1d2e2070560b7277": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false
+ },
+ "6985bed26be2752c150e6898": {
+  "mod_scope": true
+ },
+ "6985bee16be2752c150e689b": {
+  "mod_scope": true
+ },
+ "69cbfe1f6dbaa9badb0c6b13": {
+  "mod_mount": false
+ },
+ "69cbfe34c293038df7002963": {
+  "mod_mount": false
+ },
+ "69cbfe3a2f657c59da06e262": {
+  "mod_mount": false
+ },
+ "69cbfe44897389c1870b2337": {
+  "mod_mount": false
+ },
+ "69cd423343c6b278a2076cca": {
+  "mod_mount": false
+ },
+ "69ce47ca49b447e32200cbe9": {
+  "mod_mount": false
+ },
+ "69ce70a321c1fc42cd01affa": {
+  "mod_mount": false
+ },
+ "69ce70df606696c00301a760": {
+  "mod_mount": false
+ },
+ "69ce70ff49b447e32200cc1c": {
+  "mod_mount": false
+ },
+ "69f9ec80aae020b0db02f670": {
+  "mod_scope": true
+ },
+ "69f9ecc5df2c2358a904185c": {
+  "mod_scope": true,
+  "mod_sight_rear": true
+ },
+ "69f9f111df2c2358a904186f": {
+  "mod_tactical": true,
+  "mod_mount_000": false,
+  "mod_mount_001": false
+ },
+ "69f9f12c25db06fcf60a88f1": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_sight_front": true,
+  "mod_tactical": true,
+  "mod_mount_002": false
+ },
+ "69f9f1356b45e1d5210c6961": {
+  "mod_mount_001": false,
+  "mod_mount_000": false,
+  "mod_tactical": true,
+  "mod_sight_front": true,
+  "mod_scope": true,
+  "mod_mount_002": false
+ },
+ "69fa0168e72acd254602c64a": {
+  "mod_tactical": true
+ },
+ "6a146c81f77fa1814701c172": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": true,
+  "mod_tactical": false
+ },
+ "6a147ad5eff5b3bf690c2c0d": {
+  "mod_scope": true,
+  "mod_sight_front": true,
+  "mod_tactical": true,
+  "mod_mount_000": false,
+  "mod_mount_001": false
+ },
+ "6a1567ce0cce01965f0bee01": {
+  "mod_scope": true,
+  "mod_sight_front": true,
+  "mod_tactical": true,
+  "mod_mount_000": false,
+  "mod_mount_001": false
+ },
+ "6a156a75cbb8d0c82606c525": {
+  "mod_scope": true,
+  "mod_sight_front": true,
+  "mod_tactical": true,
+  "mod_mount_000": false,
+  "mod_mount_001": false
+ },
+ "6a156a9407619a15b1023be7": {
+  "mod_scope": true,
+  "mod_sight_front": true,
+  "mod_tactical": true,
+  "mod_mount_000": false,
+  "mod_mount_001": false
+ },
+ "6a156ac407619a15b1023bf0": {
+  "mod_mount": true
+ },
+ "6a1571b8060f61ca2c03e06f": {
+  "mod_mount": true
+ },
+ "6a157b9e5ef5195441036c12": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_tactical": true,
+  "mod_sight_front": true
+ },
+ "6a157e289bbb889992032c22": {
+  "mod_tactical": true
+ },
+ "6a157f34cbb8d0c82606c54c": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_tactical": true,
+  "mod_sight_front": true
+ },
+ "6a157f5d8d059ca69c0a7864": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_tactical": true,
+  "mod_scope": true,
+  "mod_sight_front": true
+ },
+ "6a157fa8af9c1c57b700778f": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_tactical": true,
+  "mod_scope": true,
+  "mod_sight_front": true
+ },
+ "6a158dd9060f61ca2c03e08e": {
+  "mod_tactical_000": true,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false
+ },
+ "6a158e90bf497aade10030e4": {
+  "mod_scope": true,
+  "mod_tactical": true,
+  "mod_mount_002": false,
+  "mod_mount_001": false,
+  "mod_mount_000": false,
+  "mod_sight_front": true
+ },
+ "6a15ae3e81a4baf60b09bc33": {
+  "mod_scope": true,
+  "mod_sight_rear": true
+ },
+ "6a15b13db507e45a68038de8": {
+  "mod_scope": true,
+  "mod_sight_front": true,
+  "mod_tactical_000": true,
+  "mod_tactical_001": false,
+  "mod_tactical_002": false
+ },
+ "6a16dc0b82cfbdc3ab09f58a": {
+  "mod_scope": true
+ },
+ "6a16dc17b7b9778bee072c65": {
+  "mod_scope": true
+ },
+ "6a1708253dfad1cb790c91ed": {
+  "mod_tactical": true,
+  "mod_scope": true,
+  "mod_mount_001": false,
+  "mod_mount_000": false
+ },
+ "6a182c0fae175e037a0be40c": {
+  "mod_tactical_000": false,
+  "mod_tactical_001": false
+ },
+ "6a3ce9c28ce058e3a2059b15": {
+  "mod_scope": true,
+  "mod_sight_rear": true
+ },
+ "6a3cea2b9768ff15af06d5e9": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_tactical": true,
+  "mod_sight_front": true
+ },
+ "6a3ceaf01ac10a22850e295a": {
+  "mod_scope": true
+ },
+ "6a567ae55cbe811cbe0136a8": {
+  "mod_mount": false
+ },
+ "6a568340263768e2ae0c9696": {
+  "mod_mount": false
+ },
+ "6a671d320578b5a41000c298": {
+  "mod_mount_001": false,
+  "mod_mount_000": false
+ },
+ "6a6720479d7f57e84800faed": {
+  "mod_mount_001": false,
+  "mod_mount_000": false
+ },
+ "6a6720592ff856278106eb3e": {
+  "mod_mount_001": false,
+  "mod_mount_000": false
+ },
+ "6a6721edecf09d43410cba5a": {
+  "mod_mount_001": false,
+  "mod_mount_000": false,
+  "mod_mount_002": false
+ },
+ "6a6724bddfb2de5e320d451d": {
+  "mod_mount_001": false,
+  "mod_mount_000": false,
+  "mod_mount_002": false
+ },
+ "6a67250406a5419b2508f23e": {
+  "mod_mount_001": false,
+  "mod_mount_000": false,
+  "mod_mount_002": false
+ },
+ "6a6759a5ca1e7d40a007a56f": {
+  "mod_tactical": true
+ },
+ "6a687e38e1ad1bac01015418": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_tactical_000": false,
+  "mod_tactical_001": true
+ },
+ "6a688026daa5d47171082d6b": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_tactical": false
+ },
+ "6a6cd61a8ca3e7453cc71847": {
+  "mod_scope": false,
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_tactical": false,
+  "mod_sight_front": false,
+  "mod_sight_rear": false
+ },
+ "6a6ce6dd8ca3e7453cc71850": {
+  "mod_scope": false,
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_tactical": false,
+  "mod_sight_front": false,
+  "mod_sight_rear": false
+ },
+ "6a83392e992762b7bf08ffb8": {
+  "mod_mount": false
+ },
+ "6a8339b9512ae66ef40af89b": {
+  "mod_mount": false
+ },
+ "6a8339d551cfbe231b091a24": {
+  "mod_mount": false
+ },
+ "6a8433de350b8a45fd0ec800": {
+  "mod_tactical_000": false
+ },
+ "6a8433fa2309518e9e03a2ae": {
+  "mod_tactical_000": false
+ },
+ "6a845c4adc351247420fd2f5": {
+  "mod_tactical_000": false
+ },
+ "6a845cbf13c5fb027c0768a9": {
+  "mod_tactical_000": false
+ },
+ "6a845cd5a5d91e080c06b6e1": {
+  "mod_tactical_000": false
+ },
+ "6a845ce613c5fb027c0768ad": {
+  "mod_tactical_000": false
+ },
+ "6a845cfd8d1432eeb8016ab9": {
+  "mod_tactical_000": false
+ },
+ "6a845e2dd68fc921f902397e": {
+  "mod_tactical_000": false
+ },
+ "6a845e3e8d1432eeb8016ac2": {
+  "mod_tactical_000": false
+ },
+ "6a845e4ea5d91e080c06b6ed": {
+  "mod_tactical_000": false
+ },
+ "6a845e60d68fc921f9023983": {
+  "mod_tactical_000": false
+ },
+ "6a845e7fc37980eea20190b2": {
+  "mod_tactical_000": false
+ },
+ "6a8ada430d43213c92dbe371": {
+  "mod_scope_000": false,
+  "mod_sight_rear": false,
+  "mod_tactical_000": false,
+  "mod_scope": false,
+  "mod_sight_front": false
+ },
+ "6a9417f9e097b0c6ce414793": {
+  "mod_scope_000": false,
+  "mod_sight_rear": false,
+  "mod_scope": false
+ },
+ "6a9497c3e097b0c6ce414794": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_tactical_000": true,
+  "mod_sight_front": true
+ },
+ "6a94a2cee097b0c6ce4147a0": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_tactical_000": true,
+  "mod_sight_front": true
+ },
+ "6a94a31ae097b0c6ce4147a2": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_sight_front": true
+ },
+ "6a94a31ae097b0c6ce4147a4": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_tactical_000": true,
+  "mod_sight_front": true
+ },
+ "6a95b2eefb598539cc275e5f": {
+  "mod_mount_000": false,
+  "mod_mount_001": false
+ },
+ "6a968b0a910dd21fbe9e374b": {
+  "mod_scope": false,
+  "mod_tactical_000": false
+ },
+ "6a9888aa03930f8d769fde27": {
+  "mod_sight_rear": false
+ },
+ "6a98a9d503930f8d769fde2d": {
+  "mod_mount_001": false,
+  "mod_tactical_000": true
+ },
+ "6a98aa1a03930f8d769fde2f": {
+  "mod_scope": true
+ },
+ "6a9954b397425139faf657d3": {
+  "mod_sight_rear": false
+ },
+ "6a9ab5e9753eac745a4ce5ca": {
+  "mod_mount_000": false
+ },
+ "6a9b0c505499040aee890f57": {
+  "mod_scope": true
+ },
+ "6a9bf1a6d67da98b239147e3": {
+  "mod_tactical_000": true
+ },
+ "6a9d77d61b88e55ada72f237": {
+  "mod_sight_rear": false,
+  "mod_scope_000": false,
+  "mod_tactical_000": false,
+  "mod_tactical_001": false
+ },
+ "6a9e7c7ba77d4b62cecda25a": {
+  "mod_tactical": false
+ },
+ "6a9e89a3a77d4b62cecda25b": {
+  "mod_sight_rear": true,
+  "mod_sight_front": true
+ },
+ "6a9ea420a77d4b62cecda261": {
+  "mod_scope": true
+ },
+ "6aa07d6955c3a243f195ed5f": {
+  "mod_scope_000": false,
+  "mod_sight_rear": false,
+  "mod_tactical_000": false,
+  "mod_scope": false
+ },
+ "6aa1c9b4a10e3944e7f07fe1": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_sight_front": true,
+  "mod_mount_002": false
+ },
+ "6aa59cd69d536417f3e88939": {
+  "mod_sight_rear": false
+ },
+ "6aa726bd8877550fb7ea7c65": {
+  "mod_mount": true,
+  "mod_mount_000": false,
+  "mod_mount_001": false
+ },
+ "6aa727b58877550fb7ea7c67": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_tactical_000": true
+ },
+ "6aa728ec8877550fb7ea7c69": {
+  "mod_mount": true,
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_tactical_000": true
+ },
+ "6aa729718877550fb7ea7c6b": {
+  "mod_mount": true,
+  "mod_mount_000": false,
+  "mod_mount_001": false
+ },
+ "6aa72a4a8877550fb7ea7c6d": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_tactical_000": true,
+  "mod_tactical_001": false
+ },
+ "6aa72a998877550fb7ea7c6f": {
+  "mod_mount": true,
+  "mod_mount_000": false,
+  "mod_mount_001": false
+ },
+ "6aa72ae88877550fb7ea7c71": {
+  "mod_mount": true,
+  "mod_mount_001": false
+ },
+ "6aa72c988877550fb7ea7c7b": {
+  "mod_scope": true
+ },
+ "6aa873df2a75b6d0fce8417f": {
+  "mod_scope": true
+ },
+ "6aa9bd88a1ebc11ab0a6b50c": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false
+ },
+ "6aaac481e4cb78c569b193c5": {
+  "mod_sight_rear": true
+ },
+ "6aaac5eae4cb78c569b193cb": {
+  "mod_sight_front": true
+ },
+ "6aaac890e4cb78c569b193cd": {
+  "mod_scope_000": true
+ },
+ "6aac31fac35219b1cf4d2a84": {
+  "mod_sight_rear": false,
+  "mod_sight_front": false,
+  "mod_scope": false,
+  "mod_tactical_002": false
+ },
+ "6ab2dff4f59f2cb62a571425": {
+  "mod_scope": true,
+  "mod_mount_001": false
+ },
+ "6ab2f75df59f2cb62a571427": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_tactical_000": true,
+  "mod_scope": true,
+  "mod_sight_front": true
+ },
+ "6ab2fe90f59f2cb62a57142a": {
+  "mod_tactical": true
+ },
+ "6cf233ccaf510155dddcb152": {
+  "mod_scope": true,
+  "mod_sight_rear": true,
+  "mod_tactical": true,
+  "mod_mount": true
+ },
+ "70493dc2459f53ff14b14175": {
+  "mod_tactical_000": true
+ },
+ "7392f0e8891b38c57fefa881": {
+  "mod_tactical": false
+ },
+ "74e6ee88c46815f9d3ee15aa": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_tactical_000": false,
+  "mod_scope": false,
+  "mod_sight_front": false,
+  "mod_sight_rear": false
+ },
+ "80bd917efb7b0db4002d4040": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_tactical_000": false,
+  "mod_scope": false,
+  "mod_sight_front": false,
+  "mod_sight_rear": false
+ },
+ "888b3d5cf9cfc87d675d2d6c": {
+  "mod_scope": true,
+  "mod_mount": true,
+  "mod_sight_front": true,
+  "mod_sight_rear": true
+ },
+ "8bf881390b6747006aae77a3": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_mount_003": true
+ },
+ "af973ba4dc7dbde1bb5bed5a": {
+  "mod_tactical": false
+ },
+ "b4613454e82a020941c1a49a": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_scope": true
+ },
+ "c0a00711f992a1aecdc53ae0": {
+  "mod_tactical_000": false
+ },
+ "c0de00120000000000000007": {
+  "mod_mount": true
+ },
+ "c0de00120000000000000011": {
+  "mod_mount": true
+ },
+ "c0de02500000000000000001": {
+  "mod_sight_rear": false,
+  "mod_scope": false
+ },
+ "c0de02500000000000000003": {
+  "mod_sight_front": true
+ },
+ "c0de02500000000000000004": {
+  "mod_tactical_001": false,
+  "mod_tactical_000": false,
+  "mod_mount_000": true
+ },
+ "c0de0250000000000000000f": {
+  "mod_tactical_000": true
+ },
+ "c0de02770000000000000001": {
+  "mod_scope": false,
+  "mod_sight_rear": false
+ },
+ "c0de02770000000000000002": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_tactical": true,
+  "mod_sight_front": true,
+  "mod_mount_003": false,
+  "mod_scope": true
+ },
+ "c0de02770000000000000016": {
+  "mod_scope": false
+ },
+ "c0de02770000000000000017": {
+  "mod_scope": false
+ },
+ "c2b2c19a77dc7a92dc9cde86": {
+  "mod_mount": true,
+  "mod_tactical": true
+ },
+ "c572ff3cb1b04b5dd73e615b": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_tactical": true
+ },
+ "da4c7e9cd4950bdfdd100919": {
+  "mod_mount_000": false,
+  "mod_mount_001": false
+ },
+ "deee28079e76d537f532021c": {
+  "mod_scope": false
+ },
+ "e35cdf03e4ef650e23e66492": {
+  "mod_mount_004": false,
+  "mod_mount_000": false
+ },
+ "f210f163bd934e1524e11162": {
+  "mod_mount": true
+ },
+ "fbe97e400bfc57e0adbafb27": {
+  "mod_tactical": true
+ },
+ "ff31402cb7b0b1d43491337c": {
+  "mod_mount_000": false,
+  "mod_mount_001": false,
+  "mod_mount_002": false,
+  "mod_mount_003": true
+ }
+}

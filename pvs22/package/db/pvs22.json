@@ -1,0 +1,142 @@
+{
+ "item": {
+  "_id": "67a0c0de5056532200000001",
+  "_name": "ustachae_mount_an_pvs22",
+  "_parent": "55818aeb4bdc2ddc698b456a",
+  "_props": {
+   "Accuracy": 0,
+   "AdjustableOpticSensitivity": 0,
+   "AdjustableOpticSensitivityMax": 0,
+   "AimSensitivity": [
+    [
+     0.65
+    ]
+   ],
+   "AnimationVariantsNumber": 0,
+   "BackgroundColor": "blue",
+   "BlocksCollapsible": false,
+   "BlocksFolding": false,
+   "CalibrationDistances": [
+    [
+     100
+    ]
+   ],
+   "CanPutIntoDuringTheRaid": true,
+   "CanRequireOnRagfair": false,
+   "CanSellOnRagfair": true,
+   "CantRemoveFromSlotsDuringRaid": [],
+   "ConflictingItems": [],
+   "CustomAimPlane": "",
+   "Description": "AN/PVS-22",
+   "DiscardLimit": -1,
+   "DiscardingBlock": false,
+   "DoubleActionAccuracyPenaltyMult": 1,
+   "DropSoundType": "None",
+   "Durability": 100,
+   "EffectiveDistance": 0,
+   "Ergonomics": -9,
+   "ExamineExperience": 10,
+   "ExamineTime": 1,
+   "ExaminedByDefault": true,
+   "ExtraSizeDown": 0,
+   "ExtraSizeForceAdd": false,
+   "ExtraSizeLeft": 0,
+   "ExtraSizeRight": 0,
+   "ExtraSizeUp": 0,
+   "ForbidMissingVitalParts": false,
+   "ForbidNonEmptyContainers": false,
+   "Grids": [],
+   "HasShoulderContact": false,
+   "Height": 1,
+   "HideEntrails": false,
+   "InsuranceDisabled": false,
+   "IsAdjustableOptic": false,
+   "IsAlwaysAvailableForInsurance": false,
+   "IsAnimated": false,
+   "IsLockedafterEquip": false,
+   "IsSecretExitRequirement": false,
+   "IsSpecialSlotOnly": false,
+   "IsUnbuyable": false,
+   "IsUndiscardable": false,
+   "IsUngivable": false,
+   "IsUnremovable": false,
+   "IsUnsaleable": false,
+   "ItemSound": "mod",
+   "LeftHandItem": false,
+   "LootExperience": 10,
+   "Loudness": 0,
+   "MergesWithChildren": true,
+   "MetascoreGroup": "Firepower",
+   "MinMaxFov": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+   },
+   "ModesCount": [
+    1
+   ],
+   "Name": "AN/PVS-22",
+   "NotShownInSlot": false,
+   "Prefab": {
+    "path": "ustachae_pvs22/an_pvs22.bundle",
+    "rcid": ""
+   },
+   "QuestItem": false,
+   "QuestStashMaxCount": 0,
+   "RagFairCommissionModifier": 1,
+   "RaidModdable": true,
+   "RarityPvE": "Superrare",
+   "Recoil": 0,
+   "RepairCost": 0,
+   "RepairSpeed": 0,
+   "ScopesCount": 1,
+   "ShortName": "PVS-22",
+   "SightingRange": 300,
+   "Slots": [],
+   "StackMaxSize": 1,
+   "StackObjectsCount": 1,
+   "ToolModdable": true,
+   "UniqueAnimationModID": 0,
+   "Unlootable": false,
+   "UnlootableFromSide": [],
+   "UnlootableFromSlot": "FirstPrimaryWeapon",
+   "UsePrefab": {
+    "path": "",
+    "rcid": ""
+   },
+   "Velocity": 0,
+   "Weight": 0.86,
+   "Width": 2,
+   "ZoomSensitivity": 0,
+   "Zooms": [
+    [
+     1
+    ]
+   ],
+   "sightModType": "optic"
+  },
+  "_proto": "5b3b6e495acfc4330140bd88",
+  "_type": "Item"
+ },
+ "locales": {
+  "en": {
+   "name": "AN/PVS-22 Universal Night Sight",
+   "shortName": "AN/PVS-22",
+   "description": "A clip-on night sight for day scopes up to 12x. Mounted in line in front of the scope, it turns the view through it into night vision while the scope keeps its own magnification."
+  },
+  "ch": {
+   "name": "AN/PVS-22 通用夜视瞄具",
+   "shortName": "AN/PVS-22",
+   "description": "夹式夜视瞄具，适配最高 12 倍的白光瞄具。同轴装在白光瞄具前方后，通过该瞄具看到的画面会变成夜视，倍率仍由白光瞄具提供。"
+  }
+ },
+ "handbookParentId": "5b5f749986f774094242f199",
+ "price": 165000,
+ "listing": {
+  "traderId": "5935c25fb3acc3127c3d8cd9",
+  "currency": "5696686a4bdc2da3298b456a",
+  "price": 1150,
+  "loyalty": 1,
+  "assortId": "67a0c0de5056532200000002"
+ }
+}
