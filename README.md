@@ -91,7 +91,7 @@ Clip-on night vision and thermal sights for SPT 4.1.6. They mount on the rail in
 | `... not found in ...` | 文件夹里没找到要求的 zip。确认参数是放 zip 的**文件夹**，zip 没有解压、没有改名 |
 | `... is not the version of the file this mod was made from` | 商店里的模型更新过，和模组测量时用的版本不同，请提交 issue |
 | `SPT.Server.exe is running` / `EscapeFromTarkov.exe is running` | 先关闭服务端和游戏 |
-| `no templates folder` | 脚本不在模组文件夹里运行，`cd` 到上表的模组文件夹再运行 |
+| `there is no templates folder` | 模组文件夹里缺少 `templates`，说明发布包没有完整解压。把整个 zip 重新解压到游戏根目录，再在模组文件夹里运行 |
 
 每次运行，脚本都会把详细过程写进模组文件夹里的日志：`build_pvs27.log` 或 `build_utc.log`。内容包括你的 Python 和库的版本、每个文件的校验结果、生成文件的校验值和出错的完整信息。如果按提示解决不了，或者生成成功但游戏里外观不对，请到 [Issues](https://github.com/UstAchae/EFTClipOnSight/issues) 提交问题，并附上这个日志文件。
 

@@ -1,5 +1,6 @@
-# The author's test install: the four clip-on mods with all their bundles (the author's own builds) and the shared
-# client plugin. Refuses while the SPT server or the game is running, since both lock files in these folders.
+# The author's test install: the four clip-on mods laid out as their release zips (for the AN/PVS-27 and UTC XII
+# also their build script and templates), plus all bundles (the author's own builds), and the shared client plugin.
+# Refuses while the SPT server or the game is running, since both lock files in these folders.
 # The earlier single-mod install (UstAchae-PVS22) holds the same items and is moved out of the way, into
 # .codex-work/old_install_backup.
 import json, shutil, subprocess, sys
@@ -8,6 +9,8 @@ from pathlib import Path
 W = Path(__file__).resolve().parent
 sys.path.insert(0, str(W.parent))
 from mods import MODS, PLUGIN_DLL, PLUGIN_FOLDER, TOP_RAILS, server_files, manifest
+
+CONVERTER = W.parent / 'converter'
 
 ROOT = Path(r'D:/games/SPT-4.1.6')
 MODS_DIR = ROOT / 'SPT_Runtime/user/mods'
@@ -40,5 +43,10 @@ for key, mod in MODS.items():
     for src, name in mod['items'].items(): copy(src, folder / 'db/items' / name)
     copy(TOP_RAILS, folder / 'db/top_rails.json')
     for bundle, (src, _) in mod['bundles'].items(): copy(src, folder / 'bundles' / bundle)
+    if mod['script']:
+        copy(CONVERTER / mod['script'], folder / mod['script'])
+        for bundle in mod['bundles']:
+            name = Path(bundle).stem + '.bundle.template'
+            copy(CONVERTER / 'templates' / name, folder / 'templates' / name)
     (folder / 'bundles.json').write_text(json.dumps(manifest(key, mod['bundles']), indent=2), encoding='utf-8')
 copy(PLUGIN_DLL, PLUGINS / PLUGIN_FOLDER / PLUGIN_DLL.name)

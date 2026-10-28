@@ -450,7 +450,8 @@ def run(args):
         if exe in running: raise SystemExit(f'{exe} is running; close the SPT server and the game first')
     templates = args.mod / 'templates'
     if not templates.is_dir():
-        raise SystemExit(f'no templates folder in {args.mod}: run this script inside the mod\'s folder, or pass --mod <the mod\'s folder>')
+        raise SystemExit(f'there is no templates folder in {args.mod}. The mod\'s release zip puts it next to this script: '
+                         f'unzip the whole zip into the game folder again (or, if this script was copied elsewhere, pass --mod <the mod\'s folder>)')
     for key in MODELS:
         template = templates / f'{key}.bundle.template'
         if not template.exists(): raise SystemExit(f'{template} is missing: reinstall the mod')
