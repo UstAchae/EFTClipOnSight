@@ -48,7 +48,7 @@ public static class ClipOnRenderCheck {
     File.WriteAllBytes(Output+"/"+key+"_eye"+deg+".png",tex.EncodeToPNG());cam.targetTexture=null;RenderTexture.active=null;
    }
    // The objective end from the side: its glass must stay inside the barrel.
-   foreach(var (deg,up) in new[]{(45f,13f),(70f,21f),(90f,27f),(70f,45f),(100f,35f)}){
+   foreach(var (deg,up) in new[]{(45f,13f),(70f,21f),(90f,27f),(70f,45f),(100f,35f),(0f,-25f),(25f,-40f)}){
     var objEnd=go.transform.TransformPoint(0,axis,b.max.z);
     var dir=Quaternion.Euler(-up,deg,0)*Vector3.forward;
     cam.transform.position=objEnd+dir*0.16f;cam.transform.LookAt(objEnd-Vector3.forward*0.01f);cam.fieldOfView=40;

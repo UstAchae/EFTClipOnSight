@@ -438,6 +438,41 @@ def frame(cfg):
     return M, ax, across
 
 
+def bore_reach(V, faces, ax, across, centre, radius, seg, margin):
+    """How far the objective glass may reach from its centre in each of `seg` directions: up to the barrel's inner
+    wall where the body crosses the plane through `centre` (half a millimetre in front of the glass: the opening
+    seen from the front; at the glass's own plane what is left of a painted lens's stacked surfaces still crosses
+    it), less `margin`, at most `radius`. A disc of one radius showed
+    past bores that are not round, such as the PVS-27's, whose rail mount arches up into it. Walls within 0.6 of
+    the radius are parts standing in the middle of the lens (the PVS-27's central cap), not the bore."""
+    plane = centre[ax]
+    starts, ends = [], []
+    for sm, corners in faces:
+        if sm != 0: continue
+        p = V[[c[0] for c in corners]]
+        s = p[:, ax] - plane
+        if s.min() >= 0 or s.max() <= 0: continue
+        hits = []
+        for i in range(len(p)):
+            a, b, sa, sb = p[i], p[(i + 1) % len(p)], s[i], s[(i + 1) % len(p)]
+            if sa * sb < 0: hits.append(a + (b - a) * (sa / (sa - sb)))
+        for k in range(0, len(hits) - 1, 2):
+            starts.append(hits[k]); ends.append(hits[k + 1])
+    if not starts: return np.full(seg, radius)
+    A = np.array(starts)[:, [across, 1]] - centre[[across, 1]]
+    E = np.array(ends)[:, [across, 1]] - centre[[across, 1]] - A
+    cross = lambda u, v: u[..., 0] * v[..., 1] - u[..., 1] * v[..., 0]
+    angles = 2 * np.pi * np.arange(seg) / seg
+    d = np.stack([np.cos(angles), np.sin(angles)], 1)[:, None, :]
+    den = cross(d, E[None])
+    ok = np.abs(den) > 1e-12
+    den = np.where(ok, den, 1.0)
+    t = cross(A[None], E[None]) / den      # along the ray
+    u = cross(A[None], d) / den            # along the wall segment
+    t = np.where(ok & (u >= 0) & (u <= 1) & (t > 0.6 * radius), t, np.inf)
+    return np.minimum(t.min(1) - margin, radius)
+
+
 def clipon_mesh(cfg, obj_text):
     V, VT, faces = read_obj(obj_text)
     M, ax, across = frame(cfg)
@@ -468,14 +503,16 @@ def clipon_mesh(cfg, obj_text):
     faces = keep
     outward = np.zeros(3); outward[ax] = cfg['objective']
     # One objective glass disc, at the painted lens's front surface (`disc`, else the front of its depth range),
-    # filling the barrel's bore (`disc_y`, `disc_radius`, else the painted lens's circle), facing out.
+    # filling the barrel's bore (`disc_y`, `disc_radius`, else the painted lens's circle; its edge following the
+    # bore's wall, bore_reach), facing out.
     disc_y, disc_r = lens.get('disc_y', lens['y']), lens.get('disc_radius', lens['radius'])
-    seg, centre = 48, np.zeros(3)
+    seg, centre = 96, np.zeros(3)
     centre[ax] = (front - lens.get('disc', lens['depth'][0])) * cfg['objective']; centre[1] = disc_y
+    reach = bore_reach(V, faces, ax, across, centre + outward * (0.0005 / cfg['scale']), disc_r, seg, 0.0002 / cfg['scale'])
     ring = []
     for i in range(seg):
         q = centre.copy(); a = 2 * np.pi * i / seg
-        q[across] += np.cos(a) * disc_r; q[1] += np.sin(a) * disc_r
+        q[across] += np.cos(a) * reach[i]; q[1] += np.sin(a) * reach[i]
         ring.append(q)
     if face_normal(np.array(ring)) @ outward < 0: ring.reverse()
     base = len(V)
