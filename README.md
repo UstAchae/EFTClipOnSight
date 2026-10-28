@@ -31,7 +31,7 @@ Clip-on night vision and thermal sights for SPT 4.1.6. They mount on the rail in
 
 这两个模型来自 CGTrader，按其授权条款，模组不附带模型，只附带不含模型的模板（`templates/`）和生成脚本。买了哪个，就能生成哪个；没有生成模型的物品不会出现在游戏里，服务端启动时会在控制台给出警告。
 
-| 物品 | 购买链接 | 需要的输入文件（下载后原样保留） | 模组文件夹 | 脚本 |
+| 物品 | 购买链接 | 需要的输入文件（下载后不要解压） | 模组文件夹 | 脚本 |
 |---|---|---|---|---|
 | AN/PVS-27（黑色、沙色） | [CGTrader：PVS27 Magnum Universal Night Sight](https://www.cgtrader.com/3d-models/military/other/pvs27-magnum-universal-night-sight) | `pvs27-magnum-universal-night-sight.zip` | `SPT_Runtime/user/mods/UstAchae-ClipOnSight-PVS27` | `build_pvs27.py` |
 | UTC XII（黑色、沙色） | [CGTrader：UTCx Thermal Weapon Sight](https://www.cgtrader.com/3d-models/military/other/utcx-thermal-weapon-sight) | `utcx-thermal-weapon-sight.zip` | `SPT_Runtime/user/mods/UstAchae-ClipOnSight-UTC` | `build_utc.py` |
@@ -49,22 +49,21 @@ Clip-on night vision and thermal sights for SPT 4.1.6. They mount on the rail in
 
 ### 生成
 
-1. 在 CGTrader 购买并下载模型，得到上表里的 zip。**不要解压，也不要改名**，把它放进一个文件夹，比如 `C:\Users\<你的用户名>\Downloads`。
+1. 在 CGTrader 购买并下载模型，得到上表里的 zip。**不要解压**；放在哪个文件夹都可以，改过名字也没关系。
 2. 关闭 SPT 服务端和游戏。
 3. 打开对应的模组文件夹（上表"模组文件夹"一列，在游戏根目录下）。在资源管理器的地址栏里输入 `cmd` 并回车，会在这个文件夹里打开命令提示符。
-4. 运行脚本，最后的参数是放 zip 的文件夹（路径里有空格时要加引号）：
+4. 运行脚本，格式是 `python 脚本名 模型zip的路径`。最省事的做法：
+   1. 在命令提示符里输入脚本名和一个空格，先不要回车：AN/PVS-27 输入 `python build_pvs27.py `，UTC XII 输入 `python build_utc.py `。
+   2. 在资源管理器里找到下载的模型 zip，用鼠标把它**拖进命令提示符窗口**，它的完整路径会自动填进去。
+   3. 回车。
 
-   AN/PVS-27，在 `UstAchae-ClipOnSight-PVS27` 文件夹里：
-
-   ```
-   python build_pvs27.py "C:\Users\<你的用户名>\Downloads"
-   ```
-
-   UTC XII，在 `UstAchae-ClipOnSight-UTC` 文件夹里：
+   拖完之后，命令看起来像这样（路径是你自己电脑上 zip 所在的位置）：
 
    ```
-   python build_utc.py "C:\Users\<你的用户名>\Downloads"
+   python build_utc.py "D:\某个文件夹\utcx-thermal-weapon-sight.zip"
    ```
+
+   也可以把 zip 直接放进模组文件夹，这样不用写路径，只运行 `python build_pvs27.py` 或 `python build_utc.py` 就行。
 
 5. 成功时，最后会显示类似这样的内容（UTC XII 的文件名是 `utc.bundle` 和 `utc_fde.bundle`）：
 
@@ -88,7 +87,7 @@ Clip-on night vision and thermal sights for SPT 4.1.6. They mount on the rail in
 |---|---|
 | `A Python package this script needs is missing` | 没装依赖库，运行 `python -m pip install UnityPy numpy Pillow` |
 | `'python' 不是内部或外部命令` | Python 没装，或安装时没勾选 Add python.exe to PATH，重新安装一次 |
-| `... not found in ...` | 文件夹里没找到要求的 zip。确认参数是放 zip 的**文件夹**，zip 没有解压、没有改名 |
+| `... was not found in ...` / `... does not exist` / `... is not the download this script needs` | 没找到模型 zip，或者给的不是这个模型的 zip。按第 4 步把 zip 拖进窗口；不要给解压出来的文件夹或里面的文件 |
 | `... is not the version of the file this mod was made from` | 商店里的模型更新过，和模组测量时用的版本不同，请提交 issue |
 | `SPT.Server.exe is running` / `EscapeFromTarkov.exe is running` | 先关闭服务端和游戏 |
 | `there is no templates folder` | 模组文件夹里缺少 `templates`，说明发布包没有完整解压。把整个 zip 重新解压到游戏根目录，再在模组文件夹里运行 |

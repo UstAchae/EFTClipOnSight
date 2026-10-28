@@ -11,7 +11,9 @@ Input: the PVS27 Magnum Universal Night Sight model from CGTrader
 Requirements: Python 3.10 or newer with `pip install UnityPy numpy Pillow`.
 
 Usage, with the SPT server and the game closed, from this mod's folder (SPT_Runtime/user/mods/UstAchae-ClipOnSight-PVS27):
-  python build_pvs27.py <folder holding the zip>
+  python build_pvs27.py <the path of the model's zip>
+The easiest way to give the path: type "python build_pvs27.py " and drag the zip into the window. The folder holding
+the zip works too, and without a path the script looks in this mod's folder. The zip may be renamed, not unzipped.
 It writes the bundles into bundles/ and lists them in bundles.json; start the server and the item is there.
 Everything it does goes into build_pvs27.log next to it: attach that file to an issue if it fails.
 """
@@ -72,8 +74,8 @@ TEX_SIZE = 2048
 
 class Purchase:
     """Files from the downloaded zips, including zips inside them, checked against the expected SHA-256."""
-    def __init__(self, folder):
-        self.outer = {name: zipfile.ZipFile(folder / name) for name in SOURCE['archives']}
+    def __init__(self, paths):
+        self.outer = {name: zipfile.ZipFile(paths[name]) for name in SOURCE['archives']}
         self.inner = {}
 
     def read(self, name):
@@ -434,12 +436,47 @@ def check_bundle(data, model):
         raise SystemExit(f'the written bundle is incomplete (mesh {vertices} vertices, textures {textures})')
 
 
+def holds_purchase(zip_path, archive):
+    """Whether a zip is this purchase's download `archive`, whatever its file name: it holds the files used from it."""
+    wanted = {e[-2] for e in SOURCE['files'].values() if (e[0] if len(e) == 3 else SOURCE['archives'][0]) == archive}
+    try:
+        names = set(zipfile.ZipFile(zip_path).namelist())
+    except (OSError, zipfile.BadZipFile):
+        return False
+    return all((w.partition('.zip/')[0] + '.zip' if '.zip/' in w else w) in names for w in wanted)
+
+
+def find_archives(given):
+    """The purchase's zips from what the player gave: the zip itself (a purchase with one download), or the folder
+    holding the zips (without anything, the mod's folder). A zip is known by its contents, so a renamed one is found."""
+    if not given.exists():
+        raise SystemExit(f'{given} does not exist. Give the path of the model\'s zip (drag the zip into this window), '
+                         f'or the folder that holds it')
+    if given.is_file():
+        if len(SOURCE['archives']) == 1 and holds_purchase(given, SOURCE['archives'][0]):
+            return {SOURCE['archives'][0]: given}
+        raise SystemExit(f'{given} is not the download this script needs ({", ".join(SOURCE["archives"])}, unchanged and not unzipped)')
+    paths = {}
+    for archive in SOURCE['archives']:
+        if (given / archive).exists():
+            paths[archive] = given / archive
+            continue
+        renamed = [p for p in sorted(given.glob('*.zip')) if holds_purchase(p, archive)]
+        if renamed: paths[archive] = renamed[0]
+    missing = [a for a in SOURCE['archives'] if a not in paths]
+    if missing:
+        found = sorted(p.name for p in given.glob('*.zip'))
+        raise SystemExit(f'{", ".join(missing)} was not found in {given} (zips there: {", ".join(found) or "none"}). '
+                         f'Give the path of the model\'s zip (drag it into this window), and do not unzip it.')
+    return paths
+
+
 def run(args):
     log(f'{Path(__file__).name} for {SOURCE["title"]}, mod {MOD_VERSION}')
     log(f'Python {sys.version.split()[0]} on {platform.platform()}; numpy {np.__version__}, Pillow {Image.__version__}, '
         f'UnityPy {getattr(UnityPy, "__version__", "?")}', show=False)
     log(f'mod folder: {args.mod}', show=False)
-    log(f'model folder: {args.models}', show=False)
+    log(f'model given: {args.models or "(none: the mod folder)"}', show=False)
     if sys.version_info < (3, 10): raise SystemExit('Python 3.10 or newer is needed')
     running = subprocess.run(['tasklist'], capture_output=True, text=True).stdout if sys.platform == 'win32' else ''
     for exe in ('SPT.Server.exe', 'EscapeFromTarkov.exe'):
@@ -452,19 +489,14 @@ def run(args):
         template = templates / f'{key}.bundle.template'
         if not template.exists(): raise SystemExit(f'{template} is missing: reinstall the mod')
         log(f'template {template.name}: {sha256(template.read_bytes())}', show=False)
-    if not args.models.is_dir(): raise SystemExit(f'{args.models} is not a folder: pass the folder that holds the zip')
-    missing = [a for a in SOURCE['archives'] if not (args.models / a).exists()]
-    if missing:
-        found = sorted(p.name for p in args.models.glob('*.zip'))
-        raise SystemExit(f'{", ".join(missing)} not found in {args.models} (zips there: {", ".join(found) or "none"}). '
-                         f'Put the download in that folder unchanged: not unzipped, not renamed.')
-    for archive in SOURCE['archives']:
-        data = (args.models / archive).read_bytes()
-        log(f'{archive}: {len(data)} bytes, sha256 {sha256(data)}', show=False)
+    paths = find_archives(args.models or args.mod)
+    for archive, path in paths.items():
+        data = path.read_bytes()
+        log(f'{archive}: {path}, {len(data)} bytes, sha256 {sha256(data)}', show=False)
 
     log('reading ' + SOURCE['title'])
     with tempfile.TemporaryDirectory() as tmp:
-        jobs = build(Purchase(args.models), args, Path(tmp))
+        jobs = build(Purchase(paths), args, Path(tmp))
         for key, (mesh, textures) in jobs.items():
             model = MODELS[key]
             data = fill_template(templates / f'{key}.bundle.template', model, mesh, textures)
@@ -485,7 +517,7 @@ def run(args):
 def main():
     global LOG
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument('models', type=Path, help='folder holding the downloaded zip' + ('s' if len(SOURCE['archives']) > 1 else ''))
+    ap.add_argument('models', type=Path, nargs='?', help='the downloaded zip, or the folder holding it (default: this mod\'s folder)')
     ap.add_argument('--mod', type=Path, default=Path(__file__).resolve().parent, help='this mod\'s folder (default: where this script is)')
     add_options(ap)
     args = ap.parse_args()

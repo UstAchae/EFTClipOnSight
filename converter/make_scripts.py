@@ -17,7 +17,9 @@ THERMAL_DEPS = (BASE_DEPS[:-1] + ", 'assets/content/items/mods/scopes/scope_base
 USAGE = '''Requirements: Python 3.10 or newer with `pip install UnityPy numpy Pillow`{extra}.
 
 Usage, with the SPT server and the game closed, from this mod's folder (SPT_Runtime/user/mods/{folder}):
-  python {script} <folder holding {what}>{options}
+  python {script} <the path of the model's zip>{options}
+The easiest way to give the path: type "python {script} " and drag the zip into the window. The folder holding
+the zip works too, and without a path the script looks in this mod's folder. The zip may be renamed, not unzipped.
 It writes the bundles into bundles/ and lists them in bundles.json; start the server and the item is there.
 Everything it does goes into {log} next to it: attach that file to an issue if it fails.
 '''
@@ -33,7 +35,7 @@ Input: the PVS27 Magnum Universal Night Sight model from CGTrader
 (not unzipped, name as downloaded):
   pvs27-magnum-universal-night-sight.zip
 
-''' + USAGE.format(extra='', folder='UstAchae-ClipOnSight-PVS27', script='build_pvs27.py', what='the zip', options='', log='build_pvs27.log') + '''"""
+''' + USAGE.format(extra='', folder='UstAchae-ClipOnSight-PVS27', script='build_pvs27.py', options='', log='build_pvs27.log') + '''"""
 # The purchase: the files used from its download ("inner.zip/path" for a zip inside it) with their SHA-256 (the
 # processing was measured on exactly these files, so other versions are refused).
 SOURCE = {'title': 'AN/PVS-27 (CGTrader)', 'archives': ['pvs27-magnum-universal-night-sight.zip'], 'files': {
@@ -75,7 +77,7 @@ Input: the UTCx Thermal Weapon Sight model from CGTrader
 unzipped, name as downloaded):
   utcx-thermal-weapon-sight.zip
 
-''' + USAGE.format(extra='', folder='UstAchae-ClipOnSight-UTC', script='build_utc.py', what='the zip', options='', log='build_utc.log') + '''"""
+''' + USAGE.format(extra='', folder='UstAchae-ClipOnSight-UTC', script='build_utc.py', options='', log='build_utc.log') + '''"""
 # The purchase: the files used from its download ("inner.zip/path" for a zip inside it) with their SHA-256 (the
 # processing was measured on exactly these files, so other versions are refused).
 SOURCE = {'title': 'UTC XII (CGTrader)', 'archives': ['utcx-thermal-weapon-sight.zip'], 'files': {
