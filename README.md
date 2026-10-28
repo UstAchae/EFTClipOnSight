@@ -36,50 +36,104 @@ Clip-on night vision and thermal sights for SPT 4.1.6. They mount on the rail in
 | AN/PVS-27（黑色、沙色） | [CGTrader：PVS27 Magnum Universal Night Sight](https://www.cgtrader.com/3d-models/military/other/pvs27-magnum-universal-night-sight) | `pvs27-magnum-universal-night-sight.zip` | `SPT_Runtime/user/mods/UstAchae-ClipOnSight-PVS27` | `build_pvs27.py` |
 | UTC XII（黑色、沙色） | [CGTrader：UTCx Thermal Weapon Sight](https://www.cgtrader.com/3d-models/military/other/utcx-thermal-weapon-sight) | `utcx-thermal-weapon-sight.zip` | `SPT_Runtime/user/mods/UstAchae-ClipOnSight-UTC` | `build_utc.py` |
 
-### 准备（只需要做一次）
+### 手把手教程
 
-1. 安装 [Python](https://www.python.org/downloads/) 3.10 或更新版本。安装时勾选 **Add python.exe to PATH**。
-2. 打开"命令提示符"（开始菜单搜索 `cmd`），安装脚本需要的三个库：
+下面以 UTC XII 为例，一步一步走一遍；AN/PVS-27 完全一样，只是把 `UTC` 换成 `PVS27`、`build_utc.py` 换成 `build_pvs27.py`。每一步都写了"应该看到什么"，和你看到的不一样时，先看那一步下面的说明。
+
+#### 第 1 步：安装 Python（只需要做一次）
+
+1. 打开 [python.org/downloads](https://www.python.org/downloads/)，下载并运行安装程序（3.10 或更新的版本都可以）。
+2. 安装界面的最下方有一个 **Add python.exe to PATH** 的勾选框，**一定要勾上**，再点 Install Now。
+
+#### 第 2 步：安装脚本需要的库（只需要做一次）
+
+1. 按 `Win` 键，输入 `cmd`，回车，会打开一个黑底白字的"命令提示符"窗口。
+2. 输入下面这行，回车：
+
+   ```
+   python --version
+   ```
+
+   **应该看到：** `Python 3.12.10` 这样的版本号。
+3. 再输入下面这行，回车：
 
    ```
    python -m pip install UnityPy numpy Pillow
    ```
 
-   输入 `python --version` 能显示版本号，就说明 Python 装好了。
+   **应该看到：** 下载和安装的过程，最后一行以 `Successfully installed` 开头。装过的话会显示 `Requirement already satisfied`，也是对的。
 
-### 生成
+**如果不是这样：** 显示 `'python' 不是内部或外部命令`，或者弹出了微软商店，说明 Python 没装好或者第 1 步没勾 Add python.exe to PATH。重新运行 Python 安装程序，勾上那个选项再装一次，然后关掉命令提示符重新打开。
 
-1. 在 CGTrader 购买并下载模型，得到上表里的 zip。**不要解压**；放在哪个文件夹都可以，改过名字也没关系。
-2. 关闭 SPT 服务端和游戏。
-3. 打开对应的模组文件夹（上表"模组文件夹"一列，在游戏根目录下）。在资源管理器的地址栏里输入 `cmd` 并回车，会在这个文件夹里打开命令提示符。
-4. 运行脚本，格式是 `python 脚本名 模型zip的路径`。最省事的做法：
-   1. 在命令提示符里输入脚本名和一个空格，先不要回车：AN/PVS-27 输入 `python build_pvs27.py `，UTC XII 输入 `python build_utc.py `。
-   2. 在资源管理器里找到下载的模型 zip，用鼠标把它**拖进命令提示符窗口**，它的完整路径会自动填进去。
-   3. 回车。
+#### 第 3 步：购买并下载模型
 
-   拖完之后，命令看起来像这样（路径是你自己电脑上 zip 所在的位置）：
+1. 打开上表里的购买链接，在 CGTrader 购买模型。
+2. 下载得到一个 zip，UTC XII 的是 `utcx-thermal-weapon-sight.zip`。
+3. **不要解压它。** 放在哪里都可以，改了名字也没关系，记得放在哪里就行。
+
+#### 第 4 步：关闭服务端和游戏
+
+脚本会改写模组文件夹里的文件，服务端或游戏开着时它会拒绝运行。
+
+#### 第 5 步：在模组文件夹里打开命令提示符
+
+1. 在资源管理器里打开游戏根目录（有 `EscapeFromTarkov.exe` 的文件夹），再依次打开 `SPT_Runtime` → `user` → `mods` → `UstAchae-ClipOnSight-UTC`。
+2. **应该看到：** 文件夹里有 `build_utc.py`、`templates` 文件夹、`db` 文件夹，以及几个 `UstAchae.ClipOnSight.UTC` 开头的文件。
+3. 点一下窗口上方的地址栏，把里面的路径全部删掉，输入 `cmd`，回车。
+4. **应该看到：** 弹出一个新的命令提示符窗口，`>` 前面显示的就是这个模组文件夹的路径。
+
+**如果不是这样：** 文件夹里没有 `templates`，说明模组的 zip 没有完整解压，把整个 zip 重新解压到游戏根目录。
+
+#### 第 6 步：运行脚本
+
+1. 在这个新窗口里输入下面的内容，**末尾有一个空格，先不要回车**：
+
+   ```
+   python build_utc.py 
+   ```
+
+2. 在资源管理器里找到第 3 步下载的 zip，用鼠标把它**拖进命令提示符窗口**，松开。它的完整路径会自动接在后面，看起来像这样（路径是你自己电脑上 zip 所在的位置）：
 
    ```
    python build_utc.py "D:\某个文件夹\utcx-thermal-weapon-sight.zip"
    ```
 
-   也可以把 zip 直接放进模组文件夹，这样不用写路径，只运行 `python build_pvs27.py` 或 `python build_utc.py` 就行。
+3. 回车。
 
-5. 成功时，最后会显示类似这样的内容（UTC XII 的文件名是 `utc.bundle` 和 `utc_fde.bundle`）：
+**应该看到：** 先显示两行开头，然后大约一两分钟没有新的输出（这时正在处理，是正常的），最后显示：
 
-   ```
-   reading AN/PVS-27 (CGTrader)
-     built ustachae_clipons/pvs27.bundle, 11.1 MB: identical to the author's build
-     built ustachae_clipons/pvs27_fde.bundle, 11.3 MB: identical to the author's build
-   bundles.json written
+```
+build_utc.py for UTC XII (CGTrader), mod 0.1.0
+reading UTC XII (CGTrader)
+  built ustachae_clipons/utc.bundle, 9.9 MB: identical to the author's build
+  built ustachae_clipons/utc_fde.bundle, 10.9 MB: identical to the author's build
+bundles.json written
 
-   Done: start the SPT server, and AN/PVS-27 (CGTrader) is in the game.
-   ```
+Done: start the SPT server, and UTC XII (CGTrader) is in the game.
+```
 
-   生成需要几分钟，期间没有输出是正常的。生成的两个 bundle（黑色和沙色）在模组文件夹的 `bundles/` 里。
-6. 启动服务端。控制台里出现 `AN/PVS-27 loaded, fits ... rail slots`（UTC XII 是 `UTC XII loaded`），物品就已经在游戏里了。
+两个 bundle 分别是黑色和沙色版本，生成在模组文件夹的 `bundles` 里。AN/PVS-27 的是 `pvs27.bundle` 和 `pvs27_fde.bundle`。
 
-如果显示的是 `not byte-identical to the author's build`，说明你电脑上的库版本和作者的不同，生成的文件和作者的不完全一样，但通常不影响使用。进游戏看一眼，外观正常就没问题。
+如果显示的是 `not byte-identical to the author's build` 而不是 `identical to the author's build`，说明你电脑上的库版本和作者的不同，生成的文件和作者的不是逐字节相同，通常不影响使用，第 8 步进游戏看一眼外观正常就行。
+
+**如果不是这样：** 屏幕上会有一行 `ERROR:` 开头的说明，按下面"出错时"的表格处理。
+
+不想拖放的话，也可以把 zip 直接放进模组文件夹，然后只输入 `python build_utc.py` 回车。
+
+#### 第 7 步：启动服务端，确认物品已加载
+
+启动 SPT 服务端，在控制台的输出里找下面两行：
+
+```
+UTC XII FDE loaded, fits 176 rail slots
+UTC XII loaded, fits 176 rail slots
+```
+
+**如果不是这样：** 如果看到的是黄色的 `UTC XII is not in the game: its model bundle ... has not been built`，说明第 6 步没有成功，回到第 6 步再运行一次，并看清楚它的输出。
+
+#### 第 8 步：进游戏
+
+启动游戏，在 Peacekeeper 一级或跳蚤市场就能买到 UTC XII（黑色和沙色），装到白光瞄具前方的导轨上即可。
 
 ### 出错时
 
@@ -87,7 +141,7 @@ Clip-on night vision and thermal sights for SPT 4.1.6. They mount on the rail in
 |---|---|
 | `A Python package this script needs is missing` | 没装依赖库，运行 `python -m pip install UnityPy numpy Pillow` |
 | `'python' 不是内部或外部命令` | Python 没装，或安装时没勾选 Add python.exe to PATH，重新安装一次 |
-| `... was not found in ...` / `... does not exist` / `... is not the download this script needs` | 没找到模型 zip，或者给的不是这个模型的 zip。按第 4 步把 zip 拖进窗口；不要给解压出来的文件夹或里面的文件 |
+| `... was not found in ...` / `... does not exist` / `... is not the download this script needs` | 没找到模型 zip，或者给的不是这个模型的 zip。按第 6 步把 zip 拖进窗口；不要给解压出来的文件夹或里面的文件 |
 | `... is not the version of the file this mod was made from` | 商店里的模型更新过，和模组测量时用的版本不同，请提交 issue |
 | `SPT.Server.exe is running` / `EscapeFromTarkov.exe is running` | 先关闭服务端和游戏 |
 | `there is no templates folder` | 模组文件夹里缺少 `templates`，说明发布包没有完整解压。把整个 zip 重新解压到游戏根目录，再在模组文件夹里运行 |
