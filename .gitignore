@@ -14,6 +14,7 @@
 !/converter/build_utc.py
 !/converter/make_scripts.py
 !/converter/make_templates.py
+!/converter/reference.json
 !/converter/parts/
 !/converter/templates/
 !/make_release.py

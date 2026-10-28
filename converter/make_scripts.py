@@ -1,8 +1,11 @@
 # Author-side: writes the players' build scripts (build_pvs27.py, build_utc.py), one per mod whose model is not
 # shipped. Each is a single file, so a player runs just the one in that mod's folder: its own header (what it
 # needs, the purchase's files and their SHA-256, its bundles), then the shared parts (parts/common.py: reading the
-# purchase, writing the templates) and the clip-on model part (parts/clipon.py).
+# purchase, writing the templates) and the clip-on model part (parts/clipon.py). The header also carries the mod's
+# version and reference.json: the SHA-256 of each bundle the script made from the author's own purchases (update it
+# after changing a template or the processing), which the log compares a player's result with.
 # Usage: python converter/make_scripts.py
+import json, re
 from pathlib import Path
 
 W = Path(__file__).resolve().parent
@@ -16,6 +19,7 @@ USAGE = '''Requirements: Python 3.10 or newer with `pip install UnityPy numpy Pi
 Usage, with the SPT server and the game closed, from this mod's folder (SPT_Runtime/user/mods/{folder}):
   python {script} <folder holding {what}>{options}
 It writes the bundles into bundles/ and lists them in bundles.json; start the server and the item is there.
+Everything it does goes into {log} next to it: attach that file to an issue if it fails.
 '''
 
 HEADS = {
@@ -29,7 +33,7 @@ Input: the PVS27 Magnum Universal Night Sight model from CGTrader
 (not unzipped, name as downloaded):
   pvs27-magnum-universal-night-sight.zip
 
-''' + USAGE.format(extra='', folder='UstAchae-ClipOnSight-PVS27', script='build_pvs27.py', what='the zip', options='') + '''"""
+''' + USAGE.format(extra='', folder='UstAchae-ClipOnSight-PVS27', script='build_pvs27.py', what='the zip', options='', log='build_pvs27.log') + '''"""
 # The purchase: the files used from its download ("inner.zip/path" for a zip inside it) with their SHA-256 (the
 # processing was measured on exactly these files, so other versions are refused).
 SOURCE = {'title': 'AN/PVS-27 (CGTrader)', 'archives': ['pvs27-magnum-universal-night-sight.zip'], 'files': {
@@ -71,7 +75,7 @@ Input: the UTCx Thermal Weapon Sight model from CGTrader
 unzipped, name as downloaded):
   utcx-thermal-weapon-sight.zip
 
-''' + USAGE.format(extra='', folder='UstAchae-ClipOnSight-UTC', script='build_utc.py', what='the zip', options='') + '''"""
+''' + USAGE.format(extra='', folder='UstAchae-ClipOnSight-UTC', script='build_utc.py', what='the zip', options='', log='build_utc.log') + '''"""
 # The purchase: the files used from its download ("inner.zip/path" for a zip inside it) with their SHA-256 (the
 # processing was measured on exactly these files, so other versions are refused).
 SOURCE = {'title': 'UTC XII (CGTrader)', 'archives': ['utcx-thermal-weapon-sight.zip'], 'files': {
@@ -118,7 +122,12 @@ def script(key):
     name, head, part = HEADS[key]
     common = (W / 'parts/common.py').read_text(encoding='utf-8')
     model = (W / 'parts' / part).read_text(encoding='utf-8')
-    return name, head + '\n' + common + '\n' + model.rstrip('\n') + '\n' + TAIL
+    version = re.search(r'Version \{ get; init; \} = new\("([^"]+)"\)', (W.parent / 'pvs22/ServerSource/PVS22Mod.cs').read_text(encoding='utf-8')).group(1)
+    reference = json.loads((W / 'reference.json').read_text(encoding='utf-8'))
+    facts = (f"MOD_VERSION = '{version}'\n"
+             "# SHA-256 of the bundles this script made from the author's own purchase (the log compares yours with them).\n"
+             f"REFERENCE = {json.dumps({k: reference[k] for k in (key, key + '_fde')}, indent=1)}\n")
+    return name, head + facts + '\n' + common + '\n' + model.rstrip('\n') + '\n' + TAIL
 
 
 if __name__ == '__main__':

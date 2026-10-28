@@ -13,6 +13,7 @@ Requirements: Python 3.10 or newer with `pip install UnityPy numpy Pillow`.
 Usage, with the SPT server and the game closed, from this mod's folder (SPT_Runtime/user/mods/UstAchae-ClipOnSight-PVS27):
   python build_pvs27.py <folder holding the zip>
 It writes the bundles into bundles/ and lists them in bundles.json; start the server and the item is there.
+Everything it does goes into build_pvs27.log next to it: attach that file to an issue if it fails.
 """
 # The purchase: the files used from its download ("inner.zip/path" for a zip inside it) with their SHA-256 (the
 # processing was measured on exactly these files, so other versions are refused).
@@ -44,13 +45,23 @@ CLIPON = {
     'drop_depth': 0.0, 'normal_dx': False,
     'albedo_target': 0.03, 'sheen': 0.6,  # its near-black paint, lifted to 3% so details read
 }
+MOD_VERSION = '0.1.0'
+# SHA-256 of the bundles this script made from the author's own purchase (the log compares yours with them).
+REFERENCE = {
+ "pvs27": "2c41984325934bd2cb61dec2f45d9d17c70a12097523be004f2524622026c9e6",
+ "pvs27_fde": "7a60047361885679eb6583046186dcff5e7b9adb13cb88aeb93b713ec9e5b71e"
+}
 
-import argparse, hashlib, io, json, math, subprocess, sys, tempfile, zipfile
+import argparse, hashlib, io, json, math, platform, subprocess, sys, tempfile, time, traceback, zipfile
 from pathlib import Path
 
-import numpy as np
-from PIL import Image
-import UnityPy
+try:
+    import numpy as np
+    from PIL import Image
+    import UnityPy
+except ImportError as missing_package:
+    raise SystemExit(f'A Python package this script needs is missing ({missing_package.name}). Install them with:\n'
+                     f'  python -m pip install UnityPy numpy Pillow')
 
 TEX_SIZE = 2048
 
@@ -76,9 +87,12 @@ class Purchase:
             data = self.inner[archive, head].read(rest)
         else:
             data = outer.read(member)
-        if hashlib.sha256(data).hexdigest() != digest:
-            raise SystemExit(f'{SOURCE["title"]}: {member} is not the expected version of the file '
-                             f'(the mod was made from a specific version of this model)')
+        got = hashlib.sha256(data).hexdigest()
+        if got != digest:
+            log(f'  {archive} / {member}: sha256 {got}, expected {digest}', show=False)
+            raise SystemExit(f'{member} in {archive} is not the version of the file this mod was made from '
+                             f'(the model may have been updated in the store)')
+        log(f'  {archive} / {member}: as expected', show=False)
         return data
 
     def image(self, name):
@@ -392,34 +406,108 @@ def fill_template(template, model, mesh, textures):
 # Command line
 # ----------------------------------------------------------------------------------------------------------
 
-def main():
-    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument('models', type=Path, help='folder holding the downloaded zip' + ('s' if len(SOURCE['archives']) > 1 else ''))
-    ap.add_argument('--mod', type=Path, default=Path(__file__).resolve().parent, help='this mod\'s folder (default: where this script is)')
-    add_options(ap)
-    args = ap.parse_args()
+ISSUES = 'https://github.com/UstAchae/EFTClipOnSight/issues'
+LOG = None
 
+
+def log(message, show=True):
+    """A line on screen and in the log file next to this script, which a player can attach to an issue."""
+    if show: print(message, flush=True)
+    if LOG: LOG.write(time.strftime('%H:%M:%S ') + message + '\n'); LOG.flush()
+
+
+def sha256(data): return hashlib.sha256(data).hexdigest()
+
+
+def check_bundle(data, model):
+    """Reads a written bundle back: the mesh has geometry and every texture has pixels."""
+    env = UnityPy.load(data)
+    vertices, textures = 0, {}
+    for o in env.objects:
+        if o.type.name == 'Mesh' and o.read_typetree()['m_Name'] == model['mesh']:
+            vertices = o.read_typetree()['m_VertexData']['m_VertexCount']
+        elif o.type.name == 'Texture2D':
+            t = o.read()
+            if t.m_Name in model['textures']: textures[t.m_Name] = (t.m_Width, t.m_Height, len(t.image_data))
+    log(f'  check: mesh {vertices} vertices; textures ' + ', '.join(f'{n} {w}x{h}' for n, (w, h, _) in sorted(textures.items())), show=False)
+    if vertices == 0 or len(textures) != len(model['textures']) or not all(size for _, _, size in textures.values()):
+        raise SystemExit(f'the written bundle is incomplete (mesh {vertices} vertices, textures {textures})')
+
+
+def run(args):
+    log(f'{Path(__file__).name} for {SOURCE["title"]}, mod {MOD_VERSION}')
+    log(f'Python {sys.version.split()[0]} on {platform.platform()}; numpy {np.__version__}, Pillow {Image.__version__}, '
+        f'UnityPy {getattr(UnityPy, "__version__", "?")}', show=False)
+    log(f'mod folder: {args.mod}', show=False)
+    log(f'model folder: {args.models}', show=False)
+    if sys.version_info < (3, 10): raise SystemExit('Python 3.10 or newer is needed')
     running = subprocess.run(['tasklist'], capture_output=True, text=True).stdout if sys.platform == 'win32' else ''
     for exe in ('SPT.Server.exe', 'EscapeFromTarkov.exe'):
-        if exe in running: raise SystemExit(f'{exe} is running; close it first')
+        if exe in running: raise SystemExit(f'{exe} is running; close the SPT server and the game first')
     templates = args.mod / 'templates'
-    if not templates.is_dir(): raise SystemExit(f'no templates folder in {args.mod}; pass --mod <this mod\'s folder>')
+    if not templates.is_dir():
+        raise SystemExit(f'no templates folder in {args.mod}: run this script inside the mod\'s folder, or pass --mod <the mod\'s folder>')
+    for key in MODELS:
+        template = templates / f'{key}.bundle.template'
+        if not template.exists(): raise SystemExit(f'{template} is missing: reinstall the mod')
+        log(f'template {template.name}: {sha256(template.read_bytes())}', show=False)
+    if not args.models.is_dir(): raise SystemExit(f'{args.models} is not a folder: pass the folder that holds the zip')
     missing = [a for a in SOURCE['archives'] if not (args.models / a).exists()]
-    if missing: raise SystemExit(f'{SOURCE["title"]}: {", ".join(missing)} not found in {args.models}')
+    if missing:
+        found = sorted(p.name for p in args.models.glob('*.zip'))
+        raise SystemExit(f'{", ".join(missing)} not found in {args.models} (zips there: {", ".join(found) or "none"}). '
+                         f'Put the download in that folder unchanged: not unzipped, not renamed.')
+    for archive in SOURCE['archives']:
+        data = (args.models / archive).read_bytes()
+        log(f'{archive}: {len(data)} bytes, sha256 {sha256(data)}', show=False)
 
-    print('reading', SOURCE['title'], flush=True)
+    log('reading ' + SOURCE['title'])
     with tempfile.TemporaryDirectory() as tmp:
         jobs = build(Purchase(args.models), args, Path(tmp))
         for key, (mesh, textures) in jobs.items():
             model = MODELS[key]
             data = fill_template(templates / f'{key}.bundle.template', model, mesh, textures)
+            check_bundle(data, model)
             out = args.mod / 'bundles' / model['bundle']
             out.parent.mkdir(parents=True, exist_ok=True)
             out.write_bytes(data)
-            print('  built', model['bundle'], f'{len(data) / 1e6:.1f} MB', flush=True)
+            digest = sha256(data)
+            same = 'identical to the author\'s build' if digest == REFERENCE.get(key) else \
+                'not byte-identical to the author\'s build (other library versions can do this; it is fine if the item looks right in game)'
+            log(f'  built {model["bundle"]}, {len(data) / 1e6:.1f} MB: {same}')
+            log(f'  sha256 {digest}', show=False)
     manifest = {'manifest': [{'key': m['bundle'], 'dependencyKeys': m['deps']} for m in MODELS.values()]}
     (args.mod / 'bundles.json').write_text(json.dumps(manifest, indent=2), encoding='utf-8')
-    print('done - start the server; ' + SOURCE['title'] + ' is enabled now.')
+    log('bundles.json written')
+
+
+def main():
+    global LOG
+    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument('models', type=Path, help='folder holding the downloaded zip' + ('s' if len(SOURCE['archives']) > 1 else ''))
+    ap.add_argument('--mod', type=Path, default=Path(__file__).resolve().parent, help='this mod\'s folder (default: where this script is)')
+    add_options(ap)
+    args = ap.parse_args()
+    log_path = args.mod / (Path(__file__).stem + '.log')
+    try:
+        LOG = open(log_path, 'w', encoding='utf-8')
+    except OSError:
+        log_path = Path(tempfile.gettempdir()) / (Path(__file__).stem + '.log')
+        LOG = open(log_path, 'w', encoding='utf-8')
+    try:
+        run(args)
+    except BaseException as error:
+        if isinstance(error, SystemExit) and isinstance(error.code, str):
+            log('ERROR: ' + error.code)
+        elif isinstance(error, KeyboardInterrupt):
+            log('stopped')
+        else:
+            log('ERROR: ' + (str(error) or type(error).__name__))
+            log(traceback.format_exc(), show=False)
+        log(f'\nNo usable bundle was made. The log is {log_path}.\n'
+            f'If you cannot fix it from the message above, open an issue at {ISSUES} and attach that file.')
+        raise SystemExit(1)
+    log(f'\nDone: start the SPT server, and {SOURCE["title"]} is in the game. (The log is {log_path}.)')
 
 
 # ----------------------------------------------------------------------------------------------------------

@@ -105,9 +105,13 @@ public class PVS22Mod(
         // Only the AN/PVS-30 mod ships its bundle; the others are built by the build_*.py script in their mod
         // folder from the player's own purchased model. An item without its bundle stays out of the game.
         string bundle = template.Properties?.Prefab?.Path ?? "";
-        if (!File.Exists(System.IO.Path.Combine(modHelper.GetAbsolutePathToModFolder(Assembly.GetExecutingAssembly()), "bundles", bundle)))
+        string modFolder = modHelper.GetAbsolutePathToModFolder(Assembly.GetExecutingAssembly());
+        if (!File.Exists(System.IO.Path.Combine(modFolder, "bundles", bundle)))
         {
-            logger.Info($"{name} not enabled: its model is not built (run the build_*.py script in its mod folder)");
+            string script = Directory.GetFiles(modFolder, "build_*.py").Select(System.IO.Path.GetFileName).FirstOrDefault() ?? "";
+            logger.Warning(script != ""
+                ? $"{name} is not in the game: its model bundle (bundles/{bundle}) has not been built. Build it from your own purchase of the model with {script} in {modFolder} (see the mod's README); if that fails, attach its log ({System.IO.Path.ChangeExtension(script, ".log")}) to an issue."
+                : $"{name} is not in the game: its model bundle (bundles/{bundle}) is missing from {modFolder}. Reinstall the mod.");
             return null;
         }
 

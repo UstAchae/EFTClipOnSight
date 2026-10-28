@@ -19,46 +19,85 @@ Clip-on night vision and thermal sights for SPT 4.1.6. They mount on the rail in
 
 ## 安装
 
-1. 从 [Releases](../../releases) 下载想要的模组，比如 `JustachaesClipOnSight-PVS30-<版本>.zip`。
+1. 从 [Releases](https://github.com/UstAchae/EFTClipOnSight/releases) 下载想要的模组，比如 `JustachaesClipOnSight-PVS30-<版本>.zip`。
 2. 解压到游戏根目录（有 `EscapeFromTarkov.exe` 的那个文件夹）。每个模组会放到两个地方：
    - `SPT_Runtime/user/mods/UstAchae-ClipOnSight-<型号>/`：服务端模组和物品数据，以及模型 bundle 或生成脚本和模板。
    - `BepInEx/plugins/UstAchae-ClipOnSight/`：游戏插件。四个模组用的是同一个插件，装多个时覆盖即可，选"替换"。
-3. 启动服务端和游戏。AN/PVS-22 和 AN/PVS-30 装好就能用；AN/PVS-27 和 UTC XII 需要先按下面的步骤生成模型。
+3. 启动服务端和游戏。AN/PVS-22 和 AN/PVS-30 装好就能用；AN/PVS-27 和 UTC XII 需要先按下面的步骤生成模型，没生成时服务端控制台会给出警告。
 
 卸载时删除对应的 `UstAchae-ClipOnSight-<型号>` 文件夹即可；四个都卸载时再删除 `BepInEx/plugins/UstAchae-ClipOnSight`。删除前请先把这些物品从仓库和角色身上拿掉。
 
 ## AN/PVS-27 和 UTC XII：用自己购买的模型生成
 
-这两个模型来自 CGTrader，按其授权条款，模组不附带模型，只附带不含模型的模板（`templates/`）和生成脚本。买了哪个，就能生成哪个；没有生成模型的物品不会出现在游戏里。
+这两个模型来自 CGTrader，按其授权条款，模组不附带模型，只附带不含模型的模板（`templates/`）和生成脚本。买了哪个，就能生成哪个；没有生成模型的物品不会出现在游戏里，服务端启动时会在控制台给出警告。
 
-| 模组 | 购买链接 | 需要的输入文件 | 脚本 |
-|---|---|---|---|
-| AN/PVS-27（含沙色） | [CGTrader：PVS27 Magnum Universal Night Sight](https://www.cgtrader.com/3d-models/military/other/pvs27-magnum-universal-night-sight) | `pvs27-magnum-universal-night-sight.zip` | `build_pvs27.py` |
-| UTC XII（含沙色） | [CGTrader：UTCx Thermal Weapon Sight](https://www.cgtrader.com/3d-models/military/other/utcx-thermal-weapon-sight) | `utcx-thermal-weapon-sight.zip` | `build_utc.py` |
+| 物品 | 购买链接 | 需要的输入文件（下载后原样保留） | 模组文件夹 | 脚本 |
+|---|---|---|---|---|
+| AN/PVS-27（黑色、沙色） | [CGTrader：PVS27 Magnum Universal Night Sight](https://www.cgtrader.com/3d-models/military/other/pvs27-magnum-universal-night-sight) | `pvs27-magnum-universal-night-sight.zip` | `SPT_Runtime/user/mods/UstAchae-ClipOnSight-PVS27` | `build_pvs27.py` |
+| UTC XII（黑色、沙色） | [CGTrader：UTCx Thermal Weapon Sight](https://www.cgtrader.com/3d-models/military/other/utcx-thermal-weapon-sight) | `utcx-thermal-weapon-sight.zip` | `SPT_Runtime/user/mods/UstAchae-ClipOnSight-UTC` | `build_utc.py` |
 
-需要：Python 3.10 或更新版本，并安装依赖：
+### 准备（只需要做一次）
 
-```
-pip install UnityPy numpy Pillow
-```
-
-步骤：
-
-1. 把从 CGTrader 下载的 zip 原样放进一个文件夹，**不要解压，文件名保持不变**。
-2. 关闭服务端和游戏。
-3. 在模组文件夹里运行脚本，参数是放 zip 的文件夹。例如 AN/PVS-27：
+1. 安装 [Python](https://www.python.org/downloads/) 3.10 或更新版本。安装时勾选 **Add python.exe to PATH**。
+2. 打开"命令提示符"（开始菜单搜索 `cmd`），安装脚本需要的三个库：
 
    ```
-   cd SPT_Runtime/user/mods/UstAchae-ClipOnSight-PVS27
-   python build_pvs27.py <放 zip 的文件夹>
+   python -m pip install UnityPy numpy Pillow
    ```
 
-   UTC XII 则是在 `UstAchae-ClipOnSight-UTC` 里运行 `python build_utc.py <放 zip 的文件夹>`。
-4. 脚本会把黑色和沙色两个 bundle 生成到 `bundles/`，并写好 `bundles.json`。启动服务端，物品就出现了。
+   输入 `python --version` 能显示版本号，就说明 Python 装好了。
 
-说明：
+### 生成
 
-- **只认指定版本的模型：** 脚本会核对用到的每个文件的 SHA-256。模组是按这一版模型测量和调整的，商店里的模型如果更新过，脚本会提示文件不对，这时请提交 issue。
+1. 在 CGTrader 购买并下载模型，得到上表里的 zip。**不要解压，也不要改名**，把它放进一个文件夹，比如 `C:\Users\<你的用户名>\Downloads`。
+2. 关闭 SPT 服务端和游戏。
+3. 打开对应的模组文件夹（上表"模组文件夹"一列，在游戏根目录下）。在资源管理器的地址栏里输入 `cmd` 并回车，会在这个文件夹里打开命令提示符。
+4. 运行脚本，最后的参数是放 zip 的文件夹（路径里有空格时要加引号）：
+
+   AN/PVS-27，在 `UstAchae-ClipOnSight-PVS27` 文件夹里：
+
+   ```
+   python build_pvs27.py "C:\Users\<你的用户名>\Downloads"
+   ```
+
+   UTC XII，在 `UstAchae-ClipOnSight-UTC` 文件夹里：
+
+   ```
+   python build_utc.py "C:\Users\<你的用户名>\Downloads"
+   ```
+
+5. 成功时，最后会显示类似这样的内容（UTC XII 的文件名是 `utc.bundle` 和 `utc_fde.bundle`）：
+
+   ```
+   reading AN/PVS-27 (CGTrader)
+     built ustachae_clipons/pvs27.bundle, 11.1 MB: identical to the author's build
+     built ustachae_clipons/pvs27_fde.bundle, 11.3 MB: identical to the author's build
+   bundles.json written
+
+   Done: start the SPT server, and AN/PVS-27 (CGTrader) is in the game.
+   ```
+
+   生成需要几分钟，期间没有输出是正常的。生成的两个 bundle（黑色和沙色）在模组文件夹的 `bundles/` 里。
+6. 启动服务端。控制台里出现 `AN/PVS-27 loaded, fits ... rail slots`（UTC XII 是 `UTC XII loaded`），物品就已经在游戏里了。
+
+如果显示的是 `not byte-identical to the author's build`，说明你电脑上的库版本和作者的不同，生成的文件和作者的不完全一样，但通常不影响使用。进游戏看一眼，外观正常就没问题。
+
+### 出错时
+
+| 提示 | 原因和解决办法 |
+|---|---|
+| `A Python package this script needs is missing` | 没装依赖库，运行 `python -m pip install UnityPy numpy Pillow` |
+| `'python' 不是内部或外部命令` | Python 没装，或安装时没勾选 Add python.exe to PATH，重新安装一次 |
+| `... not found in ...` | 文件夹里没找到要求的 zip。确认参数是放 zip 的**文件夹**，zip 没有解压、没有改名 |
+| `... is not the version of the file this mod was made from` | 商店里的模型更新过，和模组测量时用的版本不同，请提交 issue |
+| `SPT.Server.exe is running` / `EscapeFromTarkov.exe is running` | 先关闭服务端和游戏 |
+| `no templates folder` | 脚本不在模组文件夹里运行，`cd` 到上表的模组文件夹再运行 |
+
+每次运行，脚本都会把详细过程写进模组文件夹里的日志：`build_pvs27.log` 或 `build_utc.log`。内容包括你的 Python 和库的版本、每个文件的校验结果、生成文件的校验值和出错的完整信息。如果按提示解决不了，或者生成成功但游戏里外观不对，请到 [Issues](https://github.com/UstAchae/EFTClipOnSight/issues) 提交问题，并附上这个日志文件。
+
+其他说明：
+
+- **只认指定版本的模型：** 脚本会核对用到的每个文件的 SHA-256。模组是按这一版模型测量和调整的。
 - **和作者版本一致：** 脚本按作者自己的构建流程处理网格和贴图。在同样的视角下，生成的 bundle 和作者构建的 bundle 渲染出来的平均差异约为 0.5/255，肉眼看不出区别。
 - **模板不含模型：** 模板只有预制体、材质、着色器和位置标记，网格和贴图都是空的；生成的 bundle 只在你自己的电脑上，请勿转发。
 - **模组更新后要重新生成：** 新版本的模板可能有改动，更新模组后请重新运行一次脚本。
